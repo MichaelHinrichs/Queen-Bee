@@ -46,8 +46,8 @@ namespace Rebex.IO.Compression
 		private const int D_CODES = 30;
 		private const int LITERALS = 256;
 		private const int LENGTH_CODES = 29;
-		private static readonly int L_CODES = (LITERALS + 1 + LENGTH_CODES);
-		private static readonly int HEAP_SIZE = (2 * L_CODES + 1);
+		private static readonly int L_CODES = LITERALS + 1 + LENGTH_CODES;
+		private static readonly int HEAP_SIZE = 2 * L_CODES + 1;
 		
 		// Bit length codes must not exceed MAX_BL_BITS bits
 		internal const int MAX_BL_BITS = 7;
@@ -99,7 +99,7 @@ namespace Rebex.IO.Compression
 		// used.
 		internal static int d_code(int dist)
 		{
-			return ((dist) < 256?_dist_code[dist]:_dist_code[256 + (SupportClass.URShift((dist), 7))]);
+			return dist < 256?_dist_code[dist]:_dist_code[256 + SupportClass.URShift(dist, 7)];
 		}
 		
 		internal short[] dyn_tree; // the dynamic tree
@@ -235,7 +235,7 @@ namespace Rebex.IO.Compression
 			// two codes of non zero frequency.
 			while (s.heap_len < 2)
 			{
-				node = s.heap[++s.heap_len] = (max_code < 2?++max_code:0);
+				node = s.heap[++s.heap_len] = max_code < 2?++max_code:0;
 				tree[node * 2] = 1;
 				s.depth[node] = 0;
 				s.opt_len--;
@@ -320,7 +320,7 @@ namespace Rebex.IO.Compression
 				if (len == 0)
 					continue;
 				// Now reverse the bits
-				tree[n * 2] = (short) (bi_reverse(next_code[len]++, len));
+				tree[n * 2] = (short) bi_reverse(next_code[len]++, len);
 			}
 		}
 		

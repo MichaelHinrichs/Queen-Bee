@@ -138,15 +138,15 @@ namespace Rebex.IO.Compression
 		
 		private const int MIN_MATCH = 3;
 		private const int MAX_MATCH = 258;
-		private static readonly int MIN_LOOKAHEAD = (MAX_MATCH + MIN_MATCH + 1);
+		private static readonly int MIN_LOOKAHEAD = MAX_MATCH + MIN_MATCH + 1;
 		
 		private const int MAX_BITS = 15;
 		private const int D_CODES = 30;
 		private const int BL_CODES = 19;
 		private const int LENGTH_CODES = 29;
 		private const int LITERALS = 256;
-		private static readonly int L_CODES = (LITERALS + 1 + LENGTH_CODES);
-		private static readonly int HEAP_SIZE = (2 * L_CODES + 1);
+		private static readonly int L_CODES = LITERALS + 1 + LENGTH_CODES;
+		private static readonly int HEAP_SIZE = 2 * L_CODES + 1;
 		
 		private const int END_BLOCK = 256;
 		
@@ -396,7 +396,7 @@ namespace Rebex.IO.Compression
 		{
 			short tn2 = tree[n * 2];
 			short tm2 = tree[m * 2];
-			return (tn2 < tm2 || (tn2 == tm2 && depth[n] <= depth[m]));
+			return tn2 < tm2 || (tn2 == tm2 && depth[n] <= depth[m]);
 		}
 		
 		// Scan a literal or distance tree to determine the frequencies of the codes
@@ -590,19 +590,19 @@ namespace Rebex.IO.Compression
 		}
 		internal void  put_short(int w)
 		{
-			put_byte((byte) (w));
-			put_byte((byte) (SupportClass.URShift(w, 8)));
+			put_byte((byte) w);
+			put_byte((byte) SupportClass.URShift(w, 8));
 		}
 		internal void  putShortMSB(int b)
 		{
 			put_byte((byte) (b >> 8));
-			put_byte((byte) (b));
+			put_byte((byte) b);
 		}
 		
 		internal void  send_code(int c, short[] tree)
 		{
 			int c2 = c * 2;
-			send_bits((tree[c2] & 0xffff), (tree[c2 + 1] & 0xffff));
+			send_bits(tree[c2] & 0xffff, tree[c2 + 1] & 0xffff);
 		}
 		
 		internal void  send_bits(int value_Renamed, int length)
@@ -612,15 +612,15 @@ namespace Rebex.IO.Compression
 			{
 				int val = value_Renamed;
 				//      bi_buf |= (val << bi_valid);
-				bi_buf |= (short) (((val << bi_valid) & 0xffff));
+				bi_buf |= (short) ((val << bi_valid) & 0xffff);
 				put_short(bi_buf);
-				bi_buf = (short) (SupportClass.URShift(val, (Buf_size - bi_valid)));
+				bi_buf = (short) SupportClass.URShift(val, Buf_size - bi_valid);
 				bi_valid += len - Buf_size;
 			}
 			else
 			{
 				//      bi_buf |= (value) << bi_valid;
-				bi_buf |= (short) ((((value_Renamed) << bi_valid) & 0xffff));
+				bi_buf |= (short) (((value_Renamed) << bi_valid) & 0xffff);
 				bi_valid += len;
 			}
 		}
@@ -660,7 +660,7 @@ namespace Rebex.IO.Compression
 		internal bool _tr_tally(int dist, int lc)
 		{
 			
-			pending_buf[d_buf + last_lit * 2] = (byte) (SupportClass.URShift(dist, 8));
+			pending_buf[d_buf + last_lit * 2] = (byte) SupportClass.URShift(dist, 8);
 			pending_buf[d_buf + last_lit * 2 + 1] = (byte) dist;
 			
 			pending_buf[l_buf + last_lit] = (byte) lc; last_lit++;
@@ -694,7 +694,7 @@ namespace Rebex.IO.Compression
 					return true;
 			}
 			
-			return (last_lit == lit_bufsize - 1);
+			return last_lit == lit_bufsize - 1;
 			// We avoid equality with lit_bufsize because of wraparound at 64K
 			// on 16 bit machines and because stored blocks are restricted to
 			// 64K-1 bytes.
@@ -774,7 +774,7 @@ namespace Rebex.IO.Compression
 			{
 				bin_freq += dyn_ltree[n * 2]; n++;
 			}
-			data_type = (byte) (bin_freq > (SupportClass.URShift(ascii_freq, 2))?Z_BINARY:Z_ASCII);
+			data_type = (byte) (bin_freq > SupportClass.URShift(ascii_freq, 2)?Z_BINARY:Z_ASCII);
 		}
 		
 		// Flush the bit buffer, keeping at most 7 bits in it.
@@ -789,7 +789,7 @@ namespace Rebex.IO.Compression
 			else if (bi_valid >= 8)
 			{
 				put_byte((byte) bi_buf);
-				bi_buf = (short) (SupportClass.URShift(bi_buf, 8));
+				bi_buf = (short) SupportClass.URShift(bi_buf, 8);
 				bi_valid -= 8;
 			}
 		}
@@ -937,8 +937,8 @@ namespace Rebex.IO.Compression
 				max_blindex = build_bl_tree();
 				
 				// Determine the best encoding. Compute first the block length in bytes
-				opt_lenb = SupportClass.URShift((opt_len + 3 + 7), 3);
-				static_lenb = SupportClass.URShift((static_len + 3 + 7), 3);
+				opt_lenb = SupportClass.URShift(opt_len + 3 + 7, 3);
+				static_lenb = SupportClass.URShift(static_len + 3 + 7, 3);
 				
 				if (static_lenb <= opt_lenb)
 					opt_lenb = static_lenb;
@@ -997,7 +997,7 @@ namespace Rebex.IO.Compression
 			
 			do 
 			{
-				more = (window_size - lookahead - strstart);
+				more = window_size - lookahead - strstart;
 				
 				// Deal with !@#$% 64K limit:
 				if (more == 0 && strstart == 0 && lookahead == 0)
@@ -1030,7 +1030,7 @@ namespace Rebex.IO.Compression
 					p = n;
 					do 
 					{
-						m = (head[--p] & 0xffff);
+						m = head[--p] & 0xffff;
 						head[p] = (short)((m >= w_size) ? (m - w_size) : 0);
 					}
 					while (--n != 0);
@@ -1039,7 +1039,7 @@ namespace Rebex.IO.Compression
 					p = n;
 					do 
 					{
-						m = (prev[--p] & 0xffff);
+						m = prev[--p] & 0xffff;
 						prev[p] = (short)((m >= w_size) ? (m - w_size) : 0);
 						// If n is not on any hash chain, prev[n] is garbage but
 						// its value will never be used.
@@ -1109,10 +1109,10 @@ namespace Rebex.IO.Compression
 				// dictionary, and set hash_head to the head of the hash chain:
 				if (lookahead >= MIN_MATCH)
 				{
-					ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+					ins_h = (((ins_h) << hash_shift) ^ (window[strstart + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
 					
 					//	prev[strstart&w_mask]=hash_head=head[ins_h];
-					hash_head = (head[ins_h] & 0xffff);
+					hash_head = head[ins_h] & 0xffff;
 					prev[strstart & w_mask] = head[ins_h];
 					head[ins_h] = (short) strstart;
 				}
@@ -1148,9 +1148,9 @@ namespace Rebex.IO.Compression
 						{
 							strstart++;
 							
-							ins_h = ((ins_h << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+							ins_h = ((ins_h << hash_shift) ^ (window[strstart + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
 							//	    prev[strstart&w_mask]=hash_head=head[ins_h];
-							hash_head = (head[ins_h] & 0xffff);
+							hash_head = head[ins_h] & 0xffff;
 							prev[strstart & w_mask] = head[ins_h];
 							head[ins_h] = (short) strstart;
 							
@@ -1232,9 +1232,9 @@ namespace Rebex.IO.Compression
 				
 				if (lookahead >= MIN_MATCH)
 				{
-					ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+					ins_h = (((ins_h) << hash_shift) ^ (window[strstart + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
 					//	prev[strstart&w_mask]=hash_head=head[ins_h];
-					hash_head = (head[ins_h] & 0xffff);
+					hash_head = head[ins_h] & 0xffff;
 					prev[strstart & w_mask] = head[ins_h];
 					head[ins_h] = (short) strstart;
 				}
@@ -1279,15 +1279,15 @@ namespace Rebex.IO.Compression
 					// strstart-1 and strstart are already inserted. If there is not
 					// enough lookahead, the last two strings are not inserted in
 					// the hash table.
-					lookahead -= (prev_length - 1);
+					lookahead -= prev_length - 1;
 					prev_length -= 2;
 					do 
 					{
 						if (++strstart <= max_insert)
 						{
-							ins_h = (((ins_h) << hash_shift) ^ (window[(strstart) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+							ins_h = (((ins_h) << hash_shift) ^ (window[strstart + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
 							//prev[strstart&w_mask]=hash_head=head[ins_h];
-							hash_head = (head[ins_h] & 0xffff);
+							hash_head = head[ins_h] & 0xffff;
 							prev[strstart & w_mask] = head[ins_h];
 							head[ins_h] = (short) strstart;
 						}
@@ -1420,7 +1420,7 @@ namespace Rebex.IO.Compression
 					scan_end = window[scan + best_len];
 				}
 			}
-			while ((cur_match = (prev[cur_match & wmask] & 0xffff)) > limit && --chain_length != 0);
+			while ((cur_match = prev[cur_match & wmask] & 0xffff) > limit && --chain_length != 0);
 			
 			if (best_len <= lookahead)
 				return best_len;
@@ -1473,7 +1473,7 @@ namespace Rebex.IO.Compression
 			hash_bits = memLevel + 7;
 			hash_size = 1 << hash_bits;
 			hash_mask = hash_size - 1;
-			hash_shift = ((hash_bits + MIN_MATCH - 1) / MIN_MATCH);
+			hash_shift = (hash_bits + MIN_MATCH - 1) / MIN_MATCH;
 			
 			window = new byte[w_size * 2];
 			prev = new short[w_size];
@@ -1599,7 +1599,7 @@ namespace Rebex.IO.Compression
 			
 			for (int n = 0; n <= length - MIN_MATCH; n++)
 			{
-				ins_h = (((ins_h) << hash_shift) ^ (window[(n) + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
+				ins_h = (((ins_h) << hash_shift) ^ (window[n + (MIN_MATCH - 1)] & 0xff)) & hash_mask;
 				prev[n & w_mask] = head[ins_h];
 				head[ins_h] = (short) n;
 			}
@@ -1617,12 +1617,12 @@ namespace Rebex.IO.Compression
 			
 			if (strm.next_out == null || (strm.next_in == null && strm.avail_in != 0) || (status == FINISH_STATE && flush != Z_FINISH))
 			{
-				strm.msg = z_errmsg[Z_NEED_DICT - (Z_STREAM_ERROR)];
+				strm.msg = z_errmsg[Z_NEED_DICT - Z_STREAM_ERROR];
 				return Z_STREAM_ERROR;
 			}
 			if (strm.avail_out == 0)
 			{
-				strm.msg = z_errmsg[Z_NEED_DICT - (Z_BUF_ERROR)];
+				strm.msg = z_errmsg[Z_NEED_DICT - Z_BUF_ERROR];
 				return Z_BUF_ERROR;
 			}
 			
@@ -1638,7 +1638,7 @@ namespace Rebex.IO.Compression
 				
 				if (level_flags > 3)
 					level_flags = 3;
-				header |= (level_flags << 6);
+				header |= level_flags << 6;
 				if (strstart != 0)
 					header |= PRESET_DICT;
 				header += 31 - (header % 31);
@@ -1652,7 +1652,7 @@ namespace Rebex.IO.Compression
 				// Save the adler32 of the preset dictionary:
 				if (strstart != 0)
 				{
-					putShortMSB((int) (SupportClass.URShift(strm.adler, 16)));
+					putShortMSB((int) SupportClass.URShift(strm.adler, 16));
 					putShortMSB((int) (strm.adler & 0xffff));
 				}
 				strm.adler = strm._adler.adler32(0, null, 0, 0);
@@ -1680,14 +1680,14 @@ namespace Rebex.IO.Compression
 			}
 			else if (strm.avail_in == 0 && flush <= old_flush && flush != Z_FINISH)
 			{
-				strm.msg = z_errmsg[Z_NEED_DICT - (Z_BUF_ERROR)];
+				strm.msg = z_errmsg[Z_NEED_DICT - Z_BUF_ERROR];
 				return Z_BUF_ERROR;
 			}
 			
 			// User must not provide more input after the first FINISH:
 			if (status == FINISH_STATE && strm.avail_in != 0)
 			{
-				strm.msg = z_errmsg[Z_NEED_DICT - (Z_BUF_ERROR)];
+				strm.msg = z_errmsg[Z_NEED_DICT - Z_BUF_ERROR];
 				return Z_BUF_ERROR;
 			}
 			

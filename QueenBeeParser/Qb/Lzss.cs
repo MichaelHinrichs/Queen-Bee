@@ -65,7 +65,7 @@ namespace Nanook.QueenBee.Parser
 
                     /* Update buffer */
                     text_buf[r++] = (byte)c; /* Set buffer character */
-                    r &= (N - 1); /* Ensure it's inside the limits */
+                    r &= N - 1; /* Ensure it's inside the limits */
                 }
                 else /* Copy a text from the buffer */
                 {
@@ -74,7 +74,7 @@ namespace Nanook.QueenBee.Parser
                     j = input.ReadByte() & 0xFF;
 
                     /* Decode variables */
-                    i |= ((j & 0xF0) << 4); /* Position in the buffer (12 bits) */
+                    i |= (j & 0xF0) << 4; /* Position in the buffer (12 bits) */
                     j = (j & 0x0F) + THRESHOLD; /* Number of bytes (4 bits + threshold) */
 
                     /* Copy bytes */
@@ -89,7 +89,7 @@ namespace Nanook.QueenBee.Parser
 
                         /* Update buffer */
                         text_buf[r++] = (byte)c; /* Set buffer character */
-                        r &= (N - 1); /* Ensure it's inside the limits */
+                        r &= N - 1; /* Ensure it's inside the limits */
                     }
                 }
             }

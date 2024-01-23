@@ -154,7 +154,7 @@ namespace Rebex.IO.Compression
 					
 					case TYPE: 
 						
-						while (k < (3))
+						while (k < 3)
 						{
 							if (n != 0)
 							{
@@ -181,12 +181,12 @@ namespace Rebex.IO.Compression
 							
 							case 0:  // stored 
 								{
-									b = SupportClass.URShift(b, (3)); k -= (3);
+									b = SupportClass.URShift(b, 3); k -= 3;
 								}
 								t = k & 7; // go to byte boundary
 								
 								{
-									b = SupportClass.URShift(b, (t)); k -= (t);
+									b = SupportClass.URShift(b, t); k -= t;
 								}
 								mode = LENS; // get length of stored block
 								break;
@@ -203,7 +203,7 @@ namespace Rebex.IO.Compression
 								}
 								
 								{
-									b = SupportClass.URShift(b, (3)); k -= (3);
+									b = SupportClass.URShift(b, 3); k -= 3;
 								}
 								
 								mode = CODES;
@@ -212,7 +212,7 @@ namespace Rebex.IO.Compression
 							case 2:  // dynamic
 								
 								{
-									b = SupportClass.URShift(b, (3)); k -= (3);
+									b = SupportClass.URShift(b, 3); k -= 3;
 								}
 								
 								mode = TABLE;
@@ -221,7 +221,7 @@ namespace Rebex.IO.Compression
 							case 3:  // illegal
 								
 								{
-									b = SupportClass.URShift(b, (3)); k -= (3);
+									b = SupportClass.URShift(b, 3); k -= 3;
 								}
 								mode = BAD;
 								z.msg = "invalid block type";
@@ -236,7 +236,7 @@ namespace Rebex.IO.Compression
 					
 					case LENS: 
 						
-						while (k < (32))
+						while (k < 32)
 						{
 							if (n != 0)
 							{
@@ -256,7 +256,7 @@ namespace Rebex.IO.Compression
 							k += 8;
 						}
 						
-						if (((SupportClass.URShift((~ b), 16)) & 0xffff) != (b & 0xffff))
+						if (((SupportClass.URShift(~ b, 16)) & 0xffff) != (b & 0xffff))
 						{
 							mode = BAD;
 							z.msg = "invalid stored block lengths";
@@ -267,7 +267,7 @@ namespace Rebex.IO.Compression
 							write = q;
 							return inflate_flush(z, r);
 						}
-						left = (b & 0xffff);
+						left = b & 0xffff;
 						b = k = 0; // dump bits
 						mode = left != 0?STORED:(last != 0?DRY:TYPE);
 						break;
@@ -322,7 +322,7 @@ namespace Rebex.IO.Compression
 					
 					case TABLE: 
 						
-						while (k < (14))
+						while (k < 14)
 						{
 							if (n != 0)
 							{
@@ -342,7 +342,7 @@ namespace Rebex.IO.Compression
 							k += 8;
 						}
 						
-						table = t = (b & 0x3fff);
+						table = t = b & 0x3fff;
 						if ((t & 0x1f) > 29 || ((t >> 5) & 0x1f) > 29)
 						{
 							mode = BAD;
@@ -368,7 +368,7 @@ namespace Rebex.IO.Compression
 						}
 						
 						{
-							b = SupportClass.URShift(b, (14)); k -= (14);
+							b = SupportClass.URShift(b, 14); k -= 14;
 						}
 						
 						index = 0;
@@ -376,9 +376,9 @@ namespace Rebex.IO.Compression
 						goto case BTREE;
 					
 					case BTREE: 
-						while (index < 4 + (SupportClass.URShift(table, 10)))
+						while (index < 4 + SupportClass.URShift(table, 10))
 						{
-							while (k < (3))
+							while (k < 3)
 							{
 								if (n != 0)
 								{
@@ -401,7 +401,7 @@ namespace Rebex.IO.Compression
 							blens[border[index++]] = b & 7;
 							
 							{
-								b = SupportClass.URShift(b, (3)); k -= (3);
+								b = SupportClass.URShift(b, 3); k -= 3;
 							}
 						}
 						
@@ -445,7 +445,7 @@ namespace Rebex.IO.Compression
 							
 							t = bb[0];
 							
-							while (k < (t))
+							while (k < t)
 							{
 								if (n != 0)
 								{
@@ -475,7 +475,7 @@ namespace Rebex.IO.Compression
 							
 							if (c < 16)
 							{
-								b = SupportClass.URShift(b, (t)); k -= (t);
+								b = SupportClass.URShift(b, t); k -= t;
 								blens[index++] = c;
 							}
 							else
@@ -504,11 +504,11 @@ namespace Rebex.IO.Compression
 									k += 8;
 								}
 								
-								b = SupportClass.URShift(b, (t)); k -= (t);
+								b = SupportClass.URShift(b, t); k -= t;
 								
-								j += (b & inflate_mask[i]);
+								j += b & inflate_mask[i];
 								
-								b = SupportClass.URShift(b, (i)); k -= (i);
+								b = SupportClass.URShift(b, i); k -= i;
 								
 								i = index;
 								t = table;

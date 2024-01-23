@@ -163,8 +163,8 @@ namespace Rebex.IO.Compression
 				else
 					err = _zstream.inflate(flush);
 
-				if (err != JZlib.Z_OK && (flush == JZlib.Z_FINISH && err != JZlib.Z_STREAM_END))
-					throw new InvalidOperationException(string.Format("Error while {0}flating - {1}.", (_compress ? "de" : "in"), _zstream.msg));
+				if (err != JZlib.Z_OK && flush == JZlib.Z_FINISH && err != JZlib.Z_STREAM_END)
+					throw new InvalidOperationException(string.Format("Error while {0}flating - {1}.", _compress ? "de" : "in", _zstream.msg));
 
 				_output.Write(_block, 0, _block.Length - _zstream.avail_out);
 
@@ -393,7 +393,7 @@ namespace Rebex.IO.Compression
 					case JZlib.Z_STREAM_END:
 						break;
 					default:
-						throw new InvalidOperationException(string.Format("Error while {0}flating - {1}.", (_compress ? "de" : "in"), _zstream.msg));
+						throw new InvalidOperationException(string.Format("Error while {0}flating - {1}.", _compress ? "de" : "in", _zstream.msg));
 				}
 
 				if (err != JZlib.Z_OK)

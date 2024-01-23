@@ -226,7 +226,7 @@ namespace Rebex.IO.Compression
 							return r; r = f;
 						
 						z.avail_in--; z.total_in++;
-						z.istate.need += (((z.next_in[z.next_in_index++] & 0xff) << 16) & 0xff0000L);
+						z.istate.need += ((z.next_in[z.next_in_index++] & 0xff) << 16) & 0xff0000L;
 						z.istate.mode = DICT2;
 						goto case DICT2;
 					
@@ -236,7 +236,7 @@ namespace Rebex.IO.Compression
 							return r; r = f;
 						
 						z.avail_in--; z.total_in++;
-						z.istate.need += (((z.next_in[z.next_in_index++] & 0xff) << 8) & 0xff00L);
+						z.istate.need += ((z.next_in[z.next_in_index++] & 0xff) << 8) & 0xff00L;
 						z.istate.mode = DICT1;
 						goto case DICT1;
 					
@@ -246,7 +246,7 @@ namespace Rebex.IO.Compression
 							return r; r = f;
 						
 						z.avail_in--; z.total_in++;
-						z.istate.need += (z.next_in[z.next_in_index++] & 0xffL);
+						z.istate.need += z.next_in[z.next_in_index++] & 0xffL;
 						z.adler = z.istate.need;
 						z.istate.mode = DICT0;
 						return Z_NEED_DICT;
@@ -300,7 +300,7 @@ namespace Rebex.IO.Compression
 							return r; r = f;
 						
 						z.avail_in--; z.total_in++;
-						z.istate.need += (((z.next_in[z.next_in_index++] & 0xff) << 16) & 0xff0000L);
+						z.istate.need += ((z.next_in[z.next_in_index++] & 0xff) << 16) & 0xff0000L;
 						z.istate.mode = CHECK2;
 						goto case CHECK2;
 					
@@ -310,7 +310,7 @@ namespace Rebex.IO.Compression
 							return r; r = f;
 						
 						z.avail_in--; z.total_in++;
-						z.istate.need += (((z.next_in[z.next_in_index++] & 0xff) << 8) & 0xff00L);
+						z.istate.need += ((z.next_in[z.next_in_index++] & 0xff) << 8) & 0xff00L;
 						z.istate.mode = CHECK1;
 						goto case CHECK1;
 					
@@ -320,9 +320,9 @@ namespace Rebex.IO.Compression
 							return r; r = f;
 						
 						z.avail_in--; z.total_in++;
-						z.istate.need += (z.next_in[z.next_in_index++] & 0xffL);
+						z.istate.need += z.next_in[z.next_in_index++] & 0xffL;
 						
-						if (((int) (z.istate.was[0])) != ((int) (z.istate.need)))
+						if (((int) z.istate.was[0]) != ((int) z.istate.need))
 						{
 							z.istate.mode = BAD;
 							z.msg = "incorrect data check";

@@ -166,7 +166,7 @@ namespace Rebex.IO.Compression
 			while (--i != 0)
 			{
 				// note that i == g from above
-				x[xp] = (j += c[p]);
+				x[xp] = j += c[p];
 				xp++;
 				p++;
 			}
@@ -212,7 +212,7 @@ namespace Rebex.IO.Compression
 						{
 							// try a k-w bit table
 							// too few codes for k-w bit table
-							f -= (a + 1); // deduct codes from patterns left
+							f -= a + 1; // deduct codes from patterns left
 							xp = k;
 							if (j < z)
 							{
@@ -242,7 +242,7 @@ namespace Rebex.IO.Compression
 							x[h] = i; // save pattern for backing up
 							r[0] = (byte) j; // bits in this table
 							r[1] = (byte) l; // bits to dump before this table
-							j = SupportClass.URShift(i, (w - l));
+							j = SupportClass.URShift(i, w - l);
 							r[2] = q - u[h - 1] - j; // offset to this table
 							Array.Copy(r, 0, hp, (u[h - 1] + j) * 3, 3); // connect to last table
 						}

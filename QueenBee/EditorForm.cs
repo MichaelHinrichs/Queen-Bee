@@ -67,11 +67,11 @@ namespace Nanook.QueenBee
             foreach (object attribute in attributes)
             {
                 if (attribute is AssemblyDescriptionAttribute)
-                    assDescription = (((AssemblyDescriptionAttribute)attribute).Description);
+                    assDescription = ((AssemblyDescriptionAttribute)attribute).Description;
                 else if (attribute is AssemblyTitleAttribute)
-                    assName = (((AssemblyTitleAttribute)attribute).Title);
+                    assName = ((AssemblyTitleAttribute)attribute).Title;
                 else if (attribute is AssemblyCompanyAttribute)
-                    assCompany = (((AssemblyCompanyAttribute)attribute).Company);
+                    assCompany = ((AssemblyCompanyAttribute)attribute).Company;
             }
             Text = string.Format("{0} ({1})     v{2}.{3}     by {4}", assName, assDescription, assVersion.Major.ToString(), assVersion.Minor.ToString(), assCompany);
 
@@ -361,7 +361,7 @@ namespace Nanook.QueenBee
                     lstPakContents.Items[0].Focused = true;
                 }
 
-                tabPak.Text = string.Format("PAK: {0}", (new FileInfo(_pakFile.Filename)).Name);
+                tabPak.Text = string.Format("PAK: {0}", new FileInfo(_pakFile.Filename).Name);
                 mnuEditQBFile.Enabled = true;
             }
             finally
@@ -400,7 +400,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             long pab = 0;
             if (_pakFormat.PabFileExists)
             {
-                pab = (new FileInfo(_pakFormat.FullPabFilename)).Length;
+                pab = new FileInfo(_pakFormat.FullPabFilename).Length;
                 tlblPakFileInfo.Text = string.Format("PAK/PAB file: {0}/{1} bytes, {2} files", _pakFile.FileLength.ToString(), pab.ToString(), _pakFile.Headers.Count.ToString());
             }
             else
@@ -516,7 +516,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             ListViewItem topItem = null;
             try
             {
-                bool isRefresh = (selectItem != null);  
+                bool isRefresh = selectItem != null;  
 
                 lstQbItems.BeginUpdate();
 
@@ -615,7 +615,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
         private void lstPakContents_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            _lvwPakColumnSorter.Numeric = (lstPakContents.Columns[e.Column].Text == "Length");
+            _lvwPakColumnSorter.Numeric = lstPakContents.Columns[e.Column].Text == "Length";
 
             // Determine if clicked column is already the column that is being sorted.
             if (e.Column == _lvwPakColumnSorter.SortColumn)
@@ -697,7 +697,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
 
                 }
-                int c = (pak.Headers.Values.Count - skipped);
+                int c = pak.Headers.Values.Count - skipped;
                 MessageBox.Show(this, string.Format("PAK and {0} QB file{1} validated succesfully, {2} skipped", c.ToString(), c == 1 ? "" : "s", skipped.ToString()), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -733,7 +733,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 if (openQb.ShowDialog(this) != DialogResult.Cancel)
                 {
                     Cursor = Cursors.WaitCursor;
-                    AppState.LastQbReplacePath = (new FileInfo(openQb.FileName)).DirectoryName;
+                    AppState.LastQbReplacePath = new FileInfo(openQb.FileName).DirectoryName;
                     _pakFile.ReplaceFile(qbname, openQb.FileName);
 
                     refreshPakList();
@@ -773,7 +773,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 if (saveQb.ShowDialog(this) != DialogResult.Cancel)
                 {
                     Cursor = Cursors.WaitCursor;
-                    AppState.LastQbExtractPath = (new FileInfo(saveQb.FileName)).DirectoryName;
+                    AppState.LastQbExtractPath = new FileInfo(saveQb.FileName).DirectoryName;
 
                     if (File.Exists(saveQb.FileName))
                         File.Delete(saveQb.FileName);
@@ -847,7 +847,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             {
                 phi = _pakFile.Headers[li.SubItems[1].Text.ToLower()];
 
-                li.SubItems[2].Text = (string.Format("{0} ({1})", (phi.HeaderStart + phi.FileOffset).ToString("X").PadLeft(8, '0'), (phi.HeaderStart + phi.FileOffset).ToString()));
+                li.SubItems[2].Text = string.Format("{0} ({1})", (phi.HeaderStart + phi.FileOffset).ToString("X").PadLeft(8, '0'), (phi.HeaderStart + phi.FileOffset).ToString());
                 li.SubItems[3].Text = phi.FileLength.ToString();
                 li.SubItems[4].Text = phi.FileType.Text;
 
@@ -940,7 +940,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             EditPakItem f = new EditPakItem(EditPakItemType.Rename);
             PakHeaderItem phi = (PakHeaderItem)lstPakContents.SelectedItems[0].Tag;
 
-            f.IncludeFileNameInHeader = ((phi.Flags & PakHeaderFlags.Filename) == PakHeaderFlags.Filename);
+            f.IncludeFileNameInHeader = (phi.Flags & PakHeaderFlags.Filename) == PakHeaderFlags.Filename;
             if (f.IncludeFileNameInHeader) //we don't know the filename
                 f.PakItemFilename = phi.Filename;
             f.ItemType = phi.FileType;
@@ -1446,7 +1446,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
                 mnuQbEdit.Tag = sIdx;
 
-                mnuAddChild.Enabled = (mnuAddChild.DropDownItems.Count != 0);
+                mnuAddChild.Enabled = mnuAddChild.DropDownItems.Count != 0;
                 mnuInsertSibling.Enabled = sIdx != -1 && (mnuInsertSibling.DropDownItems.Count != 0);
                 mnuAddSibling.Enabled = sIdx != -1 && (mnuAddSibling.DropDownItems.Count != 0);
                 mnuRemoveSibling.Enabled = _addItemSibling != null && _addItemSibling.QbItemType != QbItemType.Unknown;
@@ -1704,7 +1704,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 string srch = txtStringSearch.Text.ToLower();
                 searchQbFile(delegate(QbFile qbFile, QbItemBase item)
                 {
-                    if ((qbs = (item as QbItemString)) != null)
+                    if ((qbs = item as QbItemString) != null)
                     {
                         foreach (string s in qbs.Strings)
                         {
@@ -1712,7 +1712,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                                 addSearchListItem(s, qbFile, qbs);
                         }
                     }
-                    else if ((qbsc = (item as QbItemScript)) != null)
+                    else if ((qbsc = item as QbItemScript) != null)
                     {
                         foreach (ScriptString s in qbsc.Strings)
                         {
@@ -1799,7 +1799,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
                 searchQbFile(delegate(QbFile qbFile, QbItemBase item)
                 {
-                    if ((qbq = (item as QbItemQbKey)) != null)
+                    if ((qbq = item as QbItemQbKey) != null)
                     {
                         foreach (QbKey qb in qbq.Values)
                         {
@@ -1859,7 +1859,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 lstSearchResults.Items.Clear();
 
                 bool hasPoint = txtNumberSearch.Text.Contains(".");
-                bool hasMinus = (txtNumberSearch.Text[0] == '-');
+                bool hasMinus = txtNumberSearch.Text[0] == '-';
 
                 double d = double.Parse(txtNumberSearch.Text);
 
@@ -1891,7 +1891,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
                 try
                 {
-                    if (schUInt = (schUInt && !schInt))
+                    if (schUInt = schUInt && !schInt)
                         schUI = uint.Parse(txtNumberSearch.Text);
                 }
                 catch
@@ -1905,13 +1905,13 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                     {
                         float[] fs = new float[0];
 
-                        QbItemFloat q = (item as QbItemFloat);
+                        QbItemFloat q = item as QbItemFloat;
                         if (q != null)
                             fs = q.Values;
                         else
                         {
-                            QbItemFloats q2 = (item as QbItemFloats);
-                            q2 = (item as QbItemFloats);
+                            QbItemFloats q2 = item as QbItemFloats;
+                            q2 = item as QbItemFloats;
                             if (q2 != null)
                                 fs = q2.Values;
                         }
@@ -1925,7 +1925,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
                     if (schInt)
                     {
-                        QbItemInteger ii = (item as QbItemInteger);
+                        QbItemInteger ii = item as QbItemInteger;
                         if (ii != null)
                         {
                             foreach (int i in ii.Values)
@@ -1937,7 +1937,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                     }
                         else if (schUInt)
                     {
-                        QbItemInteger ii = (item as QbItemInteger);
+                        QbItemInteger ii = item as QbItemInteger;
                         if (ii != null)
                         {
                             foreach (int i in ii.Values)
@@ -2560,7 +2560,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                         skipped++;
                 }
 
-                int c = (pak.Headers.Values.Count - skipped);
+                int c = pak.Headers.Values.Count - skipped;
                 MessageBox.Show(this, string.Format("PAK and {0} QB file{1} validated succesfully, {2} skipped", c.ToString(), c == 1 ? "" : "s", skipped.ToString()), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -2579,7 +2579,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             qbf = new QbFile(filename, _pakFormat);
             searchItems(qbf, qbf.Items, delegate(QbFile qbFile, QbItemBase item)
             {
-                if ((qbs = (item as QbItemString)) != null)
+                if ((qbs = item as QbItemString) != null)
                 {
                     for (int i = 0; i < qbs.Strings.Length; i++)
                         qbs.Strings[i] = "nanook";

@@ -18,8 +18,8 @@ namespace Nanook.QueenBee.Parser
             base.Create(type);
 
 
-            _isUnicode = ((type == QbItemType.SectionStringW || type == QbItemType.ArrayStringW || type == QbItemType.StructItemStringW) &&
-                (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox));
+            _isUnicode = (type == QbItemType.SectionStringW || type == QbItemType.ArrayStringW || type == QbItemType.StructItemStringW) &&
+                (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox);
 
             _charWidth = !_isUnicode ? 1 : 2;
 
@@ -53,8 +53,8 @@ namespace Nanook.QueenBee.Parser
         {
             //System.Diagnostics.Debug.WriteLine(string.Format("{0} - 0x{1}", type.ToString(), (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0')));
 
-            _isUnicode = ((type == QbItemType.SectionStringW || type == QbItemType.ArrayStringW || type == QbItemType.StructItemStringW) &&
-                (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox));
+            _isUnicode = (type == QbItemType.SectionStringW || type == QbItemType.ArrayStringW || type == QbItemType.StructItemStringW) &&
+                (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox);
 
             byte[] bytes;
 
@@ -75,7 +75,7 @@ namespace Nanook.QueenBee.Parser
                         if (StreamPos(br) != Pointers[i]) //pointer test
                             throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), Pointers[i]));
 
-                        bytes = br.ReadBytes((int)((Pointers[i + 1] - _charWidth) - StreamPos(br)));
+                        bytes = br.ReadBytes((int)(Pointers[i + 1] - _charWidth - StreamPos(br)));
 
                         _strings[i] = bytesToString(bytes); //handles unicode
 

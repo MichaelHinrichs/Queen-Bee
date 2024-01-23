@@ -38,7 +38,7 @@ namespace Nanook.QueenBee
 
             try
             {
-                _qbItem = (QbItem as QbItemScript);
+                _qbItem = QbItem as QbItemScript;
                 if (_qbItem == null)
                     throw new Exception("Error");
 
@@ -68,7 +68,7 @@ namespace Nanook.QueenBee
                 GenericQbEditItem ei;
                 foreach (Control un in Controls)
                 {
-                    if ((ei = (un as GenericQbEditItem)) != null)
+                    if ((ei = un as GenericQbEditItem) != null)
                     {
                         if (!ei.IsValid)
                         {
@@ -232,7 +232,7 @@ namespace Nanook.QueenBee
             foreach (ScriptString ss in _qbItem.Strings)
                 lstItems.Items.Add(ss.Text);
 
-            bool hasStrings = (lstItems.Items.Count != 0);
+            bool hasStrings = lstItems.Items.Count != 0;
             if (hasStrings)
                 lstItems.SelectedIndex = 0;
 
@@ -293,7 +293,7 @@ namespace Nanook.QueenBee
                     if (File.Exists(fname))
                         File.Delete(fname);
 
-                    AppState.LastScriptPath = (new FileInfo(fname)).DirectoryName;
+                    AppState.LastScriptPath = new FileInfo(fname).DirectoryName;
 
                     File.WriteAllBytes(fname, _qbItem.ScriptData);
                 }
@@ -328,7 +328,7 @@ namespace Nanook.QueenBee
                     _qbItem.ScriptData = File.ReadAllBytes(fname);
                     txtScript.Text = bytesToHexAsciiString(_qbItem.ScriptData);
 
-                    AppState.LastScriptPath = (new FileInfo(fname)).DirectoryName;
+                    AppState.LastScriptPath = new FileInfo(fname).DirectoryName;
 
                     loadStringList();
                 }
@@ -381,14 +381,14 @@ namespace Nanook.QueenBee
             tabs.SuspendLayout();
             tabString.SuspendLayout();
             tabUncompressedScript.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(err)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)err).BeginInit();
             SuspendLayout();
             // 
             // txtScript
             // 
-            txtScript.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
-                        | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            txtScript.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+                        | AnchorStyles.Left
+                        | AnchorStyles.Right;
             txtScript.BackColor = System.Drawing.SystemColors.Window;
             txtScript.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             txtScript.HideSelection = false;
@@ -403,7 +403,7 @@ namespace Nanook.QueenBee
             // 
             // btnUpdate
             // 
-            btnUpdate.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            btnUpdate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnUpdate.Location = new System.Drawing.Point(240, 431);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(75, 23);
@@ -414,8 +414,8 @@ namespace Nanook.QueenBee
             // 
             // eiItemQbKey
             // 
-            eiItemQbKey.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            eiItemQbKey.Anchor = AnchorStyles.Top | AnchorStyles.Left
+                        | AnchorStyles.Right;
             eiItemQbKey.Location = new System.Drawing.Point(-4, 9);
             eiItemQbKey.Name = "eiItemQbKey";
             eiItemQbKey.Size = new System.Drawing.Size(322, 24);
@@ -424,8 +424,8 @@ namespace Nanook.QueenBee
             // 
             // eiUnknown
             // 
-            eiUnknown.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            eiUnknown.Anchor = AnchorStyles.Top | AnchorStyles.Left
+                        | AnchorStyles.Right;
             eiUnknown.Location = new System.Drawing.Point(-4, 32);
             eiUnknown.Name = "eiUnknown";
             eiUnknown.Size = new System.Drawing.Size(322, 24);
@@ -434,9 +434,9 @@ namespace Nanook.QueenBee
             // 
             // tabs
             // 
-            tabs.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
-                        | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            tabs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+                        | AnchorStyles.Left
+                        | AnchorStyles.Right;
             tabs.Controls.Add(tabString);
             tabs.Controls.Add(tabUncompressedScript);
             tabs.Location = new System.Drawing.Point(3, 62);
@@ -462,8 +462,8 @@ namespace Nanook.QueenBee
             // 
             // txtWarning
             // 
-            txtWarning.Anchor = ((AnchorStyles.Bottom | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            txtWarning.Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+                        | AnchorStyles.Right;
             txtWarning.BorderStyle = BorderStyle.None;
             txtWarning.Location = new System.Drawing.Point(2, 259);
             txtWarning.Multiline = true;
@@ -475,7 +475,7 @@ namespace Nanook.QueenBee
             // 
             // btnSet
             // 
-            btnSet.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            btnSet.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSet.Location = new System.Drawing.Point(249, 229);
             btnSet.Name = "btnSet";
             btnSet.Size = new System.Drawing.Size(35, 21);
@@ -486,8 +486,8 @@ namespace Nanook.QueenBee
             // 
             // txtItem
             // 
-            txtItem.Anchor = ((AnchorStyles.Bottom | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            txtItem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+                        | AnchorStyles.Right;
             err.SetIconPadding(txtItem, 37);
             txtItem.Location = new System.Drawing.Point(0, 229);
             txtItem.Name = "txtItem";
@@ -497,9 +497,9 @@ namespace Nanook.QueenBee
             // 
             // lstItems
             // 
-            lstItems.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
-                        | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            lstItems.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+                        | AnchorStyles.Left
+                        | AnchorStyles.Right;
             lstItems.FormattingEnabled = true;
             lstItems.IntegralHeight = false;
             lstItems.Location = new System.Drawing.Point(0, 0);
@@ -533,7 +533,7 @@ namespace Nanook.QueenBee
             // 
             // btnExport
             // 
-            btnExport.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+            btnExport.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnExport.Location = new System.Drawing.Point(3, 431);
             btnExport.Name = "btnExport";
             btnExport.Size = new System.Drawing.Size(75, 23);
@@ -544,7 +544,7 @@ namespace Nanook.QueenBee
             // 
             // btnImport
             // 
-            btnImport.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+            btnImport.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnImport.Location = new System.Drawing.Point(84, 431);
             btnImport.Name = "btnImport";
             btnImport.Size = new System.Drawing.Size(75, 23);
@@ -570,7 +570,7 @@ namespace Nanook.QueenBee
             tabString.PerformLayout();
             tabUncompressedScript.ResumeLayout(false);
             tabUncompressedScript.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(err)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)err).EndInit();
             ResumeLayout(false);
 
         }

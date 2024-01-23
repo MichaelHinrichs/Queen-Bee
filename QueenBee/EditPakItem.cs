@@ -25,7 +25,7 @@ namespace Nanook.QueenBee
             txtImport.Visible = b;
             btnImport.Visible = b;
             lblImport.Visible = b;
-            chkFilename.Visible = (type != EditPakItemType.Rename);
+            chkFilename.Visible = type != EditPakItemType.Rename;
 
             cboFileType.Items.AddRange(Enum.GetNames(typeof(PakItemType)));
 

@@ -175,12 +175,12 @@ namespace Nanook.QueenBee
 
         private static void loadSplitterPosition(SplitContainer sp, float position)
         {
-            sp.SplitterDistance = (int)((position / 100F) * sp.Width);
+            sp.SplitterDistance = (int)(position / 100F * sp.Width);
         }
 
         private static void saveSplitterInfo(SplitContainer sp, out float position)
         {
-            position = ((sp.SplitterDistance / (float)sp.Width) * 100F);
+            position = sp.SplitterDistance / (float)sp.Width * 100F;
         }
 
         private static void saveListViewInfo(ListView lv, out string colPos, out string colWidths, out string colSort)
@@ -227,7 +227,7 @@ namespace Nanook.QueenBee
                 ListViewColumnSorter lvs = (ListViewColumnSorter)lv.ListViewItemSorter;
                 lvs.SortColumn = int.Parse(srt[0]);
                 lvs.Order = (SortOrder)int.Parse(srt[1]);
-                lvs.Numeric = (lv.Columns[lvs.SortColumn].Text == "Length");
+                lvs.Numeric = lv.Columns[lvs.SortColumn].Text == "Length";
             }
         }
     }

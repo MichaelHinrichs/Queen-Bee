@@ -232,7 +232,7 @@ namespace Nanook.QueenBee.Parser
                     PakFilename = string.Format("{0}.decompressed", PakFilename);
                     FullCompressedPakFilename = FullPakFilename;
                     FullPakFilename = string.Format("{0}.decompressed", FullPakFilename);
-                    CompressedPakFilesize = (new FileInfo(FullCompressedPakFilename)).Length;
+                    CompressedPakFilesize = new FileInfo(FullCompressedPakFilename).Length;
                 }
                 if (PabFileExists)
                 {
@@ -240,7 +240,7 @@ namespace Nanook.QueenBee.Parser
                     PabFilename = string.Format("{0}.decompressed", PabFilename);
                     FullCompressedPabFilename = FullPabFilename;
                     FullPabFilename = string.Format("{0}.decompressed", FullPabFilename);
-                    CompressedPabFilesize = (new FileInfo(FullCompressedPabFilename)).Length;
+                    CompressedPabFilesize = new FileInfo(FullCompressedPabFilename).Length;
                 }
                 if (DebugFileExists)
                 {
@@ -505,11 +505,11 @@ namespace Nanook.QueenBee.Parser
                 if (PakFormatType == PakFormatType.XBox)
                 {
                     xBoxCompress(FullPakFilename, FullCompressedPakFilename);
-                    CompressedPakFilesize = (new FileInfo(FullCompressedPakFilename)).Length;
+                    CompressedPakFilesize = new FileInfo(FullCompressedPakFilename).Length;
                     if (PakFileExists)
                     {
                         xBoxCompress(FullPabFilename, FullCompressedPabFilename);
-                        CompressedPabFilesize = (new FileInfo(FullCompressedPabFilename)).Length;
+                        CompressedPabFilesize = new FileInfo(FullCompressedPabFilename).Length;
                     }
                 }
             }
@@ -545,9 +545,9 @@ namespace Nanook.QueenBee.Parser
                             CompressionType = ct;
                     }
 
-                    UnCompressedPakFilesize = ((new FileInfo(FullPakFilename)).Length);
+                    UnCompressedPakFilesize = new FileInfo(FullPakFilename).Length;
                     if (FullPabFilename.Length != 0 && File.Exists(FullPabFilename))
-                        UnCompressedPabFilesize = ((new FileInfo(FullPabFilename)).Length);
+                        UnCompressedPabFilesize = new FileInfo(FullPabFilename).Length;
                 }
             //}
             //catch (Exception ex)
@@ -611,7 +611,7 @@ namespace Nanook.QueenBee.Parser
                                         copyStream(inFileStream, outZStream, (int)blockLen);
 
                                         if (chunkLen != 0xffffffff)
-                                            inFileStream.Seek((chunkLen - blockLen) - headerLen, SeekOrigin.Current);
+                                            inFileStream.Seek(chunkLen - blockLen - headerLen, SeekOrigin.Current);
 
                                     }
                                     else
@@ -779,7 +779,7 @@ namespace Nanook.QueenBee.Parser
 
                                     bw.Write((uint)(i != offsets.Count - 1 ? _zLibChunkSize : lastUncompressedChunk), e); //uncompressed size
                                     bw.Write((uint)uncompressedTotal, e);
-                                    uncompressedTotal += (i != offsets.Count - 1 ? _zLibChunkSize : lastUncompressedChunk);
+                                    uncompressedTotal += i != offsets.Count - 1 ? _zLibChunkSize : lastUncompressedChunk;
                                 }
                             }
                         }

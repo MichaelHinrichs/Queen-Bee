@@ -50,7 +50,7 @@ namespace Nanook.QueenBee.Parser
         {
             _debugFile = debugFile;
             _pakFormat = pakFormat;
-            _pakFilename = (!_debugFile ? _pakFormat.FullPakFilename : _pakFormat.FullDebugFilename);
+            _pakFilename = !_debugFile ? _pakFormat.FullPakFilename : _pakFormat.FullDebugFilename;
 
             Dictionary<uint, PakDbgQbKey> qbKeyFilenames = new Dictionary<uint, PakDbgQbKey>();
 
@@ -298,7 +298,7 @@ namespace Nanook.QueenBee.Parser
                 else if (_requiresPab)
                 {
                     fname = _pakFormat.FullPabFilename;
-                    offset = (phi.HeaderStart + phi.FileOffset) - (new FileInfo(_pakFormat.FullPakFilename)).Length;
+                    offset = phi.HeaderStart + phi.FileOffset - new FileInfo(_pakFormat.FullPakFilename).Length;
                 }
                 else
                 {
@@ -308,7 +308,7 @@ namespace Nanook.QueenBee.Parser
 
                 using (FileStream fsPak = File.Open(fname, FileMode.Open, FileAccess.Read))
                 {
-                    if ((offset + phi.FileLength) - 1 > fsPak.Length)
+                    if (offset + phi.FileLength - 1 > fsPak.Length)
                         throw new ApplicationException(string.Format("End of file '{0}' is located at 0x{1} which is beyond the PAK/PAB size 0x{2}", qbFilename, (offset + phi.FileLength).ToString("X").PadLeft(8, '0'), fsPak.Length.ToString("X").PadLeft(8, '0')));
 
                     fsPak.Seek(offset, SeekOrigin.Begin);
@@ -366,7 +366,7 @@ namespace Nanook.QueenBee.Parser
                 else if (_requiresPab)
                 {
                     fname = _pakFormat.FullPabFilename;
-                    offset = (phi.HeaderStart + phi.FileOffset) - (new FileInfo(_pakFormat.FullPakFilename)).Length;
+                    offset = phi.HeaderStart + phi.FileOffset - new FileInfo(_pakFormat.FullPakFilename).Length;
                 }
                 else
                 {
@@ -379,7 +379,7 @@ namespace Nanook.QueenBee.Parser
                     //open input pak
                     using (FileStream fsPak = File.Open(fname, FileMode.Open, FileAccess.ReadWrite))
                     {
-                        if ((offset + phi.FileLength) - 1 > fsPak.Length)
+                        if (offset + phi.FileLength - 1 > fsPak.Length)
                             throw new ApplicationException(string.Format("End of file '{0}' is located at 0x{1} which is beyond the PAK/PAB size 0x{2}", qbFilename, (offset + phi.FileLength).ToString("X").PadLeft(8, '0'), fsPak.Length.ToString("X").PadLeft(8, '0')));
 
                         using (BinaryReader brPak = new BinaryReader(fsPak))
@@ -621,7 +621,7 @@ namespace Nanook.QueenBee.Parser
 
                 //previously badly padded or last file
                 if (nextOffset != 0 && (nextOffset - (phi.FileOffset + phi.HeaderStart)) % filePad != 0)
-                    repPad = (int)((nextOffset - (phi.FileOffset + phi.HeaderStart)) - phi.FileLength);
+                    repPad = (int)(nextOffset - (phi.FileOffset + phi.HeaderStart) - phi.FileLength);
 
 
                 //position of the LAST header item
@@ -629,7 +629,7 @@ namespace Nanook.QueenBee.Parser
                 //the length of all the headers (like pak when there's a pab) with padding
                 long allHeadersLen = minOffset;
                 //position in the input file where our file is to be replaced (not including header pos)
-                long fileReplacePos = (phi.HeaderStart + phi.FileOffset) - allHeadersLen;
+                long fileReplacePos = phi.HeaderStart + phi.FileOffset - allHeadersLen;
                 //position in the input file after the file that is to be replaced
                 long fileAfterReplacePos = fileReplacePos + phi.FileLength + repPad; //item size before modifying header
 
@@ -672,7 +672,7 @@ namespace Nanook.QueenBee.Parser
                                         }
                                         else
                                         {
-                                            diffLen = (ph.FileLength + repPad) - (newLength + pad);
+                                            diffLen = ph.FileLength + repPad - (newLength + pad);
                                             ph.FileLength = (uint)newLength; //0 for remove
                                         }
                                     }
@@ -794,7 +794,7 @@ namespace Nanook.QueenBee.Parser
                     int i;
                     for (i = 0; i < read; i++)
                     {
-                        if (!(isPadVal = (padData[read - (i + 1)] == padVal)))
+                        if (!(isPadVal = padData[read - (i + 1)] == padVal))
                             break;
                     }
 
@@ -834,7 +834,7 @@ namespace Nanook.QueenBee.Parser
 
                         foreach (byte b in end)
                         {
-                            if (!(is0 = (b == 0)))
+                            if (!(is0 = b == 0))
                                 break;
                         }
 
@@ -876,7 +876,7 @@ namespace Nanook.QueenBee.Parser
 
                         foreach (byte b in end)
                         {
-                            if (!(isAB = (b == 0xAB)))
+                            if (!(isAB = b == 0xAB))
                                 break;
                         }
 
@@ -913,7 +913,7 @@ namespace Nanook.QueenBee.Parser
 
             uint offset = ph.FileOffset;
             if (_requiresPab)
-                offset = (uint)_pakFormat.PakPabMinDataOffset + ((_pakFormat.PakPabMinDataOffset == 0 ? ph.HeaderStart : 0) + ph.FileOffset) - (uint)_pakFileLength;
+                offset = (uint)_pakFormat.PakPabMinDataOffset + (_pakFormat.PakPabMinDataOffset == 0 ? ph.HeaderStart : 0) + ph.FileOffset - (uint)_pakFileLength;
 
             bwPakO.Write(offset, _pakFormat.EndianType);
             bwPakO.Write(ph.FileLength, _pakFormat.EndianType);

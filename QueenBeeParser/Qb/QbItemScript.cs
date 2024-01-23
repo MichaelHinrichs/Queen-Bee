@@ -192,10 +192,10 @@ namespace Nanook.QueenBee.Parser
 
             bool end = false;
 
-            au = (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox);
+            au = Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox;
 
             if (au)
-                ub = (Root.PakFormat.EndianType == EndianType.Big);
+                ub = Root.PakFormat.EndianType == EndianType.Big;
 
 
             for (int i = 0; i < _scriptData.Length; i++)

@@ -39,7 +39,7 @@ namespace Nanook.QueenBee.Parser
                     _pointer = 0;
                     _reserved = 0;
 
-                    _length = (5 * 4);
+                    _length = 5 * 4;
 
                     _itemCount = 1;
 
@@ -56,7 +56,7 @@ namespace Nanook.QueenBee.Parser
 
                     _itemCount = 1;
 
-                    _length = (4 * 4);
+                    _length = 4 * 4;
                     break;
 
                 case QbFormat.StructItemPointer:
@@ -71,7 +71,7 @@ namespace Nanook.QueenBee.Parser
                     _pointers = new uint[1];
                     _pointers[0] = _pointer;
 
-                    _length = (4 * 4);
+                    _length = 4 * 4;
                     break;
 
                 case QbFormat.StructItemValue:
@@ -81,7 +81,7 @@ namespace Nanook.QueenBee.Parser
                     _itemQbKey = QbKey.Create(0);  //always null?
                     _itemCount = 1;
 
-                    _length = (3 * 4);
+                    _length = 3 * 4;
                     break;
 
                 case QbFormat.ArrayPointer:
@@ -92,7 +92,7 @@ namespace Nanook.QueenBee.Parser
                     _pointer = 0;
                     _itemQbKey = null;
 
-                    _length = (3 * 4);
+                    _length = 3 * 4;
 
                     _pointers = new uint[_itemCount];
                     break;
@@ -103,21 +103,21 @@ namespace Nanook.QueenBee.Parser
 
                     _itemQbKey = null;
                     _itemCount = 0;
-                    _length = (2 * 4);
+                    _length = 2 * 4;
                     break;
 
                 case QbFormat.StructHeader: //when struct array item
-                    _length = (1 * 4);
+                    _length = 1 * 4;
                     break;
 
                 case QbFormat.Floats:
                     _itemCount = 2;
-                    _length = (1 * 4);
+                    _length = 1 * 4;
                     break;
 
                 case QbFormat.Unknown:
                     _position += 4; //there is no header so re add the previously removed 4
-                    _length = (0 * 4);
+                    _length = 0 * 4;
                     break;
 
                 default:
@@ -142,7 +142,7 @@ namespace Nanook.QueenBee.Parser
                     //Simple section type:
                     //  ItemId, FileId, Value, Reserved
                     _reserved = br.ReadUInt32(Root.PakFormat.EndianType);
-                    _length += (1 * 4);
+                    _length += 1 * 4;
                     break;
 
                 case QbFormat.StructItemPointer:
@@ -154,7 +154,7 @@ namespace Nanook.QueenBee.Parser
                     //Simple struct type:
                     //  ItemId, Value (4 byte), NextItemPointer
                     _nextItemPointer = br.ReadUInt32(Root.PakFormat.EndianType);
-                    _length += (1 * 4);
+                    _length += 1 * 4;
 
                     if (_nextItemPointer != 0 && StreamPos(br) != _nextItemPointer) //pointer test
                         throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _nextItemPointer));
@@ -203,7 +203,7 @@ namespace Nanook.QueenBee.Parser
                     _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
                     _reserved = br.ReadUInt32(Root.PakFormat.EndianType);
 
-                    _length = (5*4);
+                    _length = 5*4;
 
                     if (type == QbItemType.SectionScript)
                         _itemCount = 0;
@@ -226,7 +226,7 @@ namespace Nanook.QueenBee.Parser
 
                     _itemCount = 1;
 
-                    _length = (3*4);
+                    _length = 3*4;
                     break;
 
                 case QbFormat.StructItemPointer:
@@ -245,7 +245,7 @@ namespace Nanook.QueenBee.Parser
                     _pointers = new uint[1];
                     _pointers[0] = _pointer;
 
-                    _length = (4*4);
+                    _length = 4*4;
                     break;
 
                 case QbFormat.StructItemValue:
@@ -261,7 +261,7 @@ namespace Nanook.QueenBee.Parser
 
                     _itemCount = 1;
 
-                    _length = (2*4);
+                    _length = 2*4;
                     break;
 
                 case QbFormat.ArrayPointer:
@@ -273,7 +273,7 @@ namespace Nanook.QueenBee.Parser
                     _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
                     itemQbKeyCrc = 0;
 
-                    _length = (3 * 4);
+                    _length = 3 * 4;
 
                     if (_pointer != 0 && StreamPos(br) != _pointer) //pointer test
                         throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _pointer));
@@ -287,7 +287,7 @@ namespace Nanook.QueenBee.Parser
                         for (int i = 0; i < _itemCount; i++)
                             _pointers[i] = br.ReadUInt32(Root.PakFormat.EndianType);
 
-                        _length += (_itemCount * 4);
+                        _length += _itemCount * 4;
                     }
                     break;
 
@@ -298,30 +298,30 @@ namespace Nanook.QueenBee.Parser
 
                     itemQbKeyCrc = 0;
                     _itemCount = br.ReadUInt32(Root.PakFormat.EndianType);
-                    _length = (2*4);
+                    _length = 2*4;
                     if (_itemCount > 1)
                     {
                         _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
                         if (StreamPos(br) != _pointer) //pointer test
                             throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _pointer));
-                        _length += (1 * 4);
+                        _length += 1 * 4;
                     }
                     break;
 
                 case QbFormat.StructHeader: //when struct array item
                     _hasQbKey = false;
-                    _length = (1 * 4);
+                    _length = 1 * 4;
                     break;
 
                 case QbFormat.Floats:
                     _hasQbKey = false;
-                    _length = (1 * 4);
+                    _length = 1 * 4;
                     break;
 
                 case QbFormat.Unknown:
                     _hasQbKey = false;
                     _position += 4; //there is no header so re add the previously removed 4
-                    _length = (0*4);
+                    _length = 0*4;
                     break;
 
                 default:
@@ -408,9 +408,9 @@ namespace Nanook.QueenBee.Parser
                 {
                     case QbFormat.ArrayValue:
                         if (_itemCount > 1)
-                            _length = (3 * 4);
+                            _length = 3 * 4;
                         else
-                            _length = (2 * 4);
+                            _length = 2 * 4;
                         break;
                 }
                 #endregion
@@ -433,7 +433,7 @@ namespace Nanook.QueenBee.Parser
                 case QbFormat.SectionPointer:
                     //Complex section type:
                     //  ItemId, FileId, Pointer, Reserved
-                    _pointer = (pos += (5 * 4));
+                    _pointer = pos += 5 * 4;
                     break;
 
                 case QbFormat.SectionValue:
@@ -446,7 +446,7 @@ namespace Nanook.QueenBee.Parser
                     //Complex struct type:
                     //  ItemId, Pointer, NextItemPointer
                     _nextItemPointer = pos + Length;
-                    _pointer = (pos += (4 * 4));
+                    _pointer = pos += 4 * 4;
                     break;
 
                 case QbFormat.StructItemValue:
@@ -459,7 +459,7 @@ namespace Nanook.QueenBee.Parser
                 case QbFormat.ArrayPointer:
                     //Complex array type:
                     //  ItemCount, Pointer, Pointers -  (if length is 1 then pointer points to first item and Pointers are abscent)
-                    _pointer = (pos += (3 * 4));
+                    _pointer = pos += 3 * 4;
 
                     if (_qbItemType != QbItemType.ArrayString && _qbItemType != QbItemType.ArrayStringW) //string sets this itself
                         _itemCount = (uint)_items.Count;
@@ -474,7 +474,7 @@ namespace Nanook.QueenBee.Parser
                     {
                         _pointers = new uint[_itemCount];
                         _length += _itemCount * 4;
-                        uint pos2 = (pos = _pointer + (_itemCount * 4));
+                        uint pos2 = pos = _pointer + (_itemCount * 4);
                         int i = 0;
                         //no pointers will be stored for the string array
                         foreach (QbItemBase qib in _items)
@@ -492,24 +492,24 @@ namespace Nanook.QueenBee.Parser
 
                     pos += 2 * 4;
                     _pointer = 0;
-                    _length = (2 * 4);
+                    _length = 2 * 4;
 
                     if (_itemCount > 1)
                     {
-                        _pointer = (pos += (1 * 4));
-                        _length += (1 * 4);
+                        _pointer = pos += 1 * 4;
+                        _length += 1 * 4;
                     }
                     break;
 
 
                 case QbFormat.StructHeader: //when struct array item
-                    pos += (1 * 4);
+                    pos += 1 * 4;
                     break;
                 case QbFormat.Floats:
-                    pos += (1 * 4);
+                    pos += 1 * 4;
                     break;
                 case QbFormat.Unknown:
-                    pos += (0 * 4);
+                    pos += 0 * 4;
                     break;
                 default:
                     break;
@@ -741,7 +741,7 @@ namespace Nanook.QueenBee.Parser
 
             #region switch
 
-            uint qbKeyCrc = (_itemQbKey == null ? 0 : _itemQbKey.Crc);
+            uint qbKeyCrc = _itemQbKey == null ? 0 : _itemQbKey.Crc;
 
             switch (_qbFormat)
             {
@@ -965,7 +965,7 @@ namespace Nanook.QueenBee.Parser
         {
             return Root.SearchItems(Root, _items, recursive, delegate(QbItemBase item)
             {
-                return (item.ItemQbKey != 0 && item.ItemQbKey.Crc == key.Crc);
+                return item.ItemQbKey != 0 && item.ItemQbKey.Crc == key.Crc;
             });
         }
 
@@ -973,7 +973,7 @@ namespace Nanook.QueenBee.Parser
         {
             return Root.SearchItems(Root, _items, recursive, delegate(QbItemBase item)
             {
-                return (item.QbItemType == type);
+                return item.QbItemType == type;
             });
         }
 

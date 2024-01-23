@@ -58,7 +58,7 @@ namespace Nanook.QueenBee.Parser
                 floatsValue = br.ReadUInt32(Root.PakFormat.EndianType);
                 floatsType = Root.PakFormat.GetQbItemType(floatsValue);
                 
-                is3d = (type == QbItemType.SectionFloatsX3 || type == QbItemType.StructItemFloatsX3 || type == QbItemType.ArrayFloatsX3);
+                is3d = type == QbItemType.SectionFloatsX3 || type == QbItemType.StructItemFloatsX3 || type == QbItemType.ArrayFloatsX3;
 
                 switch (floatsType)
                 {

@@ -313,13 +313,13 @@ namespace Nanook.QueenBee.Parser
 
         public void AlignPointers()
         {
-            uint pos = (2 * 4); //magic and filesize
+            uint pos = 2 * 4; //magic and filesize
             foreach (QbItemBase qib in _items)
                 pos = qib.AlignPointers(pos);
 
             //2 passes ensures that some tricky issues are dealt with.
             //namely that nested sizes are calculated so parent sizes are accurate
-            pos = (2 * 4); //magic and filesize
+            pos = 2 * 4; //magic and filesize
             foreach (QbItemBase qib in _items)
                 pos = qib.AlignPointers(pos);
 
@@ -332,7 +332,7 @@ namespace Nanook.QueenBee.Parser
         {
             return SearchItems(this, _items, recursive, delegate(QbItemBase item)
                 {
-                    return (item.ItemQbKey != null && item.ItemQbKey.Crc == key.Crc);
+                    return item.ItemQbKey != null && item.ItemQbKey.Crc == key.Crc;
                 });
         }
 
@@ -340,7 +340,7 @@ namespace Nanook.QueenBee.Parser
         {
             return SearchItems(this, _items, recursive, delegate(QbItemBase item)
             {
-                return (item.QbItemType == type);
+                return item.QbItemType == type;
             });
         }
 
@@ -628,7 +628,7 @@ namespace Nanook.QueenBee.Parser
         {
             get
             {
-                uint len = (2 * 4);
+                uint len = 2 * 4;
                 foreach (QbItemBase qib in _items)
                     len += qib.Length;
                 return len;
@@ -684,7 +684,7 @@ namespace Nanook.QueenBee.Parser
                     //use this item to identify the array to set to 0 items
                     MemberInfo m = Array.Find(ms, delegate(MemberInfo mi)
                     {
-                        return (mi.Name == gqi.SourceProperty);
+                        return mi.Name == gqi.SourceProperty;
                     });
                     if (m != null)
                     {
@@ -722,7 +722,7 @@ namespace Nanook.QueenBee.Parser
 
                 MemberInfo m = Array.Find(ms, delegate(MemberInfo mi)
                 {
-                    return (mi.Name == gi.SourceProperty);
+                    return mi.Name == gi.SourceProperty;
                 });
 
                 if (m != null)
@@ -829,7 +829,7 @@ namespace Nanook.QueenBee.Parser
                     }
                     else if (o is string[])
                     {
-                        foreach (string s in ((string[])o))
+                        foreach (string s in (string[])o)
                         {
                             itm = new GenericQbItem(a.DefaultDisplayName, s, a.EditType, a.ReadOnly, a.UseQbItemType, item.QbItemType, m.Name);
                             items.Add(itm);
@@ -842,7 +842,7 @@ namespace Nanook.QueenBee.Parser
                     }
                     else if (o is uint[])
                     {
-                        foreach (uint s in ((uint[])o))
+                        foreach (uint s in (uint[])o)
                         {
                             itm = new GenericQbItem(a.DefaultDisplayName, s, a.EditType, a.ReadOnly, a.UseQbItemType, item.QbItemType, m.Name);
                             items.Add(itm);
@@ -855,7 +855,7 @@ namespace Nanook.QueenBee.Parser
                     }
                     else if (o is int[])
                     {
-                        foreach (int s in ((int[])o))
+                        foreach (int s in (int[])o)
                         {
                             itm = new GenericQbItem(a.DefaultDisplayName, s, a.EditType, a.ReadOnly, a.UseQbItemType, item.QbItemType, m.Name);
                             items.Add(itm);
@@ -868,7 +868,7 @@ namespace Nanook.QueenBee.Parser
                     }
                     else if (o is float[])
                     {
-                        foreach (float s in ((float[])o))
+                        foreach (float s in (float[])o)
                         {
                             itm = new GenericQbItem(a.DefaultDisplayName, s, a.EditType, a.ReadOnly, a.UseQbItemType, item.QbItemType, m.Name);
                             items.Add(itm);
@@ -881,7 +881,7 @@ namespace Nanook.QueenBee.Parser
                     }
                     else if (o is QbKey[])
                     {
-                        foreach (QbKey s in ((QbKey[])o))
+                        foreach (QbKey s in (QbKey[])o)
                         {
                             itm = new GenericQbItem(a.DefaultDisplayName, s, a.EditType, a.ReadOnly, a.UseQbItemType, item.QbItemType, m.Name);
                             items.Add(itm);
@@ -960,7 +960,7 @@ namespace Nanook.QueenBee.Parser
         {
             return _supportedChildItems[parent].Exists(delegate (QbItemType t)
             {
-                return (t == child);
+                return t == child;
             });
         }
 

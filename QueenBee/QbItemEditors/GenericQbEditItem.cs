@@ -96,7 +96,7 @@ namespace Nanook.QueenBee
             get { return txtValue.Left; }
             set
             {
-                int w = (txtValue.Width + (txtValue.Left - value));
+                int w = txtValue.Width + (txtValue.Left - value);
                 txtValue.Left = value;
                 txtValue.Width = w;
 

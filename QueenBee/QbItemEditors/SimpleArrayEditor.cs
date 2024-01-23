@@ -290,7 +290,7 @@ namespace Nanook.QueenBee
                 if (e.Button == MouseButtons.Right)
                 {
                     //lstItems.TopIndex
-                    int idx = (e.Y / lstItems.ItemHeight + (e.Y % lstItems.ItemHeight != 0 ? 1 : 0) + lstItems.TopIndex) - 1;
+                    int idx = e.Y / lstItems.ItemHeight + (e.Y % lstItems.ItemHeight != 0 ? 1 : 0) + lstItems.TopIndex - 1;
 
                     bool itemSelected = idx < lstItems.Items.Count;
 
@@ -305,8 +305,8 @@ namespace Nanook.QueenBee
                         itemSelected = true;
                     }
 
-                    mnuItemMoveUp.Enabled = (itemSelected && idx != 0);
-                    mnuItemMoveDown.Enabled = (itemSelected && idx != lstItems.Items.Count - 1);
+                    mnuItemMoveUp.Enabled = itemSelected && idx != 0;
+                    mnuItemMoveDown.Enabled = itemSelected && idx != lstItems.Items.Count - 1;
                     mnuInsertItem.Enabled = itemSelected;
                     mnuRemoveItem.Enabled = itemSelected;
                     mnuEditItems.Show(lstItems, e.Location);
@@ -484,15 +484,15 @@ namespace Nanook.QueenBee
             export = new System.Windows.Forms.SaveFileDialog();
             import = new System.Windows.Forms.OpenFileDialog();
             menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(err)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)err).BeginInit();
             mnuEditItems.SuspendLayout();
             SuspendLayout();
             // 
             // lstItems
             // 
-            lstItems.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
-                        | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            lstItems.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+                        | AnchorStyles.Left
+                        | AnchorStyles.Right;
             lstItems.FormattingEnabled = true;
             lstItems.IntegralHeight = false;
             lstItems.Location = new System.Drawing.Point(3, 33);
@@ -513,8 +513,8 @@ namespace Nanook.QueenBee
             // 
             // txtItem
             // 
-            txtItem.Anchor = ((AnchorStyles.Bottom | AnchorStyles.Left)
-                        | AnchorStyles.Right);
+            txtItem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+                        | AnchorStyles.Right;
             err.SetIconPadding(txtItem, 37);
             txtItem.Location = new System.Drawing.Point(3, 242);
             txtItem.Name = "txtItem";
@@ -525,7 +525,7 @@ namespace Nanook.QueenBee
             // 
             // btnConvert
             // 
-            btnConvert.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            btnConvert.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnConvert.Location = new System.Drawing.Point(228, 8);
             btnConvert.Name = "btnConvert";
             btnConvert.Size = new System.Drawing.Size(42, 22);
@@ -536,7 +536,7 @@ namespace Nanook.QueenBee
             // 
             // btnUpdate
             // 
-            btnUpdate.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            btnUpdate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnUpdate.Location = new System.Drawing.Point(195, 274);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(75, 23);
@@ -547,7 +547,7 @@ namespace Nanook.QueenBee
             // 
             // btnSet
             // 
-            btnSet.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            btnSet.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSet.Location = new System.Drawing.Point(218, 242);
             btnSet.Name = "btnSet";
             btnSet.Size = new System.Drawing.Size(35, 21);
@@ -655,7 +655,7 @@ namespace Nanook.QueenBee
             // 
             // btnImport
             // 
-            btnImport.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+            btnImport.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnImport.Location = new System.Drawing.Point(84, 274);
             btnImport.Name = "btnImport";
             btnImport.Size = new System.Drawing.Size(75, 23);
@@ -666,7 +666,7 @@ namespace Nanook.QueenBee
             // 
             // btnExport
             // 
-            btnExport.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+            btnExport.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnExport.Location = new System.Drawing.Point(3, 274);
             btnExport.Name = "btnExport";
             btnExport.Size = new System.Drawing.Size(75, 23);
@@ -699,7 +699,7 @@ namespace Nanook.QueenBee
             Size = new System.Drawing.Size(273, 300);
             Load += new System.EventHandler(SimpleArrayEditor_Load);
             menu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(err)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)err).EndInit();
             mnuEditItems.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -757,7 +757,7 @@ namespace Nanook.QueenBee
                     if (File.Exists(fname))
                         File.Delete(fname);
 
-                    AppState.LastArrayPath = (new FileInfo(fname)).DirectoryName;
+                    AppState.LastArrayPath = new FileInfo(fname).DirectoryName;
 
                     using (FileStream fs = new FileStream(fname, FileMode.CreateNew, FileAccess.Write))
                     {

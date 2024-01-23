@@ -78,7 +78,7 @@ namespace Nanook.QueenBee.Parser
         {
             get
             {
-                return base.Length + ((uint)(_values.Length) * 4);
+                return base.Length + ((uint)_values.Length * 4);
             }
         }
 

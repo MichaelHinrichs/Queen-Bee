@@ -78,7 +78,7 @@ namespace Nanook.QueenBee
             else if (_orderOfSort == SortOrder.Descending)
             {
                 // Descending sort is selected, return negative result of compare operation
-                return (-compareResult);
+                return -compareResult;
             }
             else
             {

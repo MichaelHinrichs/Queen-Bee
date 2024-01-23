@@ -13,11 +13,11 @@ namespace Nanook.QueenBee.Parser
         {
             uint crc, poly;
             int i, j;
-            poly = ((uint)0xEDB88320L);
-            for (i = 0; i < 256; (i)++)
+            poly = (uint)0xEDB88320L;
+            for (i = 0; i < 256; i++)
             {
-                crc = ((uint)i);
-                for (j = 8; j > 0; (j)--)
+                crc = (uint)i;
+                for (j = 8; j > 0; j--)
                 {
                     if ((crc & 1) == 1)
                         crc = crc >> 1 ^ poly;
@@ -72,7 +72,7 @@ namespace Nanook.QueenBee.Parser
             int length;
             length = str.Length;
             crc = 0xFFFFFFFF;
-            for (i = 0; i < length; (i)++)
+            for (i = 0; i < length; i++)
                 crc = crc >> 8 & 0x00FFFFFF ^ crc_tab[(crc ^ str[i]) & 0xFF];
             return new QbKey(crc, text);
         }
@@ -143,22 +143,22 @@ namespace Nanook.QueenBee.Parser
 
         public static bool operator ==(QbKey qb1, uint qb2)
         {
-            return (!Equals(qb1, null) && qb1.Crc == qb2);
+            return !Equals(qb1, null) && qb1.Crc == qb2;
         }
 
         public static bool operator !=(QbKey qb1, uint qb2)
         {
-            return (!(qb1 == qb2));
+            return !(qb1 == qb2);
         }
 
         public static bool operator ==(uint qb1, QbKey qb2)
         {
-            return (qb2 == qb1);
+            return qb2 == qb1;
         }
 
         public static bool operator !=(uint qb1, QbKey qb2)
         {
-            return (!(qb2 == qb1));
+            return !(qb2 == qb1);
         }
 
         public static bool operator ==(QbKey qb1, QbKey qb2)
@@ -166,12 +166,12 @@ namespace Nanook.QueenBee.Parser
             bool isNull1 = Equals(qb1, null);
             bool isNull2 = Equals(qb2, null);
 
-            return ((isNull1 && isNull2) || (!isNull1 && !isNull2 && qb1.Crc == qb2.Crc));
+            return (isNull1 && isNull2) || (!isNull1 && !isNull2 && qb1.Crc == qb2.Crc);
         }
 
         public static bool operator !=(QbKey qb1, QbKey qb2)
         {
-            return (!(qb1 == qb2));
+            return !(qb1 == qb2);
         } 
 
         private uint _crc;

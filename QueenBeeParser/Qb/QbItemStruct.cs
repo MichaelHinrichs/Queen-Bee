@@ -193,8 +193,8 @@ namespace Nanook.QueenBee.Parser
             pos = base.AlignPointers(pos);
 
             if (QbItemType != QbItemType.StructHeader)
-                pos += (1 * 4); //skip header
-            _iniNextItemPointer = (pos += (1 * 4)); //skip header and pointer
+                pos += 1 * 4; //skip header
+            _iniNextItemPointer = pos += 1 * 4; //skip header and pointer
 
             foreach (QbItemBase qib in Items)
                 pos = qib.AlignPointers(pos);

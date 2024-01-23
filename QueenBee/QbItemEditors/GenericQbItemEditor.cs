@@ -26,10 +26,10 @@ namespace Nanook.QueenBee
             if (gis.Count > 500)
             {
                 tooManyItems = true;
-                AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (1 + 1) + 10)); //+ 1 for button
+                AutoScrollMinSize = new Size(0, (top * 2) + spacing * (1 + 1) + 10); //+ 1 for button
             }
             else
-                AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (gis.Count + 1) + 10)); //+ 1 for button
+                AutoScrollMinSize = new Size(0, (top * 2) + spacing * (gis.Count + 1) + 10); //+ 1 for button
 
             Tag = QbItem; //store item for update
 
@@ -67,7 +67,7 @@ namespace Nanook.QueenBee
                         Text = "&Update",
                         Anchor = AnchorStyles.Top | AnchorStyles.Right
                     };
-                    btnUpdateItems.Left = (ClientSize.Width - btnUpdateItems.Width - 15);
+                    btnUpdateItems.Left = ClientSize.Width - btnUpdateItems.Width - 15;
                     btnUpdateItems.Top = top + 10;
                     btnUpdateItems.Height = 22;
                     btnUpdateItems.Enabled = hasEditable;
@@ -126,7 +126,7 @@ namespace Nanook.QueenBee
 
                 foreach (Control un in Controls)
                 {
-                    if ((ei = (un as GenericQbEditItem)) != null)
+                    if ((ei = un as GenericQbEditItem) != null)
                     {
                         if (!ei.IsValid)
                         {

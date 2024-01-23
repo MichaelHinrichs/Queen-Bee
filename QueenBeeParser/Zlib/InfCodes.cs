@@ -159,7 +159,7 @@ namespace Rebex.IO.Compression
 					case LEN:  // i: get length/literal/eob next
 						j = need;
 						
-						while (k < (j))
+						while (k < j)
 						{
 							if (n != 0)
 								r = Z_OK;
@@ -178,8 +178,8 @@ namespace Rebex.IO.Compression
 						
 						tindex = (tree_index + (b & inflate_mask[j])) * 3;
 						
-						b = SupportClass.URShift(b, (tree[tindex + 1]));
-						k -= (tree[tindex + 1]);
+						b = SupportClass.URShift(b, tree[tindex + 1]);
+						k -= tree[tindex + 1];
 						
 						e = tree[tindex];
 						
@@ -224,7 +224,7 @@ namespace Rebex.IO.Compression
 					case LENEXT:  // i: getting length extra (have base)
 						j = get_Renamed;
 						
-						while (k < (j))
+						while (k < j)
 						{
 							if (n != 0)
 								r = Z_OK;
@@ -240,7 +240,7 @@ namespace Rebex.IO.Compression
 							k += 8;
 						}
 						
-						len += (b & inflate_mask[j]);
+						len += b & inflate_mask[j];
 						
 						b >>= j;
 						k -= j;
@@ -254,7 +254,7 @@ namespace Rebex.IO.Compression
 					case DIST:  // i: get distance next
 						j = need;
 						
-						while (k < (j))
+						while (k < j)
 						{
 							if (n != 0)
 								r = Z_OK;
@@ -275,7 +275,7 @@ namespace Rebex.IO.Compression
 						b >>= tree[tindex + 1];
 						k -= tree[tindex + 1];
 						
-						e = (tree[tindex]);
+						e = tree[tindex];
 						if ((e & 16) != 0)
 						{
 							// distance
@@ -304,7 +304,7 @@ namespace Rebex.IO.Compression
 					case DISTEXT:  // i: getting distance extra
 						j = get_Renamed;
 						
-						while (k < (j))
+						while (k < j)
 						{
 							if (n != 0)
 								r = Z_OK;
@@ -320,7 +320,7 @@ namespace Rebex.IO.Compression
 							k += 8;
 						}
 						
-						dist += (b & inflate_mask[j]);
+						dist += b & inflate_mask[j];
 						
 						b >>= j;
 						k -= j;
@@ -500,7 +500,7 @@ namespace Rebex.IO.Compression
 			{
 				// assume called with m >= 258 && n >= 10
 				// get literal/length code
-				while (k < (20))
+				while (k < 20)
 				{
 					// max bits for literal/length code
 					n--;
@@ -513,7 +513,7 @@ namespace Rebex.IO.Compression
 				tp_index_t_3 = (tp_index + t) * 3;
 				if ((e = tp[tp_index_t_3]) == 0)
 				{
-					b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
+					b >>= tp[tp_index_t_3 + 1]; k -= tp[tp_index_t_3 + 1];
 					
 					s.window[q++] = (byte) tp[tp_index_t_3 + 2];
 					m--;
@@ -522,7 +522,7 @@ namespace Rebex.IO.Compression
 				do 
 				{
 					
-					b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
+					b >>= tp[tp_index_t_3 + 1]; k -= tp[tp_index_t_3 + 1];
 					
 					if ((e & 16) != 0)
 					{
@@ -532,7 +532,7 @@ namespace Rebex.IO.Compression
 						b >>= e; k -= e;
 						
 						// decode distance base of block to copy
-						while (k < (15))
+						while (k < 15)
 						{
 							// max bits for distance code
 							n--;
@@ -548,13 +548,13 @@ namespace Rebex.IO.Compression
 						do 
 						{
 							
-							b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
+							b >>= tp[tp_index_t_3 + 1]; k -= tp[tp_index_t_3 + 1];
 							
 							if ((e & 16) != 0)
 							{
 								// get extra bits to add to distance base
 								e &= 15;
-								while (k < (e))
+								while (k < e)
 								{
 									// get extra bits (up to 13)
 									n--;
@@ -563,7 +563,7 @@ namespace Rebex.IO.Compression
 								
 								d = tp[tp_index_t_3 + 2] + (b & inflate_mask[e]);
 								
-								b >>= (e); k -= (e);
+								b >>= e; k -= e;
 								
 								// do the copy
 								m -= c;
@@ -634,7 +634,7 @@ namespace Rebex.IO.Compression
 							else if ((e & 64) == 0)
 							{
 								t += tp[tp_index_t_3 + 2];
-								t += (b & inflate_mask[e]);
+								t += b & inflate_mask[e];
 								tp_index_t_3 = (tp_index + t) * 3;
 								e = tp[tp_index_t_3];
 							}
@@ -642,7 +642,7 @@ namespace Rebex.IO.Compression
 							{
 								z.msg = "invalid distance code";
 								
-								c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= (c << 3);
+								c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= c << 3;
 								
 								s.bitb = b; s.bitk = k;
 								z.avail_in = n; z.total_in += p - z.next_in_index; z.next_in_index = p;
@@ -658,12 +658,12 @@ namespace Rebex.IO.Compression
 					if ((e & 64) == 0)
 					{
 						t += tp[tp_index_t_3 + 2];
-						t += (b & inflate_mask[e]);
+						t += b & inflate_mask[e];
 						tp_index_t_3 = (tp_index + t) * 3;
 						if ((e = tp[tp_index_t_3]) == 0)
 						{
 							
-							b >>= (tp[tp_index_t_3 + 1]); k -= (tp[tp_index_t_3 + 1]);
+							b >>= tp[tp_index_t_3 + 1]; k -= tp[tp_index_t_3 + 1];
 							
 							s.window[q++] = (byte) tp[tp_index_t_3 + 2];
 							m--;
@@ -673,7 +673,7 @@ namespace Rebex.IO.Compression
 					else if ((e & 32) != 0)
 					{
 						
-						c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= (c << 3);
+						c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= c << 3;
 						
 						s.bitb = b; s.bitk = k;
 						z.avail_in = n; z.total_in += p - z.next_in_index; z.next_in_index = p;
@@ -685,7 +685,7 @@ namespace Rebex.IO.Compression
 					{
 						z.msg = "invalid literal/length code";
 						
-						c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= (c << 3);
+						c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= c << 3;
 						
 						s.bitb = b; s.bitk = k;
 						z.avail_in = n; z.total_in += p - z.next_in_index; z.next_in_index = p;
@@ -699,7 +699,7 @@ namespace Rebex.IO.Compression
 			while (m >= 258 && n >= 10);
 			
 			// not enough input or output--restore pointers and return
-			c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= (c << 3);
+			c = z.avail_in - n; c = (k >> 3) < c?k >> 3:c; n += c; p -= c; k -= c << 3;
 			
 			s.bitb = b; s.bitk = k;
 			z.avail_in = n; z.total_in += p - z.next_in_index; z.next_in_index = p;
