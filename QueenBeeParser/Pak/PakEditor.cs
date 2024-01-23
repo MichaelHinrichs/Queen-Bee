@@ -121,12 +121,13 @@ namespace Nanook.QueenBee.Parser
 
                     do
                     {
-                        phi = new PakHeaderItem();
+                        phi = new PakHeaderItem
+                        {
+                            HeaderStart = (uint)st.Position,
+                            IsStoredInPak = true,
 
-                        phi.HeaderStart = (uint)st.Position;
-                        phi.IsStoredInPak = true;
-
-                        phi.FileType = QbKey.Create(br.ReadUInt32(_pakFormat.EndianType));
+                            FileType = QbKey.Create(br.ReadUInt32(_pakFormat.EndianType))
+                        };
 
                         //if the entry has the file type of last then we're done
                         if (phi.FileType == lastQbKey || phi.FileType == dotLastQbKey)
@@ -398,14 +399,16 @@ namespace Nanook.QueenBee.Parser
             //update the filename in the collection
             List<PakHeaderItem> hd = new List<PakHeaderItem>(_pakHeaders.Values);
 
-            PakHeaderItem newHdr = new PakHeaderItem();
-            newHdr.FileLength = 0; // (uint)(new FileInfo(localFilename)).Length;
-            newHdr.FileOffset = hd[0].FileOffset + (uint)(filenameInHeader ? PakHeaderItem.FullHeaderLength : 0x20);
-            newHdr.Flags = (PakHeaderFlags)(filenameInHeader ? PakHeaderFlags.Filename : 0);
-            newHdr.HeaderStart = 0;
-            newHdr.IsStoredInPak = true;
-            newHdr.Filename = newQbFilename;
-            newHdr.FileType = itemType;
+            PakHeaderItem newHdr = new PakHeaderItem
+            {
+                FileLength = 0, // (uint)(new FileInfo(localFilename)).Length;
+                FileOffset = hd[0].FileOffset + (uint)(filenameInHeader ? PakHeaderItem.FullHeaderLength : 0x20),
+                Flags = (PakHeaderFlags)(filenameInHeader ? PakHeaderFlags.Filename : 0),
+                HeaderStart = 0,
+                IsStoredInPak = true,
+                Filename = newQbFilename,
+                FileType = itemType
+            };
             hd.Insert(0, newHdr);
 
             //update the filename in the collection

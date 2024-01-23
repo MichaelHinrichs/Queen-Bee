@@ -1148,8 +1148,10 @@ This PAK has no StructItem children so this setting could not be detected.", "St
         private void addItemToGui(QbItemBase itm, int indent)
         {
             //let exceptions be raised
-            ListViewItem li = new ListViewItem(itm.QbItemType.ToString());
-            li.IndentCount = indent;
+            ListViewItem li = new ListViewItem(itm.QbItemType.ToString())
+            {
+                IndentCount = indent
+            };
             if (itm.DebugName.Length != 0)
                 li.SubItems.Add(itm.DebugName);
             else if (itm.ItemQbKey != null && itm.ItemQbKey.Crc != 0)
@@ -1967,8 +1969,10 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
         private void addSearchListItem(string found, QbFile qbFile, QbItemBase qib)
         {
-            ListViewItem li = new ListViewItem(found);
-            li.ImageIndex = getQbItemImageIndex(qib.QbItemType);
+            ListViewItem li = new ListViewItem(found)
+            {
+                ImageIndex = getQbItemImageIndex(qib.QbItemType)
+            };
             li.SubItems.Add(qbFile.Filename);
             li.SubItems.Add(string.Format("{0} ({1})", qib.Position.ToString("X").PadLeft(8, '0'), qib.Position.ToString()));
             li.SubItems.Add(qib.QbItemType.ToString());

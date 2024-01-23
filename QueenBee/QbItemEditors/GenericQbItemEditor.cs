@@ -62,9 +62,11 @@ namespace Nanook.QueenBee
             {
                 if (this.Controls.Count != 0)
                 {
-                    Button btnUpdateItems = new Button();
-                    btnUpdateItems.Text = "&Update";
-                    btnUpdateItems.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                    Button btnUpdateItems = new Button
+                    {
+                        Text = "&Update",
+                        Anchor = AnchorStyles.Top | AnchorStyles.Right
+                    };
                     btnUpdateItems.Left = (this.ClientSize.Width - btnUpdateItems.Width - 15);
                     btnUpdateItems.Top = top + 10;
                     btnUpdateItems.Height = 22;
