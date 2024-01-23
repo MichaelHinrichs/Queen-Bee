@@ -79,13 +79,10 @@ namespace Rebex.IO.Compression
 		/// <param name="level">Compresion level. Only used when compressing data.</param>
 		public ZlibOutputStream(Stream output, CompressionMode mode, int level)
 		{
-			if (output == null)
-				throw new ArgumentNullException("input");
-
-			level = Math.Max(0, Math.Min(9, level));
+            level = Math.Max(0, Math.Min(9, level));
 
 			_block = new byte[0x1000];
-			_output = output;
+			_output = output ?? throw new ArgumentNullException("input");
 			_compress = mode == CompressionMode.Compress;
 			_zstream = new ZStream();
 			if (_compress)
@@ -297,13 +294,10 @@ namespace Rebex.IO.Compression
 		/// <param name="level">Compression level. Only used when compressing data.</param>
 		public ZlibInputStream(Stream input, CompressionMode mode, int level)
 		{
-			if (input == null)
-				throw new ArgumentNullException("input");
-
-			level = Math.Max(0, Math.Min(9, level));
+            level = Math.Max(0, Math.Min(9, level));
 
 			_buffer = new byte[0x1000];
-			_input = input;
+			_input = input ?? throw new ArgumentNullException("input");
 			_compress = mode == CompressionMode.Compress;
 			_zstream = new ZStream();
 			if (_compress)
