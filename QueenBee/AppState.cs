@@ -61,8 +61,7 @@ namespace Nanook.QueenBee
 
         public static void SavePakListColInfo(ListView lv)
         {
-            string cp, cw, cs;
-            saveListViewInfo(lv, out cp, out cw, out cs);
+            saveListViewInfo(lv, out string cp, out string cw, out string cs);
             PakListColPositions = cp;
             PakListColWidths = cw;
             PakListSort = cs;
@@ -70,8 +69,7 @@ namespace Nanook.QueenBee
 
         public static void SaveSearchListColInfo(ListView lv)
         {
-            string cp, cw, cs;
-            saveListViewInfo(lv, out cp, out cw, out cs);
+            saveListViewInfo(lv, out string cp, out string cw, out string cs);
             SearchListColPositions = cp;
             SearchListColWidths = cw;
             SearchListSort = cs;
@@ -79,30 +77,26 @@ namespace Nanook.QueenBee
 
         public static void SaveQbListColInfo(ListView lv)
         {
-            string cp, cw, cs;
-            saveListViewInfo(lv, out cp, out cw, out cs);
+            saveListViewInfo(lv, out string cp, out string cw, out string cs);
             QbListColPositions = cp;
             QbListColWidths = cw;
         }
 
         public static void SavePakSplitterInfo(SplitContainer sp)
         {
-            float p;
-            saveSplitterInfo(sp, out p);
+            saveSplitterInfo(sp, out float p);
             PakSplitterPosition = p;
         }
 
         public static void SaveSearchSplitterInfo(SplitContainer sp)
         {
-            float p;
-            saveSplitterInfo(sp, out p);
+            saveSplitterInfo(sp, out float p);
             SearchSplitterPosition = p;
         }
 
         public static void SaveQbSplitterInfo(SplitContainer sp)
         {
-            float p;
-            saveSplitterInfo(sp, out p);
+            saveSplitterInfo(sp, out float p);
             QbSplitterPosition = p;
         }
 

@@ -149,25 +149,22 @@ namespace Nanook.QueenBee.Parser
         private byte[] convert(string text, Type toType)
         {
             byte[] b = null;
-            float f;
-            uint u;
-            int i;
             text = convert(toType);
 
             //get the data into a byte array
             if (toType == typeof(float))
             {
-                if (float.TryParse(text, out f))
+                if (float.TryParse(text, out float f))
                     return BitConverter.GetBytes(f);
             }
             else if (toType == typeof(uint))
             {
-                if (uint.TryParse(text, out u))
+                if (uint.TryParse(text, out uint u))
                     return BitConverter.GetBytes(u);
             }
             else if (toType == typeof(int))
             {
-                if (int.TryParse(text, out i))
+                if (int.TryParse(text, out int i))
                     return BitConverter.GetBytes(i);
             }
             else if (toType == typeof(byte[]))
@@ -409,9 +406,6 @@ namespace Nanook.QueenBee.Parser
 
         public static string ValidateText(Type t, Type editType, string text)
         {
-            float f;
-            uint u;
-            int i;
             if (editType == typeof(string) && t == typeof(QbKey))
             {
                 if (!Regex.IsMatch(text, @"^[.a-zA-Z0-9_ /\\]{1,}$"))
@@ -419,17 +413,17 @@ namespace Nanook.QueenBee.Parser
             }
             else if (editType == typeof(float))
             {
-                if (!float.TryParse(text, out f))
+                if (!float.TryParse(text, out float f))
                     return "Invalid float, a valid example is 0.1234";
             }
             else if (editType == typeof(uint))
             {
-                if (!uint.TryParse(text, out u))
+                if (!uint.TryParse(text, out uint u))
                     return "Invalid uint, a valid example is 1234";
             }
             else if (editType == typeof(int))
             {
-                if (!int.TryParse(text, out i))
+                if (!int.TryParse(text, out int i))
                     return "Invalid int, a valid example is 1234 or -1234";
             }
             else if (editType == typeof(byte[]))

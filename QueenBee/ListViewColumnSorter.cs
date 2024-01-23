@@ -58,14 +58,12 @@ namespace Nanook.QueenBee
             listviewY = (ListViewItem)y;
 
             // Compare the two items
-            long l1;
-            long l2;
             bool b1;
             bool b2;
             if (_numeric)
             {
-                b1 = long.TryParse(listviewX.SubItems[_columnToSort].Text, out l1);
-                b2 = long.TryParse(listviewY.SubItems[_columnToSort].Text, out l2);
+                b1 = long.TryParse(listviewX.SubItems[_columnToSort].Text, out long l1);
+                b2 = long.TryParse(listviewY.SubItems[_columnToSort].Text, out long l2);
                 compareResult = (int)(l1 - l2);
             }
             else
