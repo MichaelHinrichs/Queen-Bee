@@ -385,7 +385,7 @@ namespace Nanook.QueenBee.Parser
                         using (BinaryReader brPak = new BinaryReader(fsPak))
                         {
                             fsPak.Seek(offset, SeekOrigin.Begin);
-                            copyData(fsPak, stream, (long)phi.FileLength);
+                            copyData(fsPak, stream, phi.FileLength);
                         }
                     }
                 }
@@ -403,7 +403,7 @@ namespace Nanook.QueenBee.Parser
             {
                 FileLength = 0, // (uint)(new FileInfo(localFilename)).Length;
                 FileOffset = hd[0].FileOffset + (uint)(filenameInHeader ? PakHeaderItem.FullHeaderLength : 0x20),
-                Flags = (PakHeaderFlags)(filenameInHeader ? PakHeaderFlags.Filename : 0),
+                Flags = filenameInHeader ? PakHeaderFlags.Filename : 0,
                 HeaderStart = 0,
                 IsStoredInPak = true,
                 Filename = newQbFilename,
@@ -659,7 +659,7 @@ namespace Nanook.QueenBee.Parser
                                 {
                                     //apply offset change before finding file to be replaced
                                     //this will prevents the offset of the replaced file being changed
-                                    ph.FileOffset = (uint)(ph.FileOffset - (long)diffLen);
+                                    ph.FileOffset = (uint)(ph.FileOffset - diffLen);
                                     if (ReferenceEquals(phi, ph))
                                     {
                                         if (remove)
@@ -672,7 +672,7 @@ namespace Nanook.QueenBee.Parser
                                         }
                                         else
                                         {
-                                            diffLen = (long)((ph.FileLength + repPad) - (newLength + pad));
+                                            diffLen = (ph.FileLength + repPad) - (newLength + pad);
                                             ph.FileLength = (uint)newLength; //0 for remove
                                         }
                                     }
@@ -695,7 +695,7 @@ namespace Nanook.QueenBee.Parser
 
                                 //Modify and write the offset of the "last" header's data
                                 uint lastOffset = brPakI.ReadUInt32(_pakFormat.EndianType);
-                                lastOffset = (uint)(lastOffset - (long)diffLen);
+                                lastOffset = (uint)(lastOffset - diffLen);
 
                                 //fix bad padding on last file
                                 if (nextOffset == 0 && ((lastOffset - (phi.FileOffset + phi.HeaderStart) % filePad) % filePad) != 0)
@@ -799,7 +799,7 @@ namespace Nanook.QueenBee.Parser
                     }
 
                     if (i != 0)
-                        fs.SetLength(pos + (long)(read - i));
+                        fs.SetLength(pos + (read - i));
                     if (i != read)
                         break;
                 }

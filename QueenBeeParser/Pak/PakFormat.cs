@@ -724,7 +724,7 @@ namespace Nanook.QueenBee.Parser
                                 outFileStream.Write(Encoding.ASCII.GetBytes("CHNK"), 0, 4);
                                 outFileStream.Write(header, 0, (int)_zLibHeaderLen - 4);
 
-                                lastUncompressedChunk = (long)_zLibChunkSize;
+                                lastUncompressedChunk = _zLibChunkSize;
                                 if (inFileStream.Position + lastUncompressedChunk > inFileStream.Length)
                                     lastUncompressedChunk = inFileStream.Length - inFileStream.Position;
 
@@ -765,9 +765,9 @@ namespace Nanook.QueenBee.Parser
                                 for (int i = 0; i < offsets.Count; i++)
                                 {
                                     outFileStream.Seek(offsets[i] + 4, SeekOrigin.Begin);
-                                    bw.Write((uint)_zLibHeaderLen, e); //headerlen
-                                    bw.Write((uint)sizes[i], e); //blocklen
-                                    bw.Write((uint)(i != offsets.Count - 1 ? offsets[i + 1] - offsets[i] : 0xffffffff), e); //chunklen ffs if last item
+                                    bw.Write(_zLibHeaderLen, e); //headerlen
+                                    bw.Write(sizes[i], e); //blocklen
+                                    bw.Write(i != offsets.Count - 1 ? offsets[i + 1] - offsets[i] : 0xffffffff, e); //chunklen ffs if last item
 
                                     //next blocklen 00's if last block
                                     if (i == offsets.Count - 1)  //last item
@@ -775,7 +775,7 @@ namespace Nanook.QueenBee.Parser
                                     else if (i + 1 == offsets.Count - 1) //secondlast item
                                         bw.Write((uint)(endPos - offsets[i + 1]), e);
                                     else
-                                        bw.Write((uint)offsets[i + 2] - offsets[i + 1], e);
+                                        bw.Write(offsets[i + 2] - offsets[i + 1], e);
 
                                     bw.Write((uint)(i != offsets.Count - 1 ? _zLibChunkSize : lastUncompressedChunk), e); //uncompressed size
                                     bw.Write((uint)uncompressedTotal, e);

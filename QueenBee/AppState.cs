@@ -180,7 +180,7 @@ namespace Nanook.QueenBee
 
         private static void saveSplitterInfo(SplitContainer sp, out float position)
         {
-            position = (((float)sp.SplitterDistance / (float)sp.Width) * 100F);
+            position = ((sp.SplitterDistance / (float)sp.Width) * 100F);
         }
 
         private static void saveListViewInfo(ListView lv, out string colPos, out string colWidths, out string colSort)

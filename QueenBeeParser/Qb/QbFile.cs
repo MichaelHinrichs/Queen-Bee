@@ -453,7 +453,7 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         internal uint StreamPos(Stream stream)
         {
-            return (uint)(stream.Position - (long)_streamStartPosition);
+            return (uint)(stream.Position - _streamStartPosition);
         }
 
         private void parse(Stream stream)

@@ -386,11 +386,11 @@ namespace Nanook.QueenBee
             // 
             // txtScript
             // 
-            txtScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
+            txtScript.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
                         | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+                        | AnchorStyles.Right);
             txtScript.BackColor = System.Drawing.SystemColors.Window;
-            txtScript.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            txtScript.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             txtScript.HideSelection = false;
             txtScript.Location = new System.Drawing.Point(0, 1);
             txtScript.Multiline = true;
@@ -403,7 +403,7 @@ namespace Nanook.QueenBee
             // 
             // btnUpdate
             // 
-            btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
+            btnUpdate.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
             btnUpdate.Location = new System.Drawing.Point(240, 431);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(75, 23);
@@ -414,8 +414,8 @@ namespace Nanook.QueenBee
             // 
             // eiItemQbKey
             // 
-            eiItemQbKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+            eiItemQbKey.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+                        | AnchorStyles.Right);
             eiItemQbKey.Location = new System.Drawing.Point(-4, 9);
             eiItemQbKey.Name = "eiItemQbKey";
             eiItemQbKey.Size = new System.Drawing.Size(322, 24);
@@ -424,8 +424,8 @@ namespace Nanook.QueenBee
             // 
             // eiUnknown
             // 
-            eiUnknown.Anchor = ((System.Windows.Forms.AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+            eiUnknown.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+                        | AnchorStyles.Right);
             eiUnknown.Location = new System.Drawing.Point(-4, 32);
             eiUnknown.Name = "eiUnknown";
             eiUnknown.Size = new System.Drawing.Size(322, 24);
@@ -434,9 +434,9 @@ namespace Nanook.QueenBee
             // 
             // tabs
             // 
-            tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
+            tabs.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
                         | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+                        | AnchorStyles.Right);
             tabs.Controls.Add(tabString);
             tabs.Controls.Add(tabUncompressedScript);
             tabs.Location = new System.Drawing.Point(3, 62);
@@ -462,8 +462,8 @@ namespace Nanook.QueenBee
             // 
             // txtWarning
             // 
-            txtWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((AnchorStyles.Bottom | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+            txtWarning.Anchor = ((AnchorStyles.Bottom | AnchorStyles.Left)
+                        | AnchorStyles.Right);
             txtWarning.BorderStyle = BorderStyle.None;
             txtWarning.Location = new System.Drawing.Point(2, 259);
             txtWarning.Multiline = true;
@@ -475,7 +475,7 @@ namespace Nanook.QueenBee
             // 
             // btnSet
             // 
-            btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
+            btnSet.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
             btnSet.Location = new System.Drawing.Point(249, 229);
             btnSet.Name = "btnSet";
             btnSet.Size = new System.Drawing.Size(35, 21);
@@ -486,8 +486,8 @@ namespace Nanook.QueenBee
             // 
             // txtItem
             // 
-            txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((AnchorStyles.Bottom | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+            txtItem.Anchor = ((AnchorStyles.Bottom | AnchorStyles.Left)
+                        | AnchorStyles.Right);
             err.SetIconPadding(txtItem, 37);
             txtItem.Location = new System.Drawing.Point(0, 229);
             txtItem.Name = "txtItem";
@@ -497,9 +497,9 @@ namespace Nanook.QueenBee
             // 
             // lstItems
             // 
-            lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
+            lstItems.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
                         | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+                        | AnchorStyles.Right);
             lstItems.FormattingEnabled = true;
             lstItems.IntegralHeight = false;
             lstItems.Location = new System.Drawing.Point(0, 0);
@@ -533,7 +533,7 @@ namespace Nanook.QueenBee
             // 
             // btnExport
             // 
-            btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
+            btnExport.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
             btnExport.Location = new System.Drawing.Point(3, 431);
             btnExport.Name = "btnExport";
             btnExport.Size = new System.Drawing.Size(75, 23);
@@ -544,7 +544,7 @@ namespace Nanook.QueenBee
             // 
             // btnImport
             // 
-            btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
+            btnImport.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
             btnImport.Location = new System.Drawing.Point(84, 431);
             btnImport.Name = "btnImport";
             btnImport.Size = new System.Drawing.Size(75, 23);

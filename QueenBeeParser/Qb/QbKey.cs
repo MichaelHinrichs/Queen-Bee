@@ -71,7 +71,7 @@ namespace Nanook.QueenBee.Parser
             int i;
             int length;
             length = str.Length;
-            crc = ((uint)0xFFFFFFFF);
+            crc = 0xFFFFFFFF;
             for (i = 0; i < length; (i)++)
                 crc = crc >> 8 & 0x00FFFFFF ^ crc_tab[(crc ^ str[i]) & 0xFF];
             return new QbKey(crc, text);

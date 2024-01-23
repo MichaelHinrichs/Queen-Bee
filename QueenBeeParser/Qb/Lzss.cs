@@ -57,7 +57,7 @@ namespace Nanook.QueenBee.Parser
                 if ((flags & 1) == 1) /* Copy character directly */
                 {
                     /* Get character */
-                    c = (int)(input.ReadByte() & 0xFF);
+                    c = input.ReadByte() & 0xFF;
 
                     /* Add character */
                     output.WriteByte((byte)c);
@@ -70,8 +70,8 @@ namespace Nanook.QueenBee.Parser
                 else /* Copy a text from the buffer */
                 {
                     /* Get buffer variables */
-                    i = (int)(input.ReadByte() & 0xFF);
-                    j = (int)(input.ReadByte() & 0xFF);
+                    i = input.ReadByte() & 0xFF;
+                    j = input.ReadByte() & 0xFF;
 
                     /* Decode variables */
                     i |= ((j & 0xF0) << 4); /* Position in the buffer (12 bits) */
@@ -186,7 +186,7 @@ namespace Nanook.QueenBee.Parser
                 if (_match_length <= THRESHOLD) /* Not long enough match. Send one byte. */
                 {
                     _match_length = 1;
-                    code_buf[0] |= (byte)mask;  /* 'Send one byte' flag */
+                    code_buf[0] |= mask;  /* 'Send one byte' flag */
                     code_buf[code_buf_ptr++] = _text_buf[r];  /* Send uncoded. */
                 }
                 else /* Compression can be used */
@@ -225,12 +225,12 @@ namespace Nanook.QueenBee.Parser
                     DeleteNode(s);
 
                     /* Read new bytes */
-                    _text_buf[s] = (byte)c;
+                    _text_buf[s] = c;
 
                     /* If the position is near the end of buffer,
                      * extend the buffer to make string comparison easier.*/
                     if (s < F - 1)
-                        _text_buf[s + N] = (byte)c;
+                        _text_buf[s + N] = c;
 
                     /* Since this is a ring buffer, increment the position modulo N. */
                     s = (s + 1) & (N - 1);
