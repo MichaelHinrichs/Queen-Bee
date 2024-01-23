@@ -29,13 +29,15 @@ namespace Nanook.QueenBee
             AppState.LastQbReplacePath = string.Empty;
             AppState.LastQbExtractPath = string.Empty;
 
-            _formats = new Dictionary<string, PakFormatType>();
-            _formats.Add("Wii (ngc)", PakFormatType.Wii);
-            _formats.Add("PS2 (ps2)", PakFormatType.PS2);
-            _formats.Add("XBox (xen)", PakFormatType.XBox);
-            _formats.Add("XBox (xbx)", PakFormatType.XBox_XBX);
-            _formats.Add("PC (xen)", PakFormatType.PC);
-            _formats.Add("PC (wpc)", PakFormatType.PC_WPC);
+            _formats = new Dictionary<string, PakFormatType>
+            {
+                { "Wii (ngc)", PakFormatType.Wii },
+                { "PS2 (ps2)", PakFormatType.PS2 },
+                { "XBox (xen)", PakFormatType.XBox },
+                { "XBox (xbx)", PakFormatType.XBox_XBX },
+                { "PC (xen)", PakFormatType.PC },
+                { "PC (wpc)", PakFormatType.PC_WPC }
+            };
 
             foreach (string s in _formats.Keys)
                 cboFormatType.Items.Add(s);

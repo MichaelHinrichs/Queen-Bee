@@ -9,13 +9,15 @@ namespace Nanook.QueenBee.Parser
     {
         static GenericQbItem()
         {
-            _supportedTypes = new Dictionary<Type, string>();
-            _supportedTypes.Add(typeof(float), "Float");
-            _supportedTypes.Add(typeof(int), "Int");
-            _supportedTypes.Add(typeof(uint), "UInt");
-            _supportedTypes.Add(typeof(string), "String");
-            _supportedTypes.Add(typeof(byte[]), "Hex");
-            _supportedTypes.Add(typeof(QbKey), "QBKey");
+            _supportedTypes = new Dictionary<Type, string>
+            {
+                { typeof(float), "Float" },
+                { typeof(int), "Int" },
+                { typeof(uint), "UInt" },
+                { typeof(string), "String" },
+                { typeof(byte[]), "Hex" },
+                { typeof(QbKey), "QBKey" }
+            };
 
         }
 

@@ -156,9 +156,10 @@ namespace Nanook.QueenBee.Parser
             _pakFormat = pakFormat;
             _filename = qbFilename;
             _magic = magic;
-            _items = new List<QbItemBase>();
-
-            _items.Add(new QbItemUnknown(unknownData, 0, this));
+            _items = new List<QbItemBase>
+            {
+                new QbItemUnknown(unknownData, 0, this)
+            };
         }
 
         public QbFile(string filename, PakFormat pakFormat) : this(filename, "", pakFormat)
@@ -712,8 +713,10 @@ namespace Nanook.QueenBee.Parser
 
                 //list = null;
 
-                list = new List<GenericQbItem>();
-                list.Add(gi);
+                list = new List<GenericQbItem>
+                {
+                    gi
+                };
                 while (i < gItems.Count && gi.SourceProperty == gItems[i].SourceProperty)
                     list.Add(gItems[i++]);
 
