@@ -854,7 +854,7 @@ namespace Nanook.QueenBee.Parser
 
         public readonly uint LastHeaderLength;
 
-        private static uint[,] _types;
+        private static readonly uint[,] _types;
 
         public long PakPabMinDataOffset;
 

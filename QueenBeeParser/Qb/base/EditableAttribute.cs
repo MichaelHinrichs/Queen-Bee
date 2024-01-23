@@ -33,9 +33,9 @@ namespace Nanook.QueenBee.Parser
             get { return _useQbItemType; }
         }
 
-        private string _defaultDisplayName;
-        private Type _editType;
-        private bool _readOnly;
-        private bool _useQbItemType;
+        private readonly string _defaultDisplayName;
+        private readonly Type _editType;
+        private readonly bool _readOnly;
+        private readonly bool _useQbItemType;
     }
 }

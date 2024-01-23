@@ -303,7 +303,7 @@ namespace Nanook.QueenBee.Parser
 
         }
 
-        private static QbKey[] _itemTypes;
+        private static readonly QbKey[] _itemTypes;
 
         private PakItemType _pakItemType;
 

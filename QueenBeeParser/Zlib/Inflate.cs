@@ -372,7 +372,7 @@ namespace Rebex.IO.Compression
 			return Z_OK;
 		}
 		
-		private static byte[] mark = new byte[]{ 0, 0, 0xff, 0xff };
+		private static readonly byte[] mark = new byte[]{ 0, 0, 0xff, 0xff };
 		
 		internal int inflateSync(ZStream z)
 		{

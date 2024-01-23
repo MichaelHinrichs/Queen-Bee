@@ -70,7 +70,7 @@ namespace Rebex.IO.Compression
 		private const int STORED = 0;
 		private const int FAST = 1;
 		private const int SLOW = 2;
-		private static Config[] config_table;
+		private static readonly Config[] config_table;
 		
 		private static readonly string[] z_errmsg = new string[]{"need dictionary", "stream end", "", "file error", "stream error", "data error", "insufficient memory", "buffer error", "incompatible version", ""};
 		

@@ -402,12 +402,12 @@ namespace Nanook.QueenBee.Parser
             _dad[p] = NIL;
         }
 
-        private byte[] _text_buf;
+        private readonly byte[] _text_buf;
         private int _match_position;
         private int _match_length;
-        private int[] _lson;
-        private int[] _rson;
-        private int[] _dad;
+        private readonly int[] _lson;
+        private readonly int[] _rson;
+        private readonly int[] _dad;
 
         private const int N = 4096;  /* Size of the ring buffer */
         private const int F = 18;  /* Upper limit for match_length (4 bits = 15 + threshold = 2) */

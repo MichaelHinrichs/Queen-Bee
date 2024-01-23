@@ -104,6 +104,6 @@ namespace Nanook.QueenBee.Parser
         }
 
         private byte[] _unknownData;
-        private int _length;
+        private readonly int _length;
     }
 }

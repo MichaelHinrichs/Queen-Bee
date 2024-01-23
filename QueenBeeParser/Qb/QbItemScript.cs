@@ -302,7 +302,7 @@ namespace Nanook.QueenBee.Parser
         private byte[] _scriptData;
         private uint _unknown;
 
-        private string _allowedStringChars;
+        private readonly string _allowedStringChars;
 
         private List<ScriptString> _strings;
 

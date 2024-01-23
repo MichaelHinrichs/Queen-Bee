@@ -174,12 +174,12 @@ namespace Nanook.QueenBee.Parser
             return !(qb1 == qb2);
         } 
 
-        private uint _crc;
-        private string _text;
+        private readonly uint _crc;
+        private readonly string _text;
 
         ///<summary>   
         /// crc_tab[] -- Array with the CRC table    
         ///</summary>   
-        private static uint[] crc_tab = new uint[256];
+        private static readonly uint[] crc_tab = new uint[256];
     }   
 }

@@ -2607,14 +2607,14 @@ This PAK has no StructItem children so this setting could not be detected.", "St
         private QbItemBase _addItemParent;
         private QbItemBase _addItemSibling;
 
-        private ListViewColumnSorter _lvwPakColumnSorter;
-        private ListViewColumnSorter _lvwSearchColumnSorter;
+        private readonly ListViewColumnSorter _lvwPakColumnSorter;
+        private readonly ListViewColumnSorter _lvwSearchColumnSorter;
         private PakEditor _pakFile;
         private PakEditor _dbgFile;
         private QbFile _qbFile;
         private InfoForm _info;
         private PakFormat _pakFormat;
-        private Dictionary<string, PakFormatType> _formats;
+        private readonly Dictionary<string, PakFormatType> _formats;
 
         private QbItemBase _copyItem;
 

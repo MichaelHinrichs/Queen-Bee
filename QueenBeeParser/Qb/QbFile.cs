@@ -983,7 +983,7 @@ namespace Nanook.QueenBee.Parser
         private List<QbItemBase> _items;
         private uint _fileId;
 
-        private static Dictionary<QbItemType, List<QbItemType>> _supportedChildItems;
+        private static readonly Dictionary<QbItemType, List<QbItemType>> _supportedChildItems;
 
     }
 

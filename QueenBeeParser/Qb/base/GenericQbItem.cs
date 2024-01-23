@@ -438,18 +438,18 @@ namespace Nanook.QueenBee.Parser
             return string.Empty;
         }
 
-        private string _name;
+        private readonly string _name;
         private string _value;
-        private Type _type;
+        private readonly Type _type;
         private Type _currType;
-        private bool _readOnly;
-        private bool _useQbItemType;
-        private QbItemType _qbType;
-        private string _sourceProperty;
+        private readonly bool _readOnly;
+        private readonly bool _useQbItemType;
+        private readonly QbItemType _qbType;
+        private readonly string _sourceProperty;
 
-        private bool _typeNumeric; //true if int, uint, float
+        private readonly bool _typeNumeric; //true if int, uint, float
         private QbKey _qbKey; //special case to remember the text
 
-        private static Dictionary<Type, string> _supportedTypes;
+        private static readonly Dictionary<Type, string> _supportedTypes;
     }
 }

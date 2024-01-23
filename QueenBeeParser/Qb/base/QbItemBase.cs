@@ -1000,8 +1000,8 @@ namespace Nanook.QueenBee.Parser
 
         private uint _lengthCheckStart;
         private uint _position;
-        private QbFile _root;
-        private List<QbItemBase> _items;
+        private readonly QbFile _root;
+        private readonly List<QbItemBase> _items;
 
         private QbFormat _qbFormat;
         private bool _qbFormatSet;

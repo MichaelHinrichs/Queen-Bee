@@ -21,7 +21,7 @@ namespace Nanook.QueenBee
         /// <summary>
         /// Case insensitive comparer object
         /// </summary>
-        private CaseInsensitiveComparer _objectCompare;
+        private readonly CaseInsensitiveComparer _objectCompare;
 
         private bool _numeric;
 
