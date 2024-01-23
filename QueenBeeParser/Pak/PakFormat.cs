@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Rebex.IO.Compression;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using Rebex.IO.Compression;
+using System.Text;
 
 
 namespace Nanook.QueenBee.Parser

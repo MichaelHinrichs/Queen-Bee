@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Nanook.QueenBee.Parser;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
-using System.Windows.Forms;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
-using System.Configuration;
-using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
-using Nanook.QueenBee.Parser;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Nanook.QueenBee
 {

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Nanook.QueenBee.Parser;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Nanook.QueenBee.Parser;
 
 namespace Nanook.QueenBee
 {
