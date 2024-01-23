@@ -19,7 +19,7 @@ namespace Nanook.QueenBee.Parser
 
 
             _isUnicode = ((type == QbItemType.SectionStringW || type == QbItemType.ArrayStringW || type == QbItemType.StructItemStringW) &&
-                (base.Root.PakFormat.PakFormatType == PakFormatType.PC || base.Root.PakFormat.PakFormatType == PakFormatType.XBox));
+                (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox));
 
             _charWidth = !_isUnicode ? 1 : 2;
 
@@ -54,44 +54,44 @@ namespace Nanook.QueenBee.Parser
             //System.Diagnostics.Debug.WriteLine(string.Format("{0} - 0x{1}", type.ToString(), (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0')));
 
             _isUnicode = ((type == QbItemType.SectionStringW || type == QbItemType.ArrayStringW || type == QbItemType.StructItemStringW) &&
-                (base.Root.PakFormat.PakFormatType == PakFormatType.PC || base.Root.PakFormat.PakFormatType == PakFormatType.XBox));
+                (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox));
 
             byte[] bytes;
 
             base.Construct(br, type);
 
-            Strings = new string[base.ItemCount];
+            Strings = new string[ItemCount];
 
             _charWidth = !_isUnicode ? 1 : 2;
 
-            if (base.ItemCount != 0)
+            if (ItemCount != 0)
             {
                 //use pointers to read quickly
-                if (base.ItemCount > 1)
+                if (ItemCount > 1)
                 {
 
-                    for (int i = 0; i < base.ItemCount - 1; i++)
+                    for (int i = 0; i < ItemCount - 1; i++)
                     {
-                        if (base.StreamPos(br) != base.Pointers[i]) //pointer test
-                            throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, base.StreamPos(br), base.Pointers[i]));
+                        if (StreamPos(br) != Pointers[i]) //pointer test
+                            throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), Pointers[i]));
 
-                        bytes = br.ReadBytes((int)((base.Pointers[i + 1] - _charWidth) - base.StreamPos(br)));
+                        bytes = br.ReadBytes((int)((Pointers[i + 1] - _charWidth) - StreamPos(br)));
 
                         _strings[i] = bytesToString(bytes); //handles unicode
 
                         if (!_isUnicode ? (br.ReadByte() != 0) : (br.ReadByte() != 0 || br.ReadByte() != 0))
-                            throw new ApplicationException(string.Format("Null byte expected reading string array at 0x{0}", (base.StreamPos(br) - _charWidth).ToString("X").PadLeft(8, '0')));
+                            throw new ApplicationException(string.Format("Null byte expected reading string array at 0x{0}", (StreamPos(br) - _charWidth).ToString("X").PadLeft(8, '0')));
                     }
 
-                    if (base.StreamPos(br) != base.Pointers[base.ItemCount - 1]) //pointer test
-                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, base.StreamPos(br), base.Pointers[base.ItemCount - 1]));
+                    if (StreamPos(br) != Pointers[ItemCount - 1]) //pointer test
+                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), Pointers[ItemCount - 1]));
                 }
 
 
                 //use the slow method read the last string
                 StringBuilder sb = new StringBuilder();
                 //if we have come from an array we must align our position to %4
-                int byteAmount = (int)(4 - (base.StreamPos(br) % 4));
+                int byteAmount = (int)(4 - (StreamPos(br) % 4));
 
                 do
                 {
@@ -103,7 +103,7 @@ namespace Nanook.QueenBee.Parser
 
 
                 //get text and remove any trailing null bytes
-                _strings[base.ItemCount - 1] = sb.ToString().TrimEnd(new char[] { '\0' });
+                _strings[ItemCount - 1] = sb.ToString().TrimEnd(new char[] { '\0' });
             }
             base.ConstructEnd(br);
         }
@@ -114,9 +114,9 @@ namespace Nanook.QueenBee.Parser
                 return Encoding.Default.GetString(bytes);
             else
             {
-                if (BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Little)
+                if (BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Little)
                     bytes = Encoding.Convert(Encoding.BigEndianUnicode, Encoding.Unicode, bytes);
-                else if (!BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Big)
+                else if (!BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Big)
                     bytes = Encoding.Convert(Encoding.Unicode, Encoding.BigEndianUnicode, bytes);
 
                 return Encoding.Unicode.GetString(bytes);
@@ -131,9 +131,9 @@ namespace Nanook.QueenBee.Parser
             else
             {
                 byte[] bytes = Encoding.Unicode.GetBytes(s);
-                if (BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Little)
+                if (BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Little)
                     bytes = Encoding.Convert(Encoding.Unicode, Encoding.BigEndianUnicode, bytes);
-                else if (!BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Big)
+                else if (!BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Big)
                     bytes = Encoding.Convert(Encoding.BigEndianUnicode, Encoding.Unicode, bytes);
 
                 return bytes;
@@ -144,7 +144,7 @@ namespace Nanook.QueenBee.Parser
         {
             //cater for new items being added
 
-            base.Pointers = new uint[_strings.Length];
+            Pointers = new uint[_strings.Length];
 
             uint pos2 = base.AlignPointers(pos);
             uint next = pos + Length;
@@ -152,12 +152,12 @@ namespace Nanook.QueenBee.Parser
             pos = pos2;
 
             if (_strings.Length == 1)
-                base.Pointers[0] = base.Pointer; //point to first and only item
+                Pointers[0] = Pointer; //point to first and only item
             else
             {
                 for (int i = 0; i < _strings.Length; i++)
                 {
-                    base.Pointers[i] = pos;
+                    Pointers[i] = pos;
                     pos += ((uint)_strings[i].Length * (uint)_charWidth) + (uint)_charWidth; //+ 1 = null terminated when saved
                 }
             }
@@ -193,7 +193,7 @@ namespace Nanook.QueenBee.Parser
 
         internal override void Write(BinaryEndianWriter bw)
         {
-            base.StartLengthCheck(bw);
+            StartLengthCheck(bw);
 
             base.Write(bw);
 
@@ -205,12 +205,12 @@ namespace Nanook.QueenBee.Parser
                     bw.Write((byte)0);
             }
 
-            while (base.StreamPos(bw) % 4 != 0)
+            while (StreamPos(bw) % 4 != 0)
                 bw.Write((byte)0);
 
             base.WriteEnd(bw);
 
-            ApplicationException ex = base.TestLengthCheck(this, bw);
+            ApplicationException ex = TestLengthCheck(this, bw);
             if (ex != null) throw ex;
         }
 
@@ -221,7 +221,7 @@ namespace Nanook.QueenBee.Parser
             set
             {
                 _strings = value;
-                base.ItemCount = (uint)_strings.Length;
+                ItemCount = (uint)_strings.Length;
             }
         }
 

@@ -50,7 +50,7 @@ namespace Nanook.QueenBee
             {
                 GenericQbItem gi;
 
-                _gItems = QbFile.GetGenericItems(base.QbItem);
+                _gItems = QbFile.GetGenericItems(QbItem);
 
                 if (_gItems.Count != 0)
                 {
@@ -70,7 +70,7 @@ namespace Nanook.QueenBee
                     }
                 }
                 else
-                    gi = QbFile.CreateGenericArrayItem(base.QbItem);
+                    gi = QbFile.CreateGenericArrayItem(QbItem);
 
                 _currentEditType = gi.CurrentEditType;
                 btnConvert.Text = GenericQbItem.GetTypeName(_currentEditType);
@@ -87,7 +87,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Load Item Error", ex);
+                ShowException("Simple Array Load Item Error", ex);
             }
 
         }
@@ -143,7 +143,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Menu Item Error", ex);
+                ShowException("Simple Array Menu Item Error", ex);
             }
         }
 
@@ -156,7 +156,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Select Item Error", ex);
+                ShowException("Simple Array Select Item Error", ex);
             }
         }
 
@@ -176,7 +176,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Set Error", ex);
+                ShowException("Simple Array Set Error", ex);
             }
         }
 
@@ -199,7 +199,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Convert Error", ex);
+                ShowException("Simple Array Convert Error", ex);
             }
 
         }
@@ -234,33 +234,33 @@ namespace Nanook.QueenBee
 
                 try
                 {
-                    QbFile.SetGenericItems(base.QbItem, _gItems);
+                    QbFile.SetGenericItems(QbItem, _gItems);
                 }
                 catch (Exception ex)
                 {
                     throw new ApplicationException(string.Format("Item conversion error: {0}", ex.Message));
                 }
-                base.UpdateQbItem();
+                UpdateQbItem();
 
                 //Check if QbKey is in the debug file, if not then add it to the user defined list
-                base.AddQbKeyToUserDebugFile(base.QbItem.ItemQbKey);
+                AddQbKeyToUserDebugFile(QbItem.ItemQbKey);
 
-                if (base.QbItem.ItemQbKey != null)
+                if (QbItem.ItemQbKey != null)
                 {
-                    if ((qbKeyText = base.QbItem.Root.PakFormat.AddNonDebugQbKey(base.QbItem.ItemQbKey, base.QbItem.Root.Filename, base.QbItem.Root)).Length != 0)
-                        base.ShowError("QB Key Error", string.Format("QB Key {0} as the same crc as item {1} from the debug file.", base.QbItem.ItemQbKey.Text, qbKeyText));
+                    if ((qbKeyText = QbItem.Root.PakFormat.AddNonDebugQbKey(QbItem.ItemQbKey, QbItem.Root.Filename, QbItem.Root)).Length != 0)
+                        ShowError("QB Key Error", string.Format("QB Key {0} as the same crc as item {1} from the debug file.", QbItem.ItemQbKey.Text, qbKeyText));
                 }
 
                 foreach (GenericQbItem gi in _gItems)
                 {
                     //if QbKey, check to see if it's in the debug file, if not then add it to the user defined list
                     if (gi.Type == typeof(QbKey))
-                        base.AddQbKeyToUserDebugFile(gi.ToQbKey());
+                        AddQbKeyToUserDebugFile(gi.ToQbKey());
                 }
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Update Error", ex);
+                ShowException("Simple Array Update Error", ex);
             }
         }
 
@@ -314,7 +314,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Menu Error", ex);
+                ShowException("Simple Array Menu Error", ex);
             }
 
         }
@@ -327,7 +327,7 @@ namespace Nanook.QueenBee
 
                 if (idx >= -1 && idx < lstItems.Items.Count)
                 {
-                    GenericQbItem qbi = QbFile.CreateGenericArrayItem(base.QbItem);
+                    GenericQbItem qbi = QbFile.CreateGenericArrayItem(QbItem);
                     qbi.ConvertTo(_currentEditType);
                     _gItems.Insert(idx + 1, qbi);
 
@@ -341,7 +341,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Add Item Error", ex);
+                ShowException("Simple Array Add Item Error", ex);
             }
         }
 
@@ -353,7 +353,7 @@ namespace Nanook.QueenBee
             {
                 if (idx >= 0 && idx < lstItems.Items.Count)
                 {
-                    GenericQbItem qbi = QbFile.CreateGenericArrayItem(base.QbItem);
+                    GenericQbItem qbi = QbFile.CreateGenericArrayItem(QbItem);
                     qbi.ConvertTo(_currentEditType);
                     _gItems.Insert(idx, qbi);
 
@@ -367,7 +367,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Insert Item Error", ex);
+                ShowException("Simple Array Insert Item Error", ex);
             }
         }
 
@@ -397,7 +397,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Simple Array Remove Item Error", ex);
+                ShowException("Simple Array Remove Item Error", ex);
             }
 
         }
@@ -490,9 +490,9 @@ namespace Nanook.QueenBee
             // 
             // lstItems
             // 
-            lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
+                        | AnchorStyles.Left)
+                        | AnchorStyles.Right)));
             lstItems.FormattingEnabled = true;
             lstItems.IntegralHeight = false;
             lstItems.Location = new System.Drawing.Point(3, 33);
@@ -513,8 +513,8 @@ namespace Nanook.QueenBee
             // 
             // txtItem
             // 
-            txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((AnchorStyles.Bottom | AnchorStyles.Left)
+                        | AnchorStyles.Right)));
             err.SetIconPadding(txtItem, 37);
             txtItem.Location = new System.Drawing.Point(3, 242);
             txtItem.Name = "txtItem";
@@ -525,7 +525,7 @@ namespace Nanook.QueenBee
             // 
             // btnConvert
             // 
-            btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Top | AnchorStyles.Right)));
             btnConvert.Location = new System.Drawing.Point(228, 8);
             btnConvert.Name = "btnConvert";
             btnConvert.Size = new System.Drawing.Size(42, 22);
@@ -536,7 +536,7 @@ namespace Nanook.QueenBee
             // 
             // btnUpdate
             // 
-            btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
             btnUpdate.Location = new System.Drawing.Point(195, 274);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(75, 23);
@@ -547,7 +547,7 @@ namespace Nanook.QueenBee
             // 
             // btnSet
             // 
-            btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
             btnSet.Location = new System.Drawing.Point(218, 242);
             btnSet.Name = "btnSet";
             btnSet.Size = new System.Drawing.Size(35, 21);
@@ -655,7 +655,7 @@ namespace Nanook.QueenBee
             // 
             // btnImport
             // 
-            btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
             btnImport.Location = new System.Drawing.Point(84, 274);
             btnImport.Name = "btnImport";
             btnImport.Size = new System.Drawing.Size(75, 23);
@@ -666,7 +666,7 @@ namespace Nanook.QueenBee
             // 
             // btnExport
             // 
-            btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
             btnExport.Location = new System.Drawing.Point(3, 274);
             btnExport.Name = "btnExport";
             btnExport.Size = new System.Drawing.Size(75, 23);
@@ -686,7 +686,7 @@ namespace Nanook.QueenBee
             // SimpleArrayEditor
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnImport);
             Controls.Add(btnExport);
             Controls.Add(btnSet);
@@ -773,7 +773,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Script Export Error", ex);
+                ShowException("Script Export Error", ex);
             }
         }
 
@@ -809,7 +809,7 @@ namespace Nanook.QueenBee
                             string s;
                             while ((s = tr.ReadLine()) != null)
                             {
-                                GenericQbItem qbi = QbFile.CreateGenericArrayItem(base.QbItem);
+                                GenericQbItem qbi = QbFile.CreateGenericArrayItem(QbItem);
                                 qbi.ConvertTo(_currentEditType);
                                 _gItems.Add(qbi);
                                 qbi.Value = s;
@@ -827,7 +827,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Script Import Error", ex);
+                ShowException("Script Import Error", ex);
             }
         }
 

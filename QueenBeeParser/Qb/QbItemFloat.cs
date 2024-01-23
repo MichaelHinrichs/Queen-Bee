@@ -47,10 +47,10 @@ namespace Nanook.QueenBee.Parser
 
             base.Construct(br, type);
 
-            _values = new float[base.ItemCount];
+            _values = new float[ItemCount];
 
-            for (int i = 0; i < base.ItemCount; i++)
-                _values[i] = br.ReadSingle(base.Root.PakFormat.EndianType);
+            for (int i = 0; i < ItemCount; i++)
+                _values[i] = br.ReadSingle(Root.PakFormat.EndianType);
 
             base.ConstructEnd(br);
         }
@@ -79,7 +79,7 @@ namespace Nanook.QueenBee.Parser
             set
             {
                 _values = value;
-                base.ItemCount = (uint)_values.Length;
+                ItemCount = (uint)_values.Length;
             }
         }
 
@@ -93,16 +93,16 @@ namespace Nanook.QueenBee.Parser
 
         internal override void Write(BinaryEndianWriter bw)
         {
-            base.StartLengthCheck(bw);
+            StartLengthCheck(bw);
 
             base.Write(bw);
 
             foreach (float f in _values)
-                bw.Write(f, base.Root.PakFormat.EndianType);
+                bw.Write(f, Root.PakFormat.EndianType);
 
             base.WriteEnd(bw);
 
-            ApplicationException ex = base.TestLengthCheck(this, bw);
+            ApplicationException ex = TestLengthCheck(this, bw);
             if (ex != null) throw ex;
         }
 

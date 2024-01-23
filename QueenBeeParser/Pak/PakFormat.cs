@@ -92,7 +92,7 @@ namespace Nanook.QueenBee.Parser
 
         public PakFormat(string pakFile, string pabFile, string dbgFile, PakFormatType type, bool autoDetectFiles)
         {
-            _structItemChildrenType = Nanook.QueenBee.Parser.StructItemChildrenType.NotSet;
+            _structItemChildrenType = StructItemChildrenType.NotSet;
 
             bool debugFile = false;
 
@@ -581,7 +581,7 @@ namespace Nanook.QueenBee.Parser
                         {
                             using (FileStream outFileStream = new FileStream(uncompFilename, chunkLen == 0 ? FileMode.Create : FileMode.Append))
                             {
-                                using (ZlibOutputStream outZStream = new ZlibOutputStream(outFileStream, Rebex.IO.Compression.CompressionMode.Decompress))
+                                using (ZlibOutputStream outZStream = new ZlibOutputStream(outFileStream, CompressionMode.Decompress))
                                 {
                                     //test for newer GHWT+ compression
                                     long pos = inFileStream.Position;

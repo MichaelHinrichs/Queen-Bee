@@ -28,18 +28,18 @@ namespace Nanook.QueenBee.Parser
         {
             get
             {
-                if (_pakFormat.StructItemChildrenType == Nanook.QueenBee.Parser.StructItemChildrenType.NotSet)
+                if (_pakFormat.StructItemChildrenType == StructItemChildrenType.NotSet)
                 {
                     foreach (PakHeaderItem phi in _pakHeaders.Values)
                     {
                         if (phi.PakFileType == PakItemType.Qb || phi.PakFileType == PakItemType.Sqb || phi.PakFileType == PakItemType.Midi)
                         {
                             QbFile qbf = ReadQbFile(phi.Filename); //set the _pakformat.StructItemChildrenType item
-                            if (_pakFormat.StructItemChildrenType != Nanook.QueenBee.Parser.StructItemChildrenType.NotSet)
+                            if (_pakFormat.StructItemChildrenType != StructItemChildrenType.NotSet)
                                 return _pakFormat.StructItemChildrenType;
                         }
                     }
-                    return Nanook.QueenBee.Parser.StructItemChildrenType.NotSet;
+                    return StructItemChildrenType.NotSet;
                 }
                 else
                     return _pakFormat.StructItemChildrenType;
@@ -182,7 +182,7 @@ namespace Nanook.QueenBee.Parser
                             }
                         }
                         else
-                            phi.Filename = UTF8Encoding.UTF8.GetString(br.ReadBytes(PakHeaderItem.FileNameMaxLength)).TrimEnd(new char[] { '\0' });
+                            phi.Filename = Encoding.UTF8.GetString(br.ReadBytes(PakHeaderItem.FileNameMaxLength)).TrimEnd(new char[] { '\0' });
 
                         try
                         {
@@ -607,7 +607,7 @@ namespace Nanook.QueenBee.Parser
                         itemFound = false; //don't enter this if again
                     }
 
-                    if (object.ReferenceEquals(phi, ph))
+                    if (ReferenceEquals(phi, ph))
                         itemFound = true;
 
                     if (ph.HeaderStart + ph.FileOffset < minOffset)
@@ -660,7 +660,7 @@ namespace Nanook.QueenBee.Parser
                                     //apply offset change before finding file to be replaced
                                     //this will prevents the offset of the replaced file being changed
                                     ph.FileOffset = (uint)(ph.FileOffset - (long)diffLen);
-                                    if (object.ReferenceEquals(phi, ph))
+                                    if (ReferenceEquals(phi, ph))
                                     {
                                         if (remove)
                                         {
@@ -679,7 +679,7 @@ namespace Nanook.QueenBee.Parser
 
                                     lastHeaderPos += PakHeaderItem.FullHeaderLength;
 
-                                    if (!(remove && object.ReferenceEquals(phi, ph)))
+                                    if (!(remove && ReferenceEquals(phi, ph)))
                                         writeHeaderItem(bwPakO, ph);
 
 

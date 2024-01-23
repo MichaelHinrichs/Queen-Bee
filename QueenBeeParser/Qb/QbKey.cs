@@ -48,9 +48,9 @@ namespace Nanook.QueenBee.Parser
         public QbKey Clone()
         {
             if (HasText)
-                return QbKey.Create(Text);
+                return Create(Text);
             else
-                return QbKey.Create(Crc);
+                return Create(Crc);
         }
 
         ///<summary>   
@@ -143,7 +143,7 @@ namespace Nanook.QueenBee.Parser
 
         public static bool operator ==(QbKey qb1, uint qb2)
         {
-            return (!object.Equals(qb1, null) && qb1.Crc == qb2);
+            return (!Equals(qb1, null) && qb1.Crc == qb2);
         }
 
         public static bool operator !=(QbKey qb1, uint qb2)
@@ -163,8 +163,8 @@ namespace Nanook.QueenBee.Parser
 
         public static bool operator ==(QbKey qb1, QbKey qb2)
         {
-            bool isNull1 = object.Equals(qb1, null);
-            bool isNull2 = object.Equals(qb2, null);
+            bool isNull1 = Equals(qb1, null);
+            bool isNull2 = Equals(qb2, null);
 
             return ((isNull1 && isNull2) || (!isNull1 && !isNull2 && qb1.Crc == qb2.Crc));
         }

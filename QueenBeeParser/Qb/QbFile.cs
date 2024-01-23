@@ -676,7 +676,7 @@ namespace Nanook.QueenBee.Parser
             if (gItems.Count == 0)
             {
                 //test if this is an array item
-                GenericQbItem gqi = QbFile.CreateGenericArrayItem(item);
+                GenericQbItem gqi = CreateGenericArrayItem(item);
 
                 //null if not an array type
                 if (gqi != null)
@@ -909,7 +909,7 @@ namespace Nanook.QueenBee.Parser
             uint len = Length;
             if (StreamPos(bw.BaseStream) - _lengthCheckStart != len)
             {
-                return new ApplicationException(QbFile.FormatWriteLengthExceptionMessage(sender, _lengthCheckStart, StreamPos(bw.BaseStream), len));
+                return new ApplicationException(FormatWriteLengthExceptionMessage(sender, _lengthCheckStart, StreamPos(bw.BaseStream), len));
             }
             else
                 return null;

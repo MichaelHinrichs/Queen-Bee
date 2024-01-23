@@ -61,9 +61,9 @@ namespace Nanook.QueenBee.Parser
 
             base.Construct(br, type);
 
-            _unknown = br.ReadUInt32(base.Root.PakFormat.EndianType);
-            uint decompressedSize = br.ReadUInt32(base.Root.PakFormat.EndianType);
-            uint compressedSize = br.ReadUInt32(base.Root.PakFormat.EndianType);
+            _unknown = br.ReadUInt32(Root.PakFormat.EndianType);
+            uint decompressedSize = br.ReadUInt32(Root.PakFormat.EndianType);
+            uint compressedSize = br.ReadUInt32(Root.PakFormat.EndianType);
 
             // Get script data
             Lzss lz = new Lzss();
@@ -72,11 +72,11 @@ namespace Nanook.QueenBee.Parser
                 _scriptData = lz.Decompress(_scriptData);
 
             if (_scriptData.Length != decompressedSize)
-                throw new ApplicationException(string.Format("Location 0x{0}: Script decompressed to {1} bytes not {2}", (base.StreamPos(br) - compressedSize).ToString("X").PadLeft(8, '0'), _scriptData.Length.ToString(), decompressedSize.ToString()));
+                throw new ApplicationException(string.Format("Location 0x{0}: Script decompressed to {1} bytes not {2}", (StreamPos(br) - compressedSize).ToString("X").PadLeft(8, '0'), _scriptData.Length.ToString(), decompressedSize.ToString()));
 
             // Padding...
-            if ((base.StreamPos(br) % 4) != 0)
-                br.BaseStream.Seek(4 - (base.StreamPos(br) % 4), SeekOrigin.Current);
+            if ((StreamPos(br) % 4) != 0)
+                br.BaseStream.Seek(4 - (StreamPos(br) % 4), SeekOrigin.Current);
 
             base.ConstructEnd(br);
         }
@@ -124,11 +124,11 @@ namespace Nanook.QueenBee.Parser
 
         internal override void Write(BinaryEndianWriter bw)
         {
-            base.StartLengthCheck(bw);
+            StartLengthCheck(bw);
 
             base.Write(bw);
-            bw.Write(_unknown, base.Root.PakFormat.EndianType);
-            bw.Write((uint)_scriptData.Length, base.Root.PakFormat.EndianType);
+            bw.Write(_unknown, Root.PakFormat.EndianType);
+            bw.Write((uint)_scriptData.Length, Root.PakFormat.EndianType);
 
             byte[] compScript;
             Lzss lz = new Lzss();
@@ -137,7 +137,7 @@ namespace Nanook.QueenBee.Parser
             if (compScript.Length >= _scriptData.Length)
                 compScript = _scriptData;
 
-            bw.Write((uint)compScript.Length, base.Root.PakFormat.EndianType);
+            bw.Write((uint)compScript.Length, Root.PakFormat.EndianType);
             bw.Write(compScript);
 
             if (compScript.Length % 4 != 0)
@@ -148,7 +148,7 @@ namespace Nanook.QueenBee.Parser
 
             base.WriteEnd(bw);
 
-            ApplicationException ex = base.TestLengthCheck(this, bw);
+            ApplicationException ex = TestLengthCheck(this, bw);
             if (ex != null) throw ex;
         }
 
@@ -273,9 +273,9 @@ namespace Nanook.QueenBee.Parser
                 return Encoding.Default.GetString(bytes);
             else
             {
-                if (BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Little)
+                if (BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Little)
                     bytes = Encoding.Convert(Encoding.BigEndianUnicode, Encoding.Unicode, bytes);
-                else if (!BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Big)
+                else if (!BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Big)
                     bytes = Encoding.Convert(Encoding.Unicode, Encoding.BigEndianUnicode, bytes);
 
                 return Encoding.Unicode.GetString(bytes);
@@ -290,9 +290,9 @@ namespace Nanook.QueenBee.Parser
             else
             {
                 byte[] bytes = Encoding.Unicode.GetBytes(s);
-                if (BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Little)
+                if (BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Little)
                     bytes = Encoding.Convert(Encoding.Unicode, Encoding.BigEndianUnicode, bytes);
-                else if (!BitConverter.IsLittleEndian && base.Root.PakFormat.EndianType != EndianType.Big)
+                else if (!BitConverter.IsLittleEndian && Root.PakFormat.EndianType != EndianType.Big)
                     bytes = Encoding.Convert(Encoding.BigEndianUnicode, Encoding.Unicode, bytes);
 
                 return bytes;

@@ -52,11 +52,11 @@ namespace Nanook.QueenBee.Parser
             uint pointer;
 
             if (type != QbItemType.StructHeader)
-                _headerValue = br.ReadUInt32(base.Root.PakFormat.EndianType);
+                _headerValue = br.ReadUInt32(Root.PakFormat.EndianType);
             else
-                _headerValue = base.Root.PakFormat.GetQbItemValue(type, Root);
+                _headerValue = Root.PakFormat.GetQbItemValue(type, Root);
 
-             _headerType = base.Root.PakFormat.GetQbItemType(_headerValue);
+             _headerType = Root.PakFormat.GetQbItemType(_headerValue);
 
             QbItemBase qib = null;
             QbItemType structType;
@@ -64,12 +64,12 @@ namespace Nanook.QueenBee.Parser
 
             if (_headerType == QbItemType.StructHeader)
             {
-                pointer = br.ReadUInt32(base.Root.PakFormat.EndianType); //Should be the current stream position after reading
+                pointer = br.ReadUInt32(Root.PakFormat.EndianType); //Should be the current stream position after reading
 
                 _iniNextItemPointer = pointer;
 
-                if (pointer != 0 && base.StreamPos(br) != pointer) //pointer test
-                    throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, base.StreamPos(br), pointer));
+                if (pointer != 0 && StreamPos(br) != pointer) //pointer test
+                    throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), pointer));
 
                 while (pointer != 0)
                 {
@@ -176,12 +176,12 @@ namespace Nanook.QueenBee.Parser
                         pointer = qib.NextItemPointer;
                     }
                     else
-                        throw new ApplicationException(string.Format("Location 0x{0}: Unknown item type 0x{1} in struct ", (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), structValue.ToString("X").PadLeft(8, '0')));
+                        throw new ApplicationException(string.Format("Location 0x{0}: Unknown item type 0x{1} in struct ", (StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), structValue.ToString("X").PadLeft(8, '0')));
 
                 }
             }
             else
-                throw new ApplicationException(string.Format("Location 0x{0}: Struct without header type", (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0')));
+                throw new ApplicationException(string.Format("Location 0x{0}: Struct without header type", (StreamPos(br) - 4).ToString("X").PadLeft(8, '0')));
 
             base.ConstructEnd(br);
         }
@@ -192,7 +192,7 @@ namespace Nanook.QueenBee.Parser
 
             pos = base.AlignPointers(pos);
 
-            if (base.QbItemType != QbItemType.StructHeader)
+            if (QbItemType != QbItemType.StructHeader)
                 pos += (1 * 4); //skip header
             _iniNextItemPointer = (pos += (1 * 4)); //skip header and pointer
 
@@ -210,7 +210,7 @@ namespace Nanook.QueenBee.Parser
         {
             get
             {
-                return base.Length + base.ChildrenLength + (1 * 4) + (uint)(base.QbItemType != QbItemType.StructHeader ? 1 * 4 : 0 * 4);
+                return base.Length + ChildrenLength + (1 * 4) + (uint)(QbItemType != QbItemType.StructHeader ? 1 * 4 : 0 * 4);
             }
         }
 
@@ -222,20 +222,20 @@ namespace Nanook.QueenBee.Parser
 
         internal override void Write(BinaryEndianWriter bw)
         {
-            base.StartLengthCheck(bw);
+            StartLengthCheck(bw);
 
             base.Write(bw);
 
-            if (base.QbItemType != QbItemType.StructHeader)
-                bw.Write(_headerValue, base.Root.PakFormat.EndianType);
-            bw.Write(_iniNextItemPointer, base.Root.PakFormat.EndianType);
+            if (QbItemType != QbItemType.StructHeader)
+                bw.Write(_headerValue, Root.PakFormat.EndianType);
+            bw.Write(_iniNextItemPointer, Root.PakFormat.EndianType);
 
-            foreach (QbItemBase qib in base.Items)
+            foreach (QbItemBase qib in Items)
                 qib.Write(bw);
 
             base.WriteEnd(bw);
 
-            ApplicationException ex = base.TestLengthCheck(this, bw);
+            ApplicationException ex = TestLengthCheck(this, bw);
             if (ex != null) throw ex;
         }
 

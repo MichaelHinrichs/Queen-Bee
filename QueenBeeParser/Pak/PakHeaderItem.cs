@@ -222,7 +222,7 @@ namespace Nanook.QueenBee.Parser
         /// </summary>
         public string PaddedFullFileName
         {
-            get { return _filename.PadRight(PakHeaderItem.FileNameMaxLength, '\0'); }
+            get { return _filename.PadRight(FileNameMaxLength, '\0'); }
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace Nanook.QueenBee.Parser
         /// </summary>
         public string PaddedFileName
         {
-            get { return _filename.PadRight(PakHeaderItem.FileNameMaxLength, '\0'); }
+            get { return _filename.PadRight(FileNameMaxLength, '\0'); }
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace Nanook.QueenBee.Parser
         /// <param name="baseOn">base the qbKeys that are present on the passed item</param>
         public void SetFilename(string newFullQbFilename, QbKey itemType, string extension, PakHeaderItem baseOn)
         {
-            if (newFullQbFilename.Length > PakHeaderItem.FileNameMaxLength)
+            if (newFullQbFilename.Length > FileNameMaxLength)
                 throw new ApplicationException("newQbFilename is too long");
 
             if (!itemType.HasText || itemType.Text.Length == 0)

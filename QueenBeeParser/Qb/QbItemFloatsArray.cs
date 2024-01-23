@@ -50,10 +50,10 @@ namespace Nanook.QueenBee.Parser
             QbItemType floatsType;
             uint floatsValue;
             bool is3d;
-            for (int i = 0; i < base.ItemCount; i++)
+            for (int i = 0; i < ItemCount; i++)
             {
-                if (base.StreamPos(br) != base.Pointers[i]) //pointer test
-                    throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, base.StreamPos(br), base.Pointers[i]));
+                if (StreamPos(br) != Pointers[i]) //pointer test
+                    throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), Pointers[i]));
 
                 floatsValue = br.ReadUInt32(Root.PakFormat.EndianType);
                 floatsType = Root.PakFormat.GetQbItemType(floatsValue);
@@ -66,7 +66,7 @@ namespace Nanook.QueenBee.Parser
                         qib = new QbItemFloats(Root, is3d);
                         break;
                     default:
-                        throw new ApplicationException(string.Format("Location 0x{0}: Not a float type 0x{1}", (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), floatsValue.ToString("X").PadLeft(8, '0')));
+                        throw new ApplicationException(string.Format("Location 0x{0}: Not a float type 0x{1}", (StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), floatsValue.ToString("X").PadLeft(8, '0')));
                 }
                 qib.Construct(br, floatsType);
                 AddItem(qib);
@@ -93,22 +93,22 @@ namespace Nanook.QueenBee.Parser
         {
             get
             {
-                return base.Length +  base.ChildrenLength;
+                return base.Length + ChildrenLength;
             }
         }
 
         internal override void Write(BinaryEndianWriter bw)
         {
-            base.StartLengthCheck(bw);
+            StartLengthCheck(bw);
 
             base.Write(bw);
 
-            foreach (QbItemBase qib in base.Items)
+            foreach (QbItemBase qib in Items)
                 qib.Write(bw);
 
             base.WriteEnd(bw);
 
-            ApplicationException ex = base.TestLengthCheck(this, bw);
+            ApplicationException ex = TestLengthCheck(this, bw);
             if (ex != null) throw ex;
         }
 

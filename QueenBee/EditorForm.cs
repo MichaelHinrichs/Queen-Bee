@@ -2522,7 +2522,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
         #region Test Routines
         private void btnInfo_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && (Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+            if (e.Button == MouseButtons.Right && (ModifierKeys & Keys.Shift) == Keys.Shift)
             {
                 btnTestSize.Visible = !btnTestSize.Visible;
                 btnTestQbFile.Visible = !btnTestQbFile.Visible;

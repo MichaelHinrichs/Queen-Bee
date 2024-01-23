@@ -7,7 +7,7 @@ namespace Nanook.QueenBee.Parser
         public QbItemUnknown(byte[] unknownData, uint position, QbFile root) : base(root)
         {
             _unknownData = unknownData;
-            base.Position = position;
+            Position = position;
         }
 
         /// <summary>
@@ -93,13 +93,13 @@ namespace Nanook.QueenBee.Parser
 
         internal override void Write(BinaryEndianWriter bw)
         {
-            base.StartLengthCheck(bw);
+            StartLengthCheck(bw);
 
             bw.Write(_unknownData);
 
             base.WriteEnd(bw);
 
-            ApplicationException ex = base.TestLengthCheck(this, bw);
+            ApplicationException ex = TestLengthCheck(this, bw);
             if (ex != null) throw ex;
         }
 

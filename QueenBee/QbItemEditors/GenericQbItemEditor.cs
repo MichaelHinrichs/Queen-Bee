@@ -21,7 +21,7 @@ namespace Nanook.QueenBee
             int tabIndex = TabIndex;
             int lblWidth = 0;
 
-            List<GenericQbItem> gis = QbFile.GetGenericItems(base.QbItem);
+            List<GenericQbItem> gis = QbFile.GetGenericItems(QbItem);
 
             if (gis.Count > 500)
             {
@@ -31,7 +31,7 @@ namespace Nanook.QueenBee
             else
                 AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (gis.Count + 1) + 10)); //+ 1 for button
 
-            Tag = base.QbItem; //store item for update
+            Tag = QbItem; //store item for update
 
             bool hasEditable = false;
 
@@ -52,7 +52,7 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Edit Item List Error", ex);
+                ShowException("Edit Item List Error", ex);
             }
 
             foreach (GenericQbEditItem et in Controls)
@@ -76,11 +76,11 @@ namespace Nanook.QueenBee
                 }
 
                 if (tooManyItems)
-                    base.ShowError("Too Many Items", string.Format("This item contains {0} items. It is likely that it should be edited by a dedicated application.", gis.Count.ToString()));
+                    ShowError("Too Many Items", string.Format("This item contains {0} items. It is likely that it should be edited by a dedicated application.", gis.Count.ToString()));
             }
             catch (Exception ex)
             {
-                base.ShowException("Update Button Error", ex);
+                ShowException("Update Button Error", ex);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Nanook.QueenBee
                 hasEditable = true;
 
             if (gi.UseQbItemType)
-                ei.ConvertTo(base.QbItemDataType);
+                ei.ConvertTo(QbItemDataType);
             //else
             //    ei.ConvertTo(base.EditType);
 
@@ -122,7 +122,7 @@ namespace Nanook.QueenBee
             try
             {
                 //Check if QbKey is in the debug file, if not then add it to the user defined list
-                base.AddQbKeyToUserDebugFile(base.QbItem.ItemQbKey);
+                AddQbKeyToUserDebugFile(QbItem.ItemQbKey);
 
                 foreach (Control un in Controls)
                 {
@@ -130,7 +130,7 @@ namespace Nanook.QueenBee
                     {
                         if (!ei.IsValid)
                         {
-                            base.ShowError("Error", "QB cannot be updated while data is invalid.");
+                            ShowError("Error", "QB cannot be updated while data is invalid.");
                             return;
                         }
                         gi = ei.GenericQbItem;
@@ -145,21 +145,21 @@ namespace Nanook.QueenBee
             }
             catch (Exception ex)
             {
-                base.ShowException("Failed to Get Item Values", ex);
+                ShowException("Failed to Get Item Values", ex);
                 return;
             }
 
             try
             {
-                QbFile.SetGenericItems(base.QbItem, gis);
+                QbFile.SetGenericItems(QbItem, gis);
             }
             catch (Exception ex)
             {
-                base.ShowException("Edit Values Update Error", ex);
+                ShowException("Edit Values Update Error", ex);
                 return;
             }
 
-            base.UpdateQbItem();
+            UpdateQbItem();
         }
 
         private void InitializeComponent()
