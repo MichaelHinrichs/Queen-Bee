@@ -324,7 +324,7 @@ namespace Nanook.QueenBee.Parser
                 pos = qib.AlignPointers(pos);
 
             //this.FileSize = this.Length;
-            this.FileSize = pos; //this should work as long as all the calculations are correct
+            FileSize = pos; //this should work as long as all the calculations are correct
 
         }
 
@@ -467,8 +467,8 @@ namespace Nanook.QueenBee.Parser
 
             using (BinaryEndianReader br = new BinaryEndianReader(stream))
             {
-                _magic = br.ReadUInt32(this.PakFormat.EndianType);
-                _fileSize = br.ReadUInt32(this.PakFormat.EndianType);
+                _magic = br.ReadUInt32(PakFormat.EndianType);
+                _fileSize = br.ReadUInt32(PakFormat.EndianType);
 
                 uint sectionValue;
 
@@ -476,10 +476,10 @@ namespace Nanook.QueenBee.Parser
                 qib.Construct(br, QbItemType.Unknown);
                 AddItem(qib);
 
-                while (this.StreamPos(br.BaseStream) < _fileSize)
+                while (StreamPos(br.BaseStream) < _fileSize)
                 {
-                    sectionValue = br.ReadUInt32(this.PakFormat.EndianType);
-                    QbItemType sectionType = this.PakFormat.GetQbItemType(sectionValue);
+                    sectionValue = br.ReadUInt32(PakFormat.EndianType);
+                    QbItemType sectionType = PakFormat.GetQbItemType(sectionValue);
 
                     switch (sectionType)
                     {
@@ -513,7 +513,7 @@ namespace Nanook.QueenBee.Parser
                             qib = new QbItemQbKey(this);
                             break;
                         default:
-                            throw new ApplicationException(string.Format("Location 0x{0}: Unknown section type 0x{1}", (this.StreamPos(br.BaseStream) - 4).ToString("X").PadLeft(8, '0'), sectionValue.ToString("X").PadLeft(8, '0')));
+                            throw new ApplicationException(string.Format("Location 0x{0}: Unknown section type 0x{1}", (StreamPos(br.BaseStream) - 4).ToString("X").PadLeft(8, '0'), sectionValue.ToString("X").PadLeft(8, '0')));
                     }
                     qib.Construct(br, sectionType);
 
@@ -521,7 +521,7 @@ namespace Nanook.QueenBee.Parser
                 }
             }
 
-            uint f = this.FileId; //gettin this sets the file id
+            uint f = FileId; //gettin this sets the file id
         }
 
         public List<QbItemBase> Items
@@ -542,18 +542,18 @@ namespace Nanook.QueenBee.Parser
         /// <param name="beforeAfter">Insert before=True or after=False</param>
         public void InsertItem(QbItemBase item, QbItemBase sibling, bool beforeAfter)
         {
-            for (int i = 0; i < this.Items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
             {
-                if (this.Items[i] == sibling)
+                if (Items[i] == sibling)
                 {
                     if (beforeAfter)
-                        this.Items.Insert(i, item);
+                        Items.Insert(i, item);
                     else
                     {
-                        if (i + 1 < this.Items.Count)
-                            this.Items.Insert(i + 1, item);
+                        if (i + 1 < Items.Count)
+                            Items.Insert(i + 1, item);
                         else
-                            this.Items.Add(item);
+                            Items.Add(item);
                     }
                     return;
                 }
@@ -593,9 +593,9 @@ namespace Nanook.QueenBee.Parser
         /// </summary>
         public void SetNewFileId()
         {
-            uint fileId = QbKey.Create(this.Filename).Crc;
+            uint fileId = QbKey.Create(Filename).Crc;
 
-            foreach (QbItemBase qbi in this.Items)
+            foreach (QbItemBase qbi in Items)
             {
                 if (qbi.QbItemType != QbItemType.Unknown)
                     qbi.FileId = fileId;
@@ -608,7 +608,7 @@ namespace Nanook.QueenBee.Parser
             {
                 if (_fileId == 0)
                 {
-                    foreach (QbItemBase qib in this.Items)
+                    foreach (QbItemBase qib in Items)
                     {
                         if (qib.FileId != 0)
                         {
@@ -617,7 +617,7 @@ namespace Nanook.QueenBee.Parser
                         }
                     }
                     if (_fileId == 0)
-                        _fileId = QbKey.Create(this.Filename).Crc; //just create one
+                        _fileId = QbKey.Create(Filename).Crc; //just create one
                 }
 
                 return _fileId;
@@ -648,16 +648,16 @@ namespace Nanook.QueenBee.Parser
             BinaryEndianWriter bw = new BinaryEndianWriter(s);
             //using (BinaryEndianWriter bw = new BinaryEndianWriter(s))
             //{
-                this.startLengthCheck(bw);
+                startLengthCheck(bw);
 
-                bw.Write(_magic, this.PakFormat.EndianType);
-                bw.Write(_fileSize, this.PakFormat.EndianType);
+                bw.Write(_magic, PakFormat.EndianType);
+                bw.Write(_fileSize, PakFormat.EndianType);
 
                 foreach (QbItemBase qib in _items)
                     qib.Write(bw);
 
 
-                ApplicationException ex = this.testLengthCheck(this, bw);
+                ApplicationException ex = testLengthCheck(this, bw);
                 if (ex != null) throw ex;
             //}
 
@@ -901,15 +901,15 @@ namespace Nanook.QueenBee.Parser
 
         private void startLengthCheck(BinaryEndianWriter bw)
         {
-            _lengthCheckStart = this.StreamPos(bw.BaseStream);
+            _lengthCheckStart = StreamPos(bw.BaseStream);
         }
 
         private ApplicationException testLengthCheck(object sender, BinaryEndianWriter bw)
         {
-            uint len = this.Length;
-            if (this.StreamPos(bw.BaseStream) - _lengthCheckStart != len)
+            uint len = Length;
+            if (StreamPos(bw.BaseStream) - _lengthCheckStart != len)
             {
-                return new ApplicationException(QbFile.FormatWriteLengthExceptionMessage(sender, _lengthCheckStart, this.StreamPos(bw.BaseStream), len));
+                return new ApplicationException(QbFile.FormatWriteLengthExceptionMessage(sender, _lengthCheckStart, StreamPos(bw.BaseStream), len));
             }
             else
                 return null;

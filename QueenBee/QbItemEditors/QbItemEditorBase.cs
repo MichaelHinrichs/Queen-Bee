@@ -53,7 +53,7 @@ namespace Nanook.QueenBee
                 return;
 
             if ((qbKeyText = _qbItemBase.Root.PakFormat.AddNonDebugQbKey(qbKey, _qbItemBase.Root.Filename, _qbItemBase.Root)).Length != 0)
-                this.ShowError("QB Key Error", string.Format("QB Key '{0}' has the same crc as item '{1}' from the debug file.{2}{2}The QbKey text '{0}' will not be saved to the User Debug file.", qbKey.Text, qbKeyText, Environment.NewLine));
+                ShowError("QB Key Error", string.Format("QB Key '{0}' has the same crc as item '{1}' from the debug file.{2}{2}The QbKey text '{0}' will not be saved to the User Debug file.", qbKey.Text, qbKeyText, Environment.NewLine));
         }
 
 
@@ -62,7 +62,7 @@ namespace Nanook.QueenBee
         /// </summary>
         protected void UpdateQbItem()
         {
-            this.OnUpdated(new EventArgs());
+            OnUpdated(new EventArgs());
         }
 
         protected Type QbItemDataType

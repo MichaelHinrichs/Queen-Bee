@@ -7,10 +7,10 @@
     {
         public ScriptString(string text, int pos, int length, bool isUnicode)
         {
-            this.Text = text;
-            this.Pos = pos;
-            this.Length = length;
-            this.IsUnicode = isUnicode;
+            Text = text;
+            Pos = pos;
+            Length = length;
+            IsUnicode = isUnicode;
         }
 
         public string Text { get; set; }

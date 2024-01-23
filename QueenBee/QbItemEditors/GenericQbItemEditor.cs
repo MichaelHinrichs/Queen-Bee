@@ -18,7 +18,7 @@ namespace Nanook.QueenBee
             bool tooManyItems = false;
             int spacing = 22;
             int top = 20;
-            int tabIndex = this.TabIndex;
+            int tabIndex = TabIndex;
             int lblWidth = 0;
 
             List<GenericQbItem> gis = QbFile.GetGenericItems(base.QbItem);
@@ -26,12 +26,12 @@ namespace Nanook.QueenBee
             if (gis.Count > 500)
             {
                 tooManyItems = true;
-                this.AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (1 + 1) + 10)); //+ 1 for button
+                AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (1 + 1) + 10)); //+ 1 for button
             }
             else
-                this.AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (gis.Count + 1) + 10)); //+ 1 for button
+                AutoScrollMinSize = new Size(0, (top * 2) + (spacing * (gis.Count + 1) + 10)); //+ 1 for button
 
-            this.Tag = base.QbItem; //store item for update
+            Tag = base.QbItem; //store item for update
 
             bool hasEditable = false;
 
@@ -55,24 +55,24 @@ namespace Nanook.QueenBee
                 base.ShowException("Edit Item List Error", ex);
             }
 
-            foreach (GenericQbEditItem et in this.Controls)
+            foreach (GenericQbEditItem et in Controls)
                 et.TextBoxLeft = lblWidth + 6;
 
             try
             {
-                if (this.Controls.Count != 0)
+                if (Controls.Count != 0)
                 {
                     Button btnUpdateItems = new Button
                     {
                         Text = "&Update",
                         Anchor = AnchorStyles.Top | AnchorStyles.Right
                     };
-                    btnUpdateItems.Left = (this.ClientSize.Width - btnUpdateItems.Width - 15);
+                    btnUpdateItems.Left = (ClientSize.Width - btnUpdateItems.Width - 15);
                     btnUpdateItems.Top = top + 10;
                     btnUpdateItems.Height = 22;
                     btnUpdateItems.Enabled = hasEditable;
                     btnUpdateItems.Click += new EventHandler(btnUpdateItems_Click);
-                    this.Controls.Add(btnUpdateItems);
+                    Controls.Add(btnUpdateItems);
                 }
 
                 if (tooManyItems)
@@ -90,7 +90,7 @@ namespace Nanook.QueenBee
             ei = new GenericQbEditItem();
             ei.SetData(gi);
             ei.Left = 0;
-            ei.Width = this.ClientSize.Width;
+            ei.Width = ClientSize.Width;
             ei.Top = top;
             top += spacing;
             ei.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
@@ -103,7 +103,7 @@ namespace Nanook.QueenBee
             //else
             //    ei.ConvertTo(base.EditType);
 
-            this.Controls.Add(ei);
+            Controls.Add(ei);
 
             if (ei.LabelWidth > lblWidth)
                 lblWidth = ei.LabelWidth;
@@ -124,7 +124,7 @@ namespace Nanook.QueenBee
                 //Check if QbKey is in the debug file, if not then add it to the user defined list
                 base.AddQbKeyToUserDebugFile(base.QbItem.ItemQbKey);
 
-                foreach (Control un in this.Controls)
+                foreach (Control un in Controls)
                 {
                     if ((ei = (un as GenericQbEditItem)) != null)
                     {
@@ -164,14 +164,14 @@ namespace Nanook.QueenBee
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // GenericQbItemEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Name = "GenericQbItemEditor";
-            this.Load += new System.EventHandler(this.GenericQbItemEditor_Load);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            Name = "GenericQbItemEditor";
+            Load += new System.EventHandler(GenericQbItemEditor_Load);
+            ResumeLayout(false);
 
         }
 

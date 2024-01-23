@@ -34,7 +34,7 @@ namespace Nanook.QueenBee.Parser
                     {
                         if (phi.PakFileType == PakItemType.Qb || phi.PakFileType == PakItemType.Sqb || phi.PakFileType == PakItemType.Midi)
                         {
-                            QbFile qbf = this.ReadQbFile(phi.Filename); //set the _pakformat.StructItemChildrenType item
+                            QbFile qbf = ReadQbFile(phi.Filename); //set the _pakformat.StructItemChildrenType item
                             if (_pakFormat.StructItemChildrenType != Nanook.QueenBee.Parser.StructItemChildrenType.NotSet)
                                 return _pakFormat.StructItemChildrenType;
                         }
@@ -231,7 +231,7 @@ namespace Nanook.QueenBee.Parser
 
             StructItemChildrenType s;
             if (!debugFile)
-                s = this.StructItemChildrenType;  //auto detect the structitemchildren type
+                s = StructItemChildrenType;  //auto detect the structitemchildren type
         }
 
         private void addDebugFilename(string debugFileContents, Dictionary<uint, PakDbgQbKey> qbKeyFilenames, uint dbgQbKey)
@@ -464,7 +464,7 @@ namespace Nanook.QueenBee.Parser
         {
             createBlankFile(newQbFilename, itemType, filenameInHeader);
             QbFile blank = new QbFile(newQbFilename, _pakFormat, magic, unknownData);
-            this.ReplaceFile(newQbFilename, blank);
+            ReplaceFile(newQbFilename, blank);
         }
 
         /// <summary>
@@ -477,7 +477,7 @@ namespace Nanook.QueenBee.Parser
         {
             createBlankFile(newQbFilename, itemType, filenameInHeader);
 
-            this.ReplaceFile(newQbFilename, localFilename);
+            ReplaceFile(newQbFilename, localFilename);
         }
 
 
@@ -491,7 +491,7 @@ namespace Nanook.QueenBee.Parser
         {
             createBlankFile(newQbFilename, itemType, filenameInHeader);
 
-            this.ReplaceFile(newQbFilename, newQbFile);
+            ReplaceFile(newQbFilename, newQbFile);
 
         }
 

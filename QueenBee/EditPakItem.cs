@@ -21,7 +21,7 @@ namespace Nanook.QueenBee
 
             bool b = type == EditPakItemType.Add;
 
-            this.Height = b ? 180 : 150;
+            Height = b ? 180 : 150;
             txtImport.Visible = b;
             btnImport.Visible = b;
             lblImport.Visible = b;
@@ -34,16 +34,16 @@ namespace Nanook.QueenBee
             switch (type)
             {
                 case EditPakItemType.New:
-                    this.Text = "New Pak Item";
+                    Text = "New Pak Item";
                     break;
                 case EditPakItemType.Add:
-                    this.Text = "Add Pak Item";
+                    Text = "Add Pak Item";
                     break;
                 case EditPakItemType.Rename:
-                    this.Text = "Rename Pak Item";
+                    Text = "Rename Pak Item";
                     break;
                 default:
-                    this.Text = "Edit Pak Item";
+                    Text = "Edit Pak Item";
                     break;
             }
 
@@ -117,18 +117,18 @@ Note: GH3 Wii misses the first character from the path, you can include it to en
                 return;
             }
 
-            if (this.PakItemFilename.Trim().Length == 0)
+            if (PakItemFilename.Trim().Length == 0)
             {
                 MessageBox.Show(this, "The pak item filename has not been specified", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void btnImport_Click(object sender, EventArgs e)

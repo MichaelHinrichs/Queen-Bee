@@ -38,19 +38,19 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemScript sc = new QbItemScript(this.Root);
-            sc.Create(this.QbItemType);
+            QbItemScript sc = new QbItemScript(Root);
+            sc.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                sc.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                sc.ItemQbKey = ItemQbKey.Clone();
 
-            byte[] bi = new byte[this.ScriptData.Length];
+            byte[] bi = new byte[ScriptData.Length];
             for (int i = 0; i < bi.Length; i++)
-                bi[i] = this.ScriptData[i];
+                bi[i] = ScriptData[i];
 
             sc.ScriptData = bi;
-            sc.ItemCount = this.ItemCount;
-            sc.Unknown = this.Unknown;
+            sc.ItemCount = ItemCount;
+            sc.Unknown = Unknown;
 
             return sc;
         }
@@ -83,7 +83,7 @@ namespace Nanook.QueenBee.Parser
 
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
 
             pos = base.AlignPointers(pos);
 
@@ -192,10 +192,10 @@ namespace Nanook.QueenBee.Parser
 
             bool end = false;
 
-            au = (this.Root.PakFormat.PakFormatType == PakFormatType.PC || this.Root.PakFormat.PakFormatType == PakFormatType.XBox);
+            au = (Root.PakFormat.PakFormatType == PakFormatType.PC || Root.PakFormat.PakFormatType == PakFormatType.XBox);
 
             if (au)
-                ub = (this.Root.PakFormat.EndianType == EndianType.Big);
+                ub = (Root.PakFormat.EndianType == EndianType.Big);
 
 
             for (int i = 0; i < _scriptData.Length; i++)

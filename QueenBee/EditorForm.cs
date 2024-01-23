@@ -24,7 +24,7 @@ namespace Nanook.QueenBee
         {
             InitializeComponent();
 
-            this.Visible = false;
+            Visible = false;
 
             AppState.LastQbReplacePath = string.Empty;
             AppState.LastQbExtractPath = string.Empty;
@@ -43,15 +43,15 @@ namespace Nanook.QueenBee
                 cboFormatType.Items.Add(s);
 
             _info = null;
-            this.FormClosing += new FormClosingEventHandler(EditorForm_FormClosing);
+            FormClosing += new FormClosingEventHandler(EditorForm_FormClosing);
 
             _lvwPakColumnSorter = new ListViewColumnSorter();
-            this.lstPakContents.ListViewItemSorter = _lvwPakColumnSorter;
+            lstPakContents.ListViewItemSorter = _lvwPakColumnSorter;
             _lvwPakColumnSorter.SortColumn = 0;
             _lvwPakColumnSorter.Order = SortOrder.Ascending;
 
             _lvwSearchColumnSorter = new ListViewColumnSorter();
-            this.lstSearchResults.ListViewItemSorter = _lvwSearchColumnSorter;
+            lstSearchResults.ListViewItemSorter = _lvwSearchColumnSorter;
             _lvwSearchColumnSorter.SortColumn = 0;
             _lvwSearchColumnSorter.Order = SortOrder.Ascending;
 
@@ -73,12 +73,12 @@ namespace Nanook.QueenBee
                 else if (attribute is AssemblyCompanyAttribute)
                     assCompany = (((AssemblyCompanyAttribute)attribute).Company);
             }
-            this.Text = string.Format("{0} ({1})     v{2}.{3}     by {4}", assName, assDescription, assVersion.Major.ToString(), assVersion.Minor.ToString(), assCompany);
+            Text = string.Format("{0} ({1})     v{2}.{3}     by {4}", assName, assDescription, assVersion.Major.ToString(), assVersion.Minor.ToString(), assCompany);
 
             cboFormatType.SelectedIndex = 0;
 
             loadConfiguration();
-            this.Visible = true;
+            Visible = true;
         }
 
         #region PAK tab routines
@@ -199,7 +199,7 @@ namespace Nanook.QueenBee
         {
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 if (txtPakFile.Text.Trim().Length == 0)
                 {
@@ -366,7 +366,7 @@ namespace Nanook.QueenBee
             }
             finally
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
 
                 try
                 {
@@ -732,7 +732,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 openQb.FileName = fname;
                 if (openQb.ShowDialog(this) != DialogResult.Cancel)
                 {
-                    this.Cursor = Cursors.WaitCursor;
+                    Cursor = Cursors.WaitCursor;
                     AppState.LastQbReplacePath = (new FileInfo(openQb.FileName)).DirectoryName;
                     _pakFile.ReplaceFile(qbname, openQb.FileName);
 
@@ -745,7 +745,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             }
             finally
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -772,7 +772,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 saveQb.FileName = fname;
                 if (saveQb.ShowDialog(this) != DialogResult.Cancel)
                 {
-                    this.Cursor = Cursors.WaitCursor;
+                    Cursor = Cursors.WaitCursor;
                     AppState.LastQbExtractPath = (new FileInfo(saveQb.FileName)).DirectoryName;
 
                     if (File.Exists(saveQb.FileName))
@@ -786,7 +786,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             }
             finally
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -797,7 +797,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 browseQb.SelectedPath = string.Format(@"{0}\", AppState.LastQbExtractPath.TrimEnd('\\'));
                 if (browseQb.ShowDialog(this) != DialogResult.Cancel)
                 {
-                    this.Cursor = Cursors.WaitCursor;
+                    Cursor = Cursors.WaitCursor;
                     AppState.LastQbExtractPath = browseQb.SelectedPath.TrimEnd('\\');
                     string fn;
                     foreach (PakHeaderItem phi in _pakFile.Headers.Values)
@@ -817,7 +817,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             }
             finally
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -902,7 +902,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             {
                 try
                 {
-                    this.Cursor = Cursors.WaitCursor;
+                    Cursor = Cursors.WaitCursor;
 
                     if (!File.Exists(f.ImportFilename))
                     {
@@ -930,7 +930,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 }
                 finally
                 {
-                    this.Cursor = Cursors.Default;
+                    Cursor = Cursors.Default;
                 }
             }
         }
@@ -949,7 +949,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             {
                 try
                 {
-                    this.Cursor = Cursors.WaitCursor;
+                    Cursor = Cursors.WaitCursor;
 
                     if (f.PakItemFilename.Trim().Length == 0)
                     {
@@ -972,7 +972,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 }
                 finally
                 {
-                    this.Cursor = Cursors.Default;
+                    Cursor = Cursors.Default;
                 }
             }
         }
@@ -981,7 +981,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
         {
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 if (lstPakContents.Items.Count <= 1)
                 {
@@ -996,7 +996,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             }
             finally
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -1070,7 +1070,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
         {
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 long pakLen = _pakFormat.CompressedPakFilesize;
                 long pabLen = _pakFormat.CompressedPabFilesize;
@@ -1143,7 +1143,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             }
             finally
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -1693,7 +1693,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 lstSearchResults.BeginUpdate();
                 lstSearchResults.ListViewItemSorter = null;
@@ -1733,7 +1733,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 lstSearchResults.ListViewItemSorter = _lvwSearchColumnSorter;
                 lstSearchResults.EndUpdate();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
         }
 
@@ -1750,7 +1750,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 if (err.GetError(txtQbKeySearch).Length != 0)
                     return;
@@ -1829,7 +1829,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 lstSearchResults.ListViewItemSorter = _lvwSearchColumnSorter;
                 lstSearchResults.EndUpdate();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
 
             }
         }
@@ -1841,7 +1841,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
             try
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
 
                 if (err.GetError(txtNumberSearch).Length != 0)
                     return;
@@ -1963,7 +1963,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 lstSearchResults.ListViewItemSorter = _lvwSearchColumnSorter;
                 lstSearchResults.EndUpdate();
 
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
 
             }
         }
@@ -2226,25 +2226,25 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
         private void EditorForm_Resize_Move(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
                 AppState.SaveWindowInfo(this);
         }
 
         private void splitPak_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (this.WindowState != FormWindowState.Minimized)
+            if (WindowState != FormWindowState.Minimized)
                 AppState.SavePakSplitterInfo((SplitContainer)sender);
         }
 
         private void splitQb_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (this.WindowState != FormWindowState.Minimized)
+            if (WindowState != FormWindowState.Minimized)
                 AppState.SaveQbSplitterInfo((SplitContainer)sender);
         }
 
         private void splitSearch_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (this.WindowState != FormWindowState.Minimized)
+            if (WindowState != FormWindowState.Minimized)
                 AppState.SaveSearchSplitterInfo((SplitContainer)sender);
         }
 

@@ -18,7 +18,7 @@ namespace Nanook.QueenBee.Parser
             if (type != QbItemType.StructHeader)
             {
                 _headerType = QbItemType.StructHeader;
-                _headerValue = this.Root.PakFormat.GetQbItemValue(_headerType, this.Root);
+                _headerValue = Root.PakFormat.GetQbItemValue(_headerType, Root);
             }
 
         }
@@ -29,16 +29,16 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemStruct s = new QbItemStruct(this.Root);
-            s.Create(this.QbItemType);
+            QbItemStruct s = new QbItemStruct(Root);
+            s.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                s.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                s.ItemQbKey = ItemQbKey.Clone();
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 s.Items.Add(qib.Clone());
 
-            s.ItemCount = this.ItemCount;
+            s.ItemCount = ItemCount;
 
             return s;
         }
@@ -54,7 +54,7 @@ namespace Nanook.QueenBee.Parser
             if (type != QbItemType.StructHeader)
                 _headerValue = br.ReadUInt32(base.Root.PakFormat.EndianType);
             else
-                _headerValue = base.Root.PakFormat.GetQbItemValue(type, this.Root);
+                _headerValue = base.Root.PakFormat.GetQbItemValue(type, Root);
 
              _headerType = base.Root.PakFormat.GetQbItemType(_headerValue);
 
@@ -73,93 +73,93 @@ namespace Nanook.QueenBee.Parser
 
                 while (pointer != 0)
                 {
-                    structValue = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    structType = this.Root.PakFormat.GetQbItemType(structValue);
+                    structValue = br.ReadUInt32(Root.PakFormat.EndianType);
+                    structType = Root.PakFormat.GetQbItemType(structValue);
 
                     switch (structType)
                     {
                         case QbItemType.StructItemStruct:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemStruct(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemStruct(Root);
                             break;
                         case QbItemType.StructItemStringPointer:
                         case QbItemType.StructItemInteger:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemInteger(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemInteger(Root);
                             break;
                         case QbItemType.StructItemQbKeyString:
                         case QbItemType.StructItemQbKeyStringQs:
                         case QbItemType.StructItemQbKey:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemQbKey(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemQbKey(Root);
                             break;
                         case QbItemType.StructItemString:
                         case QbItemType.StructItemStringW:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemString(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemString(Root);
                             break;
                         case QbItemType.StructItemFloat:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemFloat(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemFloat(Root);
                             break;
                         case QbItemType.StructItemFloatsX2:
                         case QbItemType.StructItemFloatsX3:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemFloatsArray(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemFloatsArray(Root);
                             break;
                         case QbItemType.StructItemArray:
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
-                            qib = new QbItemArray(this.Root);
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.StructItems;
+                            qib = new QbItemArray(Root);
                             break;
 
                         //Convert array types to structitems to fit in with this parser (if QbFile.HasStructItems is false then internal type will be swapped back to array)
                         case QbItemType.ArrayStruct:
                             structType = QbItemType.StructItemStruct;
-                            qib = new QbItemArray(this.Root);
+                            qib = new QbItemArray(Root);
                             break;
                         case QbItemType.ArrayInteger:
                             structType = QbItemType.StructItemInteger;
-                            qib = new QbItemInteger(this.Root);
+                            qib = new QbItemInteger(Root);
                             break;
                         case QbItemType.ArrayQbKeyString:
                             structType = QbItemType.StructItemQbKeyString;
-                            qib = new QbItemQbKey(this.Root);
+                            qib = new QbItemQbKey(Root);
                             break;
                         case QbItemType.ArrayStringPointer:
                             structType = QbItemType.StructItemStringPointer;
-                            qib = new QbItemInteger(this.Root);
+                            qib = new QbItemInteger(Root);
                             break;
                         case QbItemType.ArrayQbKeyStringQs:
                             structType = QbItemType.StructItemQbKeyStringQs;
-                            qib = new QbItemQbKey(this.Root);
+                            qib = new QbItemQbKey(Root);
                             break;
                         case QbItemType.ArrayQbKey:
                             structType = QbItemType.StructItemQbKey;
-                            qib = new QbItemQbKey(this.Root);
+                            qib = new QbItemQbKey(Root);
                             break;
                         case QbItemType.ArrayString:
                             structType = QbItemType.StructItemString;
-                            qib = new QbItemString(this.Root);
+                            qib = new QbItemString(Root);
                             break;
                         case QbItemType.ArrayStringW:
                             structType = QbItemType.StructItemStringW;
-                            qib = new QbItemString(this.Root);
+                            qib = new QbItemString(Root);
                             break;
                         case QbItemType.ArrayFloat:
                             structType = QbItemType.StructItemFloat;
-                            qib = new QbItemFloat(this.Root);
+                            qib = new QbItemFloat(Root);
                             break;
                         case QbItemType.ArrayFloatsX2:
                             structType = QbItemType.StructItemFloatsX2;
-                            qib = new QbItemFloatsArray(this.Root);
+                            qib = new QbItemFloatsArray(Root);
                             break;
                         case QbItemType.ArrayFloatsX3:
                             structType = QbItemType.StructItemFloatsX3;
-                            qib = new QbItemFloatsArray(this.Root);
+                            qib = new QbItemFloatsArray(Root);
                             break;
                         case QbItemType.ArrayArray:
                             structType = QbItemType.StructItemArray;
-                            qib = new QbItemArray(this.Root);
+                            qib = new QbItemArray(Root);
                             break;
                         default:
                             qib = null;
@@ -168,8 +168,8 @@ namespace Nanook.QueenBee.Parser
 
                     if (qib != null)
                     {
-                        if (this.Root.PakFormat.StructItemChildrenType == StructItemChildrenType.NotSet) //will have been set to structItem if qib is not null)
-                            this.Root.PakFormat.StructItemChildrenType = StructItemChildrenType.ArrayItems;
+                        if (Root.PakFormat.StructItemChildrenType == StructItemChildrenType.NotSet) //will have been set to structItem if qib is not null)
+                            Root.PakFormat.StructItemChildrenType = StructItemChildrenType.ArrayItems;
 
                         qib.Construct(br, structType);
                         AddItem(qib);
@@ -188,7 +188,7 @@ namespace Nanook.QueenBee.Parser
 
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
 
             pos = base.AlignPointers(pos);
 
@@ -196,10 +196,10 @@ namespace Nanook.QueenBee.Parser
                 pos += (1 * 4); //skip header
             _iniNextItemPointer = (pos += (1 * 4)); //skip header and pointer
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 pos = qib.AlignPointers(pos);
-            if (this.Items.Count != 0)
-                this.Items[this.Items.Count - 1].NextItemPointer = 0;
+            if (Items.Count != 0)
+                Items[Items.Count - 1].NextItemPointer = 0;
             else
                 _iniNextItemPointer = 0; //no next item
 

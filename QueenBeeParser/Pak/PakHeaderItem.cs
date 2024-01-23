@@ -269,19 +269,19 @@ namespace Nanook.QueenBee.Parser
                 throw new ApplicationException("fileType is not recognised");
 
             //filename is stored in the header
-            if ((this.Flags & PakHeaderFlags.Filename) == PakHeaderFlags.Filename)
+            if ((Flags & PakHeaderFlags.Filename) == PakHeaderFlags.Filename)
             {
-                this.Filename = newFullQbFilename;
-                this.FullFilenameQbKey = 0;
+                Filename = newFullQbFilename;
+                FullFilenameQbKey = 0;
             }
             else
             {
-                this.Filename = QbKey.Create(newFullQbFilename).Crc.ToString("X").PadLeft(8, '0').ToLower();
+                Filename = QbKey.Create(newFullQbFilename).Crc.ToString("X").PadLeft(8, '0').ToLower();
 
                 if (baseOn == null || baseOn.FullFilenameQbKey != 0)
-                    this.FullFilenameQbKey = QbKey.Create(newFullQbFilename).Crc;
+                    FullFilenameQbKey = QbKey.Create(newFullQbFilename).Crc;
                 else
-                    this.FullFilenameQbKey = 0;
+                    FullFilenameQbKey = 0;
             }
 
             string[] pts = newFullQbFilename.Split('.');
@@ -289,17 +289,17 @@ namespace Nanook.QueenBee.Parser
             string nameOnly = pts[0];
 
             if (baseOn == null || baseOn.FullFilenameQbKey != 0)
-                this.NameOnlyCrc = QbKey.Create(nameOnly).Crc;
+                NameOnlyCrc = QbKey.Create(nameOnly).Crc;
             else
-                this.NameOnlyCrc = 0;
+                NameOnlyCrc = 0;
 
 
-            this.FileType = itemType;
+            FileType = itemType;
 
             if (baseOn == null || baseOn.PakFullFileNameQbKey != 0)
-                this.PakFullFileNameQbKey = QbKey.Create(newFullQbFilename).Crc;
+                PakFullFileNameQbKey = QbKey.Create(newFullQbFilename).Crc;
             else
-                this.PakFullFileNameQbKey = 0;
+                PakFullFileNameQbKey = 0;
 
         }
 

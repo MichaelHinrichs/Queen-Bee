@@ -27,8 +27,8 @@ namespace Nanook.QueenBee.Parser
         {
             public NonDebugQbKey(QbKey qbKey, string qbFilename)
             {
-                this.QbKey = qbKey;
-                this.QbFilename = qbFilename;
+                QbKey = qbKey;
+                QbFilename = qbFilename;
             }
 
             public QbKey QbKey { get; set; }
@@ -161,7 +161,7 @@ namespace Nanook.QueenBee.Parser
             if (!File.Exists(pakFile))
                 return;
 
-            this.CompressionType = CompressionType.None;
+            CompressionType = CompressionType.None;
 
             FileInfo fi = new FileInfo(pakFile);
             PakPath = fi.Directory.FullName;
@@ -359,7 +359,7 @@ namespace Nanook.QueenBee.Parser
 
         public uint GetQbItemValue(QbItemType type, QbFile qbFile)
         {
-            return _types[(int)this.GetInternalType(type, qbFile), (int)PakFormatType];
+            return _types[(int)GetInternalType(type, qbFile), (int)PakFormatType];
         }
 
         public QbItemType GetQbItemType(uint type)
@@ -500,16 +500,16 @@ namespace Nanook.QueenBee.Parser
 
         public void Compress()
         {
-            if (this.IsCompressed)
+            if (IsCompressed)
             {
-                if (this.PakFormatType == PakFormatType.XBox)
+                if (PakFormatType == PakFormatType.XBox)
                 {
-                    this.xBoxCompress(this.FullPakFilename, this.FullCompressedPakFilename);
-                    this.CompressedPakFilesize = (new FileInfo(this.FullCompressedPakFilename)).Length;
-                    if (this.PakFileExists)
+                    xBoxCompress(FullPakFilename, FullCompressedPakFilename);
+                    CompressedPakFilesize = (new FileInfo(FullCompressedPakFilename)).Length;
+                    if (PakFileExists)
                     {
-                        this.xBoxCompress(this.FullPabFilename, this.FullCompressedPabFilename);
-                        this.CompressedPabFilesize = (new FileInfo(this.FullCompressedPabFilename)).Length;
+                        xBoxCompress(FullPabFilename, FullCompressedPabFilename);
+                        CompressedPabFilesize = (new FileInfo(FullCompressedPabFilename)).Length;
                     }
                 }
             }
@@ -522,32 +522,32 @@ namespace Nanook.QueenBee.Parser
             //{
                 CompressionType ct = CompressionType.None;
 
-                if (this.PakFormatType == PakFormatType.XBox)
+                if (PakFormatType == PakFormatType.XBox)
                 {
-                    if ((ct = this.xBoxUncompress(this.FullCompressedPakFilename, this.FullPakFilename)) != CompressionType.None)
-                        this.CompressionType = ct;
+                    if ((ct = xBoxUncompress(FullCompressedPakFilename, FullPakFilename)) != CompressionType.None)
+                        CompressionType = ct;
                     else
                     {
                         if (File.Exists(FullPakFilename))
                             File.Delete(FullPakFilename); //delete the .decompressed file
                         //none compressed pak
-                        this.FullPakFilename = this.FullCompressedPakFilename;
-                        this.PakFilename = this.CompressedPakFilename;
+                        FullPakFilename = FullCompressedPakFilename;
+                        PakFilename = CompressedPakFilename;
                     }
-                    if (this.CompressedPabFileExists)
+                    if (CompressedPabFileExists)
                     {
-                        if ((ct = this.xBoxUncompress(this.FullCompressedPabFilename, this.FullPabFilename)) != CompressionType.None)
-                            this.CompressionType = ct;
+                        if ((ct = xBoxUncompress(FullCompressedPabFilename, FullPabFilename)) != CompressionType.None)
+                            CompressionType = ct;
                     }
-                    if (this.CompressedDebugFileExists)
+                    if (CompressedDebugFileExists)
                     {
-                        if ((ct = this.xBoxUncompress(this.FullCompressedDebugFilename, this.FullDebugFilename)) != CompressionType.None)
-                            this.CompressionType = ct;
+                        if ((ct = xBoxUncompress(FullCompressedDebugFilename, FullDebugFilename)) != CompressionType.None)
+                            CompressionType = ct;
                     }
 
-                    this.UnCompressedPakFilesize = ((new FileInfo(this.FullPakFilename)).Length);
-                    if (this.FullPabFilename.Length != 0 && File.Exists(this.FullPabFilename))
-                        this.UnCompressedPabFilesize = ((new FileInfo(this.FullPabFilename)).Length);
+                    UnCompressedPakFilesize = ((new FileInfo(FullPakFilename)).Length);
+                    if (FullPabFilename.Length != 0 && File.Exists(FullPabFilename))
+                        UnCompressedPabFilesize = ((new FileInfo(FullPabFilename)).Length);
                 }
             //}
             //catch (Exception ex)
@@ -590,7 +590,7 @@ namespace Nanook.QueenBee.Parser
                                     {
                                         ct = CompressionType.ZLibChunk;
 
-                                        EndianType et = this.EndianType;
+                                        EndianType et = EndianType;
 
                                         //Decompress each section
                                         uint headerLen = br.ReadUInt32(et);
@@ -601,8 +601,8 @@ namespace Nanook.QueenBee.Parser
                                         uint uncompressedPos = br.ReadUInt32(et);
 
                                         _zLibHeaderLen = headerLen;
-                                        if (uncompressedLen > this._zLibChunkSize)
-                                            this._zLibChunkSize = uncompressedLen;
+                                        if (uncompressedLen > _zLibChunkSize)
+                                            _zLibChunkSize = uncompressedLen;
 
                                         inFileStream.Seek(headerLen - (inFileStream.Position - pos), SeekOrigin.Current);
                                         outZStream.WriteByte(0x58);  //Search deflate.cs for "Nanook" for the mod to stop it being written out
@@ -679,7 +679,7 @@ namespace Nanook.QueenBee.Parser
 
             try
             {
-                if (this.CompressionType == CompressionType.ZLib)
+                if (CompressionType == CompressionType.ZLib)
                 {
                     using (FileStream outFileStream = new FileStream(compFilename, FileMode.Create))
                     {
@@ -692,7 +692,7 @@ namespace Nanook.QueenBee.Parser
                         }
                     }
                 }
-                else if (this.CompressionType == CompressionType.ZLibChunk)
+                else if (CompressionType == CompressionType.ZLibChunk)
                 {
                     List<uint> sizes = new List<uint>();
                     List<uint> offsets = new List<uint>();
@@ -702,7 +702,7 @@ namespace Nanook.QueenBee.Parser
                     long lastUncompressedChunk;
                     long endPos;
 
-                    EndianType et = this.EndianType;
+                    EndianType et = EndianType;
 
                     int part = 0;
 
@@ -760,7 +760,7 @@ namespace Nanook.QueenBee.Parser
                             using (BinaryEndianWriter bw = new BinaryEndianWriter(outFileStream))
                             {
                                 long uncompressedTotal = 0;
-                                EndianType e = this.EndianType;
+                                EndianType e = EndianType;
 
                                 for (int i = 0; i < offsets.Count; i++)
                                 {

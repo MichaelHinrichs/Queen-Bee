@@ -10,7 +10,7 @@ namespace Nanook.QueenBee.Parser
 
         public QbItemFloats(QbFile root, bool isX3) : base(root)
         {
-            this.Values = new float[isX3 ? 3 : 2];
+            Values = new float[isX3 ? 3 : 2];
         }
 
         public override void Create(QbItemType type)
@@ -20,7 +20,7 @@ namespace Nanook.QueenBee.Parser
 
             base.Create(type);
 
-            this.Values = new float[2]; //sets item count
+            Values = new float[2]; //sets item count
             _values[0] = 0; //default to 2 items, if more are required, simply set Values externally.
             _values[1] = 0;
         }
@@ -31,18 +31,18 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemFloats qi = new QbItemFloats(this.Root);
-            qi.Create(this.QbItemType);
+            QbItemFloats qi = new QbItemFloats(Root);
+            qi.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                qi.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                qi.ItemQbKey = ItemQbKey.Clone();
 
-            float[] fi = new float[this.Values.Length];
+            float[] fi = new float[Values.Length];
             for (int i = 0; i < fi.Length; i++)
-                fi[i] = this.Values[i];
+                fi[i] = Values[i];
 
             qi.Values = fi;
-            qi.ItemCount = this.ItemCount;
+            qi.ItemCount = ItemCount;
 
             return qi;
         }
@@ -68,7 +68,7 @@ namespace Nanook.QueenBee.Parser
         
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
             //yey no pointers
             base.AlignPointers(pos);
             return next;

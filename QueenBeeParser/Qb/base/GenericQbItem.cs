@@ -40,7 +40,7 @@ namespace Nanook.QueenBee.Parser
 
             _typeNumeric = true;
             _qbKey = value;
-            this.ConvertTo(editType);
+            ConvertTo(editType);
         }
 
         public GenericQbItem(string name, float value, Type editType, bool readOnly, bool useQbItemType, QbItemType qbType, string sourceProperty)
@@ -49,7 +49,7 @@ namespace Nanook.QueenBee.Parser
             _typeNumeric = true;
             _value = value.ToString();
             _type = value.GetType();
-            this.ConvertTo(editType);
+            ConvertTo(editType);
         }
 
         public GenericQbItem(string name, int value, Type editType, bool readOnly, bool useQbItemType, QbItemType qbType, string sourceProperty)
@@ -58,7 +58,7 @@ namespace Nanook.QueenBee.Parser
             _typeNumeric = true;
             _value = value.ToString();
             _type = value.GetType();
-            this.ConvertTo(editType);
+            ConvertTo(editType);
         }
 
         public GenericQbItem(string name, uint value, Type editType, bool readOnly, bool useQbItemType, QbItemType qbType, string sourceProperty)
@@ -67,7 +67,7 @@ namespace Nanook.QueenBee.Parser
             _typeNumeric = true;
             _value = value.ToString();
             _type = value.GetType();
-            this.ConvertTo(editType);
+            ConvertTo(editType);
         }
 
         public GenericQbItem(string name, byte[] value, Type editType, bool readOnly, bool useQbItemType, QbItemType qbType, string sourceProperty)
@@ -79,7 +79,7 @@ namespace Nanook.QueenBee.Parser
 
             _value = sb.ToString();
             _type = value.GetType();
-            this.ConvertTo(editType);
+            ConvertTo(editType);
         }
 
         public GenericQbItem(string name, string value, Type editType, bool readOnly, bool useQbItemType, QbItemType qbType, string sourceProperty)
@@ -87,7 +87,7 @@ namespace Nanook.QueenBee.Parser
         {
             _value = value;
             _type = value.GetType();
-            this.ConvertTo(editType);
+            ConvertTo(editType);
         }
 
         public string Name
@@ -244,7 +244,7 @@ namespace Nanook.QueenBee.Parser
             if (_currType == toType)
                 return _value;
 
-            if (!this.CanConvertTo(toType))
+            if (!CanConvertTo(toType))
                 return _value;
 
             //if QBKey then swap between Hex and String

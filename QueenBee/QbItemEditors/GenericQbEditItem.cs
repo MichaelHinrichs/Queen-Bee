@@ -12,7 +12,7 @@ namespace Nanook.QueenBee
         {
             InitializeComponent();
 
-            if (this.DesignMode)
+            if (DesignMode)
                 return;
 
             txtValue.ReadOnly = true;
@@ -57,7 +57,7 @@ namespace Nanook.QueenBee
 
         private void txtValue_LostFocus(object sender, EventArgs e)
         {
-            this.Validate();
+            Validate();
         }
 
         public override string Text

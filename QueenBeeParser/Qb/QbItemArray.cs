@@ -22,16 +22,16 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemArray a = new QbItemArray(this.Root);
-            a.Create(this.QbItemType);
+            QbItemArray a = new QbItemArray(Root);
+            a.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                a.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                a.ItemQbKey = ItemQbKey.Clone();
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 a.Items.Add(qib.Clone());
 
-            a.ItemCount = this.ItemCount;
+            a.ItemCount = ItemCount;
 
             return a;
         }
@@ -48,42 +48,42 @@ namespace Nanook.QueenBee.Parser
 
             for (int i = 0; i < base.ItemCount; i++)
             {
-                arrayValue = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                arrayType = this.Root.PakFormat.GetQbItemType(arrayValue);
+                arrayValue = br.ReadUInt32(Root.PakFormat.EndianType);
+                arrayType = Root.PakFormat.GetQbItemType(arrayValue);
 
                 switch (arrayType)
                 {
                     case QbItemType.Floats:
-                        qib = new QbItemFloats(this.Root);
+                        qib = new QbItemFloats(Root);
                         break;
                     case QbItemType.ArrayStruct:
-                        qib = new QbItemStructArray(this.Root);
+                        qib = new QbItemStructArray(Root);
                         break;
                     case QbItemType.ArrayFloat:
-                        qib = new QbItemFloat(this.Root);
+                        qib = new QbItemFloat(Root);
                         break;
                     case QbItemType.ArrayString:
                     case QbItemType.ArrayStringW:
-                        qib = new QbItemString(this.Root);
+                        qib = new QbItemString(Root);
                         break;
                     case QbItemType.ArrayFloatsX2:
                     case QbItemType.ArrayFloatsX3:
-                        qib = new QbItemFloatsArray(this.Root);
+                        qib = new QbItemFloatsArray(Root);
                         break;
                     case QbItemType.ArrayStringPointer:
                     case QbItemType.ArrayInteger:
-                        qib = new QbItemInteger(this.Root);
+                        qib = new QbItemInteger(Root);
                         break;
                     case QbItemType.ArrayArray:
-                        qib = new QbItemArray(this.Root);
+                        qib = new QbItemArray(Root);
                         break;
                     case QbItemType.ArrayQbKey:
                     case QbItemType.ArrayQbKeyString:
                     case QbItemType.ArrayQbKeyStringQs: //GH:GH
-                        qib = new QbItemQbKey(this.Root);
+                        qib = new QbItemQbKey(Root);
                         break;
                     case QbItemType.StructHeader:
-                        qib = new QbItemStruct(this.Root);
+                        qib = new QbItemStruct(Root);
                         break;
                     default:
                         throw new ApplicationException(string.Format("Location 0x{0}: Unknown array type 0x{1}", (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), arrayValue.ToString("X").PadLeft(8, '0')));
@@ -97,15 +97,15 @@ namespace Nanook.QueenBee.Parser
 
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
             pos = base.AlignPointers(pos);
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 pos = qib.AlignPointers(pos);
 
             //if items exist then null the last item's pointer
-            if (this.Items.Count != 0)
-                this.Items[this.Items.Count - 1].NextItemPointer = 0;
+            if (Items.Count != 0)
+                Items[Items.Count - 1].NextItemPointer = 0;
 
             return next;
         }

@@ -47,10 +47,10 @@ namespace Nanook.QueenBee.Parser
 
         public QbKey Clone()
         {
-            if (this.HasText)
-                return QbKey.Create(this.Text);
+            if (HasText)
+                return QbKey.Create(Text);
             else
-                return QbKey.Create(this.Crc);
+                return QbKey.Create(Crc);
         }
 
         ///<summary>   
@@ -116,7 +116,7 @@ namespace Nanook.QueenBee.Parser
 
         public override int GetHashCode()
         {
-            return base.GetHashCode() & (int)this._crc; //Hmm
+            return base.GetHashCode() & (int)_crc; //Hmm
         }
 
         public bool HasText
@@ -135,9 +135,9 @@ namespace Nanook.QueenBee.Parser
         public override bool Equals(object obj)
         {
             if (obj is QbKey)
-                return this.Crc == ((QbKey)obj).Crc;
+                return Crc == ((QbKey)obj).Crc;
             else if (obj is uint)
-                return this.Crc == (uint)obj;
+                return Crc == (uint)obj;
             return false;
         }
 

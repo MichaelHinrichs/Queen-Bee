@@ -25,16 +25,16 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemFloatsArray a = new QbItemFloatsArray(this.Root);
-            a.Create(this.QbItemType);
+            QbItemFloatsArray a = new QbItemFloatsArray(Root);
+            a.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                a.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                a.ItemQbKey = ItemQbKey.Clone();
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 a.Items.Add(qib.Clone());
 
-            a.ItemCount = this.ItemCount;
+            a.ItemCount = ItemCount;
 
             return a;
         }
@@ -55,15 +55,15 @@ namespace Nanook.QueenBee.Parser
                 if (base.StreamPos(br) != base.Pointers[i]) //pointer test
                     throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, base.StreamPos(br), base.Pointers[i]));
 
-                floatsValue = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                floatsType = this.Root.PakFormat.GetQbItemType(floatsValue);
+                floatsValue = br.ReadUInt32(Root.PakFormat.EndianType);
+                floatsType = Root.PakFormat.GetQbItemType(floatsValue);
                 
                 is3d = (type == QbItemType.SectionFloatsX3 || type == QbItemType.StructItemFloatsX3 || type == QbItemType.ArrayFloatsX3);
 
                 switch (floatsType)
                 {
                     case QbItemType.Floats:
-                        qib = new QbItemFloats(this.Root, is3d);
+                        qib = new QbItemFloats(Root, is3d);
                         break;
                     default:
                         throw new ApplicationException(string.Format("Location 0x{0}: Not a float type 0x{1}", (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), floatsValue.ToString("X").PadLeft(8, '0')));
@@ -77,14 +77,14 @@ namespace Nanook.QueenBee.Parser
 
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
 
             pos = base.AlignPointers(pos);
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 pos = qib.AlignPointers(pos);
-            if (this.Items.Count != 0)
-                this.Items[this.Items.Count - 1].NextItemPointer = 0;
+            if (Items.Count != 0)
+                Items[Items.Count - 1].NextItemPointer = 0;
 
             return next;
         }

@@ -43,7 +43,7 @@ namespace Nanook.QueenBee
 
         private void SimpleArrayEditor_Load(object sender, EventArgs e)
         {
-            if (this.DesignMode)
+            if (DesignMode)
                 return;
 
             try
@@ -458,251 +458,251 @@ namespace Nanook.QueenBee
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.lstItems = new System.Windows.Forms.ListBox();
-            this.lblItems = new System.Windows.Forms.Label();
-            this.txtItem = new System.Windows.Forms.TextBox();
-            this.btnConvert = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnSet = new System.Windows.Forms.Button();
-            this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuFloat = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuInt = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuUint = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHex = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuString = new System.Windows.Forms.ToolStripMenuItem();
-            this.err = new System.Windows.Forms.ErrorProvider(this.components);
-            this.mnuEditItems = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuInsertItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAddItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuItemMoveUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuItemMoveDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnImport = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.export = new System.Windows.Forms.SaveFileDialog();
-            this.import = new System.Windows.Forms.OpenFileDialog();
-            this.menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
-            this.mnuEditItems.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            lstItems = new System.Windows.Forms.ListBox();
+            lblItems = new System.Windows.Forms.Label();
+            txtItem = new System.Windows.Forms.TextBox();
+            btnConvert = new System.Windows.Forms.Button();
+            btnUpdate = new System.Windows.Forms.Button();
+            btnSet = new System.Windows.Forms.Button();
+            menu = new System.Windows.Forms.ContextMenuStrip(components);
+            mnuFloat = new System.Windows.Forms.ToolStripMenuItem();
+            mnuInt = new System.Windows.Forms.ToolStripMenuItem();
+            mnuUint = new System.Windows.Forms.ToolStripMenuItem();
+            mnuHex = new System.Windows.Forms.ToolStripMenuItem();
+            mnuString = new System.Windows.Forms.ToolStripMenuItem();
+            err = new System.Windows.Forms.ErrorProvider(components);
+            mnuEditItems = new System.Windows.Forms.ContextMenuStrip(components);
+            mnuInsertItem = new System.Windows.Forms.ToolStripMenuItem();
+            mnuAddItem = new System.Windows.Forms.ToolStripMenuItem();
+            mnuRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            mnuItemMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            mnuItemMoveDown = new System.Windows.Forms.ToolStripMenuItem();
+            btnImport = new System.Windows.Forms.Button();
+            btnExport = new System.Windows.Forms.Button();
+            export = new System.Windows.Forms.SaveFileDialog();
+            import = new System.Windows.Forms.OpenFileDialog();
+            menu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(err)).BeginInit();
+            mnuEditItems.SuspendLayout();
+            SuspendLayout();
             // 
             // lstItems
             // 
-            this.lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstItems.FormattingEnabled = true;
-            this.lstItems.IntegralHeight = false;
-            this.lstItems.Location = new System.Drawing.Point(3, 33);
-            this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(267, 206);
-            this.lstItems.TabIndex = 2;
-            this.lstItems.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstItems_MouseUp);
-            this.lstItems.SelectedIndexChanged += new System.EventHandler(this.lstItems_SelectedIndexChanged);
+            lstItems.FormattingEnabled = true;
+            lstItems.IntegralHeight = false;
+            lstItems.Location = new System.Drawing.Point(3, 33);
+            lstItems.Name = "lstItems";
+            lstItems.Size = new System.Drawing.Size(267, 206);
+            lstItems.TabIndex = 2;
+            lstItems.MouseUp += new System.Windows.Forms.MouseEventHandler(lstItems_MouseUp);
+            lstItems.SelectedIndexChanged += new System.EventHandler(lstItems_SelectedIndexChanged);
             // 
             // lblItems
             // 
-            this.lblItems.AutoSize = true;
-            this.lblItems.Location = new System.Drawing.Point(0, 18);
-            this.lblItems.Name = "lblItems";
-            this.lblItems.Size = new System.Drawing.Size(32, 13);
-            this.lblItems.TabIndex = 0;
-            this.lblItems.Text = "Items";
+            lblItems.AutoSize = true;
+            lblItems.Location = new System.Drawing.Point(0, 18);
+            lblItems.Name = "lblItems";
+            lblItems.Size = new System.Drawing.Size(32, 13);
+            lblItems.TabIndex = 0;
+            lblItems.Text = "Items";
             // 
             // txtItem
             // 
-            this.txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.err.SetIconPadding(this.txtItem, 37);
-            this.txtItem.Location = new System.Drawing.Point(3, 242);
-            this.txtItem.Name = "txtItem";
-            this.txtItem.Size = new System.Drawing.Size(215, 20);
-            this.txtItem.TabIndex = 3;
-            this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
-            this.txtItem.Validating += new System.ComponentModel.CancelEventHandler(this.txtItem_Validating);
+            err.SetIconPadding(txtItem, 37);
+            txtItem.Location = new System.Drawing.Point(3, 242);
+            txtItem.Name = "txtItem";
+            txtItem.Size = new System.Drawing.Size(215, 20);
+            txtItem.TabIndex = 3;
+            txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(txtItem_KeyDown);
+            txtItem.Validating += new System.ComponentModel.CancelEventHandler(txtItem_Validating);
             // 
             // btnConvert
             // 
-            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConvert.Location = new System.Drawing.Point(228, 8);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(42, 22);
-            this.btnConvert.TabIndex = 1;
-            this.btnConvert.Text = "float";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            btnConvert.Location = new System.Drawing.Point(228, 8);
+            btnConvert.Name = "btnConvert";
+            btnConvert.Size = new System.Drawing.Size(42, 22);
+            btnConvert.TabIndex = 1;
+            btnConvert.Text = "float";
+            btnConvert.UseVisualStyleBackColor = true;
+            btnConvert.Click += new System.EventHandler(btnConvert_Click);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(195, 274);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 5;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnUpdate.Location = new System.Drawing.Point(195, 274);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new System.Drawing.Size(75, 23);
+            btnUpdate.TabIndex = 5;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += new System.EventHandler(btnUpdate_Click);
             // 
             // btnSet
             // 
-            this.btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSet.Location = new System.Drawing.Point(218, 242);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(35, 21);
-            this.btnSet.TabIndex = 4;
-            this.btnSet.Text = "Set";
-            this.btnSet.UseVisualStyleBackColor = true;
-            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
+            btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnSet.Location = new System.Drawing.Point(218, 242);
+            btnSet.Name = "btnSet";
+            btnSet.Size = new System.Drawing.Size(35, 21);
+            btnSet.TabIndex = 4;
+            btnSet.Text = "Set";
+            btnSet.UseVisualStyleBackColor = true;
+            btnSet.Click += new System.EventHandler(btnSet_Click);
             // 
             // menu
             // 
-            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFloat,
-            this.mnuInt,
-            this.mnuUint,
-            this.mnuHex,
-            this.mnuString});
-            this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(149, 114);
+            menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            mnuFloat,
+            mnuInt,
+            mnuUint,
+            mnuHex,
+            mnuString});
+            menu.Name = "menu";
+            menu.Size = new System.Drawing.Size(149, 114);
             // 
             // mnuFloat
             // 
-            this.mnuFloat.Name = "mnuFloat";
-            this.mnuFloat.Size = new System.Drawing.Size(148, 22);
-            this.mnuFloat.Text = "Edit as Float";
+            mnuFloat.Name = "mnuFloat";
+            mnuFloat.Size = new System.Drawing.Size(148, 22);
+            mnuFloat.Text = "Edit as Float";
             // 
             // mnuInt
             // 
-            this.mnuInt.Name = "mnuInt";
-            this.mnuInt.Size = new System.Drawing.Size(148, 22);
-            this.mnuInt.Text = "Edit as Int";
+            mnuInt.Name = "mnuInt";
+            mnuInt.Size = new System.Drawing.Size(148, 22);
+            mnuInt.Text = "Edit as Int";
             // 
             // mnuUint
             // 
-            this.mnuUint.Name = "mnuUint";
-            this.mnuUint.Size = new System.Drawing.Size(148, 22);
-            this.mnuUint.Text = "Edit as UInt";
+            mnuUint.Name = "mnuUint";
+            mnuUint.Size = new System.Drawing.Size(148, 22);
+            mnuUint.Text = "Edit as UInt";
             // 
             // mnuHex
             // 
-            this.mnuHex.Name = "mnuHex";
-            this.mnuHex.Size = new System.Drawing.Size(148, 22);
-            this.mnuHex.Text = "Edit as Hex";
+            mnuHex.Name = "mnuHex";
+            mnuHex.Size = new System.Drawing.Size(148, 22);
+            mnuHex.Text = "Edit as Hex";
             // 
             // mnuString
             // 
-            this.mnuString.Name = "mnuString";
-            this.mnuString.Size = new System.Drawing.Size(148, 22);
-            this.mnuString.Text = "Edit as String";
+            mnuString.Name = "mnuString";
+            mnuString.Size = new System.Drawing.Size(148, 22);
+            mnuString.Text = "Edit as String";
             // 
             // err
             // 
-            this.err.ContainerControl = this;
+            err.ContainerControl = this;
             // 
             // mnuEditItems
             // 
-            this.mnuEditItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuInsertItem,
-            this.mnuAddItem,
-            this.mnuRemoveItem,
-            this.toolStripMenuItem1,
-            this.mnuItemMoveUp,
-            this.mnuItemMoveDown});
-            this.mnuEditItems.Name = "contextMenuStrip1";
-            this.mnuEditItems.Size = new System.Drawing.Size(150, 120);
+            mnuEditItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            mnuInsertItem,
+            mnuAddItem,
+            mnuRemoveItem,
+            toolStripMenuItem1,
+            mnuItemMoveUp,
+            mnuItemMoveDown});
+            mnuEditItems.Name = "contextMenuStrip1";
+            mnuEditItems.Size = new System.Drawing.Size(150, 120);
             // 
             // mnuInsertItem
             // 
-            this.mnuInsertItem.Name = "mnuInsertItem";
-            this.mnuInsertItem.Size = new System.Drawing.Size(149, 22);
-            this.mnuInsertItem.Text = "Insert Item";
-            this.mnuInsertItem.Click += new System.EventHandler(this.mnuInsertItem_Click);
+            mnuInsertItem.Name = "mnuInsertItem";
+            mnuInsertItem.Size = new System.Drawing.Size(149, 22);
+            mnuInsertItem.Text = "Insert Item";
+            mnuInsertItem.Click += new System.EventHandler(mnuInsertItem_Click);
             // 
             // mnuAddItem
             // 
-            this.mnuAddItem.Name = "mnuAddItem";
-            this.mnuAddItem.Size = new System.Drawing.Size(149, 22);
-            this.mnuAddItem.Text = "Add Item";
-            this.mnuAddItem.Click += new System.EventHandler(this.mnuAddItem_Click);
+            mnuAddItem.Name = "mnuAddItem";
+            mnuAddItem.Size = new System.Drawing.Size(149, 22);
+            mnuAddItem.Text = "Add Item";
+            mnuAddItem.Click += new System.EventHandler(mnuAddItem_Click);
             // 
             // mnuRemoveItem
             // 
-            this.mnuRemoveItem.Name = "mnuRemoveItem";
-            this.mnuRemoveItem.Size = new System.Drawing.Size(149, 22);
-            this.mnuRemoveItem.Text = "Remove Item";
-            this.mnuRemoveItem.Click += new System.EventHandler(this.mnuRemoveItem_Click);
+            mnuRemoveItem.Name = "mnuRemoveItem";
+            mnuRemoveItem.Size = new System.Drawing.Size(149, 22);
+            mnuRemoveItem.Text = "Remove Item";
+            mnuRemoveItem.Click += new System.EventHandler(mnuRemoveItem_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(146, 6);
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new System.Drawing.Size(146, 6);
             // 
             // mnuItemMoveUp
             // 
-            this.mnuItemMoveUp.Name = "mnuItemMoveUp";
-            this.mnuItemMoveUp.Size = new System.Drawing.Size(149, 22);
-            this.mnuItemMoveUp.Text = "Move Up";
-            this.mnuItemMoveUp.Click += new System.EventHandler(this.mnuItemMoveUp_Click);
+            mnuItemMoveUp.Name = "mnuItemMoveUp";
+            mnuItemMoveUp.Size = new System.Drawing.Size(149, 22);
+            mnuItemMoveUp.Text = "Move Up";
+            mnuItemMoveUp.Click += new System.EventHandler(mnuItemMoveUp_Click);
             // 
             // mnuItemMoveDown
             // 
-            this.mnuItemMoveDown.Name = "mnuItemMoveDown";
-            this.mnuItemMoveDown.Size = new System.Drawing.Size(149, 22);
-            this.mnuItemMoveDown.Text = "Move Down";
-            this.mnuItemMoveDown.Click += new System.EventHandler(this.mnuItemMoveDown_Click);
+            mnuItemMoveDown.Name = "mnuItemMoveDown";
+            mnuItemMoveDown.Size = new System.Drawing.Size(149, 22);
+            mnuItemMoveDown.Text = "Move Down";
+            mnuItemMoveDown.Click += new System.EventHandler(mnuItemMoveDown_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImport.Location = new System.Drawing.Point(84, 274);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
-            this.btnImport.TabIndex = 7;
-            this.btnImport.Text = "Import...";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            btnImport.Location = new System.Drawing.Point(84, 274);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new System.Drawing.Size(75, 23);
+            btnImport.TabIndex = 7;
+            btnImport.Text = "Import...";
+            btnImport.UseVisualStyleBackColor = true;
+            btnImport.Click += new System.EventHandler(btnImport_Click);
             // 
             // btnExport
             // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExport.Location = new System.Drawing.Point(3, 274);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 6;
-            this.btnExport.Text = "Export...";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            btnExport.Location = new System.Drawing.Point(3, 274);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new System.Drawing.Size(75, 23);
+            btnExport.TabIndex = 6;
+            btnExport.Text = "Export...";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += new System.EventHandler(btnExport_Click);
             // 
             // export
             // 
-            this.export.AddExtension = false;
+            export.AddExtension = false;
             // 
             // import
             // 
-            this.import.Title = "Open QB to Replace in PAK";
+            import.Title = "Open QB to Replace in PAK";
             // 
             // SimpleArrayEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnImport);
-            this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.btnSet);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnConvert);
-            this.Controls.Add(this.txtItem);
-            this.Controls.Add(this.lblItems);
-            this.Controls.Add(this.lstItems);
-            this.Name = "SimpleArrayEditor";
-            this.Size = new System.Drawing.Size(273, 300);
-            this.Load += new System.EventHandler(this.SimpleArrayEditor_Load);
-            this.menu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
-            this.mnuEditItems.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(btnImport);
+            Controls.Add(btnExport);
+            Controls.Add(btnSet);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnConvert);
+            Controls.Add(txtItem);
+            Controls.Add(lblItems);
+            Controls.Add(lstItems);
+            Name = "SimpleArrayEditor";
+            Size = new System.Drawing.Size(273, 300);
+            Load += new System.EventHandler(SimpleArrayEditor_Load);
+            menu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(err)).EndInit();
+            mnuEditItems.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

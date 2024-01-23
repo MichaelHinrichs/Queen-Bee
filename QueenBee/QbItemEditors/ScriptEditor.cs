@@ -33,7 +33,7 @@ namespace Nanook.QueenBee
 
         private void ScriptEditor_Load(object sender, EventArgs e)
         {
-            if (this.DesignMode)
+            if (DesignMode)
                 return;
 
             try
@@ -66,7 +66,7 @@ namespace Nanook.QueenBee
             try
             {
                 GenericQbEditItem ei;
-                foreach (Control un in this.Controls)
+                foreach (Control un in Controls)
                 {
                     if ((ei = (un as GenericQbEditItem)) != null)
                     {
@@ -360,218 +360,218 @@ namespace Nanook.QueenBee
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScriptEditor));
-            this.txtScript = new System.Windows.Forms.TextBox();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.eiItemQbKey = new Nanook.QueenBee.GenericQbEditItem();
-            this.eiUnknown = new Nanook.QueenBee.GenericQbEditItem();
-            this.tabs = new System.Windows.Forms.TabControl();
-            this.tabString = new System.Windows.Forms.TabPage();
-            this.txtWarning = new System.Windows.Forms.TextBox();
-            this.btnSet = new System.Windows.Forms.Button();
-            this.txtItem = new System.Windows.Forms.TextBox();
-            this.lstItems = new System.Windows.Forms.ListBox();
-            this.tabUncompressedScript = new System.Windows.Forms.TabPage();
-            this.err = new System.Windows.Forms.ErrorProvider(this.components);
-            this.export = new System.Windows.Forms.SaveFileDialog();
-            this.import = new System.Windows.Forms.OpenFileDialog();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnImport = new System.Windows.Forms.Button();
-            this.tabs.SuspendLayout();
-            this.tabString.SuspendLayout();
-            this.tabUncompressedScript.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
-            this.SuspendLayout();
+            txtScript = new System.Windows.Forms.TextBox();
+            btnUpdate = new System.Windows.Forms.Button();
+            eiItemQbKey = new Nanook.QueenBee.GenericQbEditItem();
+            eiUnknown = new Nanook.QueenBee.GenericQbEditItem();
+            tabs = new System.Windows.Forms.TabControl();
+            tabString = new System.Windows.Forms.TabPage();
+            txtWarning = new System.Windows.Forms.TextBox();
+            btnSet = new System.Windows.Forms.Button();
+            txtItem = new System.Windows.Forms.TextBox();
+            lstItems = new System.Windows.Forms.ListBox();
+            tabUncompressedScript = new System.Windows.Forms.TabPage();
+            err = new System.Windows.Forms.ErrorProvider(components);
+            export = new System.Windows.Forms.SaveFileDialog();
+            import = new System.Windows.Forms.OpenFileDialog();
+            btnExport = new System.Windows.Forms.Button();
+            btnImport = new System.Windows.Forms.Button();
+            tabs.SuspendLayout();
+            tabString.SuspendLayout();
+            tabUncompressedScript.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(err)).BeginInit();
+            SuspendLayout();
             // 
             // txtScript
             // 
-            this.txtScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            txtScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtScript.BackColor = System.Drawing.SystemColors.Window;
-            this.txtScript.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtScript.HideSelection = false;
-            this.txtScript.Location = new System.Drawing.Point(0, 1);
-            this.txtScript.Multiline = true;
-            this.txtScript.Name = "txtScript";
-            this.txtScript.ReadOnly = true;
-            this.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtScript.Size = new System.Drawing.Size(303, 336);
-            this.txtScript.TabIndex = 0;
-            this.txtScript.WordWrap = false;
+            txtScript.BackColor = System.Drawing.SystemColors.Window;
+            txtScript.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            txtScript.HideSelection = false;
+            txtScript.Location = new System.Drawing.Point(0, 1);
+            txtScript.Multiline = true;
+            txtScript.Name = "txtScript";
+            txtScript.ReadOnly = true;
+            txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            txtScript.Size = new System.Drawing.Size(303, 336);
+            txtScript.TabIndex = 0;
+            txtScript.WordWrap = false;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(240, 431);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 5;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnUpdate.Location = new System.Drawing.Point(240, 431);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new System.Drawing.Size(75, 23);
+            btnUpdate.TabIndex = 5;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += new System.EventHandler(btnUpdate_Click);
             // 
             // eiItemQbKey
             // 
-            this.eiItemQbKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            eiItemQbKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.eiItemQbKey.Location = new System.Drawing.Point(-4, 9);
-            this.eiItemQbKey.Name = "eiItemQbKey";
-            this.eiItemQbKey.Size = new System.Drawing.Size(322, 24);
-            this.eiItemQbKey.TabIndex = 0;
-            this.eiItemQbKey.TextBoxLeft = 66;
+            eiItemQbKey.Location = new System.Drawing.Point(-4, 9);
+            eiItemQbKey.Name = "eiItemQbKey";
+            eiItemQbKey.Size = new System.Drawing.Size(322, 24);
+            eiItemQbKey.TabIndex = 0;
+            eiItemQbKey.TextBoxLeft = 66;
             // 
             // eiUnknown
             // 
-            this.eiUnknown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            eiUnknown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.eiUnknown.Location = new System.Drawing.Point(-4, 32);
-            this.eiUnknown.Name = "eiUnknown";
-            this.eiUnknown.Size = new System.Drawing.Size(322, 24);
-            this.eiUnknown.TabIndex = 1;
-            this.eiUnknown.TextBoxLeft = 66;
+            eiUnknown.Location = new System.Drawing.Point(-4, 32);
+            eiUnknown.Name = "eiUnknown";
+            eiUnknown.Size = new System.Drawing.Size(322, 24);
+            eiUnknown.TabIndex = 1;
+            eiUnknown.TextBoxLeft = 66;
             // 
             // tabs
             // 
-            this.tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabs.Controls.Add(this.tabString);
-            this.tabs.Controls.Add(this.tabUncompressedScript);
-            this.tabs.Location = new System.Drawing.Point(3, 62);
-            this.tabs.Name = "tabs";
-            this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(312, 363);
-            this.tabs.TabIndex = 2;
-            this.tabs.SelectedIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
+            tabs.Controls.Add(tabString);
+            tabs.Controls.Add(tabUncompressedScript);
+            tabs.Location = new System.Drawing.Point(3, 62);
+            tabs.Name = "tabs";
+            tabs.SelectedIndex = 0;
+            tabs.Size = new System.Drawing.Size(312, 363);
+            tabs.TabIndex = 2;
+            tabs.SelectedIndexChanged += new System.EventHandler(tabs_SelectedIndexChanged);
             // 
             // tabString
             // 
-            this.tabString.Controls.Add(this.txtWarning);
-            this.tabString.Controls.Add(this.btnSet);
-            this.tabString.Controls.Add(this.txtItem);
-            this.tabString.Controls.Add(this.lstItems);
-            this.tabString.Location = new System.Drawing.Point(4, 22);
-            this.tabString.Name = "tabString";
-            this.tabString.Padding = new System.Windows.Forms.Padding(3);
-            this.tabString.Size = new System.Drawing.Size(304, 337);
-            this.tabString.TabIndex = 0;
-            this.tabString.Text = "Strings";
-            this.tabString.UseVisualStyleBackColor = true;
+            tabString.Controls.Add(txtWarning);
+            tabString.Controls.Add(btnSet);
+            tabString.Controls.Add(txtItem);
+            tabString.Controls.Add(lstItems);
+            tabString.Location = new System.Drawing.Point(4, 22);
+            tabString.Name = "tabString";
+            tabString.Padding = new System.Windows.Forms.Padding(3);
+            tabString.Size = new System.Drawing.Size(304, 337);
+            tabString.TabIndex = 0;
+            tabString.Text = "Strings";
+            tabString.UseVisualStyleBackColor = true;
             // 
             // txtWarning
             // 
-            this.txtWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            txtWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWarning.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtWarning.Location = new System.Drawing.Point(2, 259);
-            this.txtWarning.Multiline = true;
-            this.txtWarning.Name = "txtWarning";
-            this.txtWarning.ReadOnly = true;
-            this.txtWarning.Size = new System.Drawing.Size(300, 78);
-            this.txtWarning.TabIndex = 3;
-            this.txtWarning.Text = resources.GetString("txtWarning.Text");
+            txtWarning.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtWarning.Location = new System.Drawing.Point(2, 259);
+            txtWarning.Multiline = true;
+            txtWarning.Name = "txtWarning";
+            txtWarning.ReadOnly = true;
+            txtWarning.Size = new System.Drawing.Size(300, 78);
+            txtWarning.TabIndex = 3;
+            txtWarning.Text = resources.GetString("txtWarning.Text");
             // 
             // btnSet
             // 
-            this.btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSet.Location = new System.Drawing.Point(249, 229);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(35, 21);
-            this.btnSet.TabIndex = 2;
-            this.btnSet.Text = "Set";
-            this.btnSet.UseVisualStyleBackColor = true;
-            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
+            btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnSet.Location = new System.Drawing.Point(249, 229);
+            btnSet.Name = "btnSet";
+            btnSet.Size = new System.Drawing.Size(35, 21);
+            btnSet.TabIndex = 2;
+            btnSet.Text = "Set";
+            btnSet.UseVisualStyleBackColor = true;
+            btnSet.Click += new System.EventHandler(btnSet_Click);
             // 
             // txtItem
             // 
-            this.txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            txtItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.err.SetIconPadding(this.txtItem, 37);
-            this.txtItem.Location = new System.Drawing.Point(0, 229);
-            this.txtItem.Name = "txtItem";
-            this.txtItem.Size = new System.Drawing.Size(249, 20);
-            this.txtItem.TabIndex = 1;
-            this.txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtItem_KeyDown);
+            err.SetIconPadding(txtItem, 37);
+            txtItem.Location = new System.Drawing.Point(0, 229);
+            txtItem.Name = "txtItem";
+            txtItem.Size = new System.Drawing.Size(249, 20);
+            txtItem.TabIndex = 1;
+            txtItem.KeyDown += new System.Windows.Forms.KeyEventHandler(txtItem_KeyDown);
             // 
             // lstItems
             // 
-            this.lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            lstItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstItems.FormattingEnabled = true;
-            this.lstItems.IntegralHeight = false;
-            this.lstItems.Location = new System.Drawing.Point(0, 0);
-            this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(304, 223);
-            this.lstItems.TabIndex = 0;
-            this.lstItems.SelectedIndexChanged += new System.EventHandler(this.lstItems_SelectedIndexChanged);
+            lstItems.FormattingEnabled = true;
+            lstItems.IntegralHeight = false;
+            lstItems.Location = new System.Drawing.Point(0, 0);
+            lstItems.Name = "lstItems";
+            lstItems.Size = new System.Drawing.Size(304, 223);
+            lstItems.TabIndex = 0;
+            lstItems.SelectedIndexChanged += new System.EventHandler(lstItems_SelectedIndexChanged);
             // 
             // tabUncompressedScript
             // 
-            this.tabUncompressedScript.Controls.Add(this.txtScript);
-            this.tabUncompressedScript.Location = new System.Drawing.Point(4, 22);
-            this.tabUncompressedScript.Name = "tabUncompressedScript";
-            this.tabUncompressedScript.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUncompressedScript.Size = new System.Drawing.Size(304, 337);
-            this.tabUncompressedScript.TabIndex = 1;
-            this.tabUncompressedScript.Text = "Uncompressed Script";
-            this.tabUncompressedScript.UseVisualStyleBackColor = true;
+            tabUncompressedScript.Controls.Add(txtScript);
+            tabUncompressedScript.Location = new System.Drawing.Point(4, 22);
+            tabUncompressedScript.Name = "tabUncompressedScript";
+            tabUncompressedScript.Padding = new System.Windows.Forms.Padding(3);
+            tabUncompressedScript.Size = new System.Drawing.Size(304, 337);
+            tabUncompressedScript.TabIndex = 1;
+            tabUncompressedScript.Text = "Uncompressed Script";
+            tabUncompressedScript.UseVisualStyleBackColor = true;
             // 
             // err
             // 
-            this.err.ContainerControl = this;
+            err.ContainerControl = this;
             // 
             // export
             // 
-            this.export.AddExtension = false;
+            export.AddExtension = false;
             // 
             // import
             // 
-            this.import.Title = "Open QB to Replace in PAK";
+            import.Title = "Open QB to Replace in PAK";
             // 
             // btnExport
             // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExport.Location = new System.Drawing.Point(3, 431);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Export...";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            btnExport.Location = new System.Drawing.Point(3, 431);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new System.Drawing.Size(75, 23);
+            btnExport.TabIndex = 3;
+            btnExport.Text = "Export...";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += new System.EventHandler(btnExport_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImport.Location = new System.Drawing.Point(84, 431);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
-            this.btnImport.TabIndex = 4;
-            this.btnImport.Text = "Import...";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            btnImport.Location = new System.Drawing.Point(84, 431);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new System.Drawing.Size(75, 23);
+            btnImport.TabIndex = 4;
+            btnImport.Text = "Import...";
+            btnImport.UseVisualStyleBackColor = true;
+            btnImport.Click += new System.EventHandler(btnImport_Click);
             // 
             // ScriptEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Controls.Add(this.btnImport);
-            this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.eiItemQbKey);
-            this.Controls.Add(this.eiUnknown);
-            this.Controls.Add(this.tabs);
-            this.Controls.Add(this.btnUpdate);
-            this.Name = "ScriptEditor";
-            this.Size = new System.Drawing.Size(318, 461);
-            this.Load += new System.EventHandler(this.ScriptEditor_Load);
-            this.tabs.ResumeLayout(false);
-            this.tabString.ResumeLayout(false);
-            this.tabString.PerformLayout();
-            this.tabUncompressedScript.ResumeLayout(false);
-            this.tabUncompressedScript.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            Controls.Add(btnImport);
+            Controls.Add(btnExport);
+            Controls.Add(eiItemQbKey);
+            Controls.Add(eiUnknown);
+            Controls.Add(tabs);
+            Controls.Add(btnUpdate);
+            Name = "ScriptEditor";
+            Size = new System.Drawing.Size(318, 461);
+            Load += new System.EventHandler(ScriptEditor_Load);
+            tabs.ResumeLayout(false);
+            tabString.ResumeLayout(false);
+            tabString.PerformLayout();
+            tabUncompressedScript.ResumeLayout(false);
+            tabUncompressedScript.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(err)).EndInit();
+            ResumeLayout(false);
 
         }
 

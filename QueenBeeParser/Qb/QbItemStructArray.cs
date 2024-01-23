@@ -23,16 +23,16 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemStructArray a = new QbItemStructArray(this.Root);
-            a.Create(this.QbItemType);
+            QbItemStructArray a = new QbItemStructArray(Root);
+            a.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                a.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                a.ItemQbKey = ItemQbKey.Clone();
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 a.Items.Add(qib.Clone());
 
-            a.ItemCount = this.ItemCount;
+            a.ItemCount = ItemCount;
 
             return a;
         }
@@ -52,13 +52,13 @@ namespace Nanook.QueenBee.Parser
                 if (base.StreamPos(br) != base.Pointers[i]) //pointer test
                     throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, base.StreamPos(br), base.Pointers[i]));
 
-                headerValue = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                headerType = this.Root.PakFormat.GetQbItemType(headerValue);
+                headerValue = br.ReadUInt32(Root.PakFormat.EndianType);
+                headerType = Root.PakFormat.GetQbItemType(headerValue);
 
                 switch (headerType)
                 {
                     case QbItemType.StructHeader:
-                        qib = new QbItemStruct(this.Root);
+                        qib = new QbItemStruct(Root);
                         break;
                     default:
                         throw new ApplicationException(string.Format("Location 0x{0}: Not a struct header type 0x{1}", (base.StreamPos(br) - 4).ToString("X").PadLeft(8, '0'), headerValue.ToString("X").PadLeft(8, '0')));
@@ -72,14 +72,14 @@ namespace Nanook.QueenBee.Parser
 
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
 
             pos = base.AlignPointers(pos);
 
-            foreach (QbItemBase qib in this.Items)
+            foreach (QbItemBase qib in Items)
                 pos = qib.AlignPointers(pos);
-            if (this.Items.Count != 0)
-                this.Items[this.Items.Count - 1].NextItemPointer = 0;
+            if (Items.Count != 0)
+                Items[Items.Count - 1].NextItemPointer = 0;
 
             return next;
         }

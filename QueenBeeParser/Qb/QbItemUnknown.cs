@@ -54,24 +54,24 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemUnknown u = new QbItemUnknown((int)this.Length, this.Root);
-            u.Create(this.QbItemType);
+            QbItemUnknown u = new QbItemUnknown((int)Length, Root);
+            u.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                u.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                u.ItemQbKey = ItemQbKey.Clone();
 
-            byte[] bi = new byte[this.UnknownData.Length];
+            byte[] bi = new byte[UnknownData.Length];
             for (int i = 0; i < bi.Length; i++)
-                bi[i] = this.UnknownData[i];
+                bi[i] = UnknownData[i];
 
-            u.ItemCount = this.ItemCount;
+            u.ItemCount = ItemCount;
 
             return u;
         }
 
         public override uint AlignPointers(uint pos)
         {
-            uint next = pos + this.Length;
+            uint next = pos + Length;
             //yey no pointers
             return next;
         }

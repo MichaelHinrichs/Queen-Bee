@@ -24,7 +24,7 @@ namespace Nanook.QueenBee.Parser
             setQbFormat(type);
 
             _qbItemType = type;
-            _qbItemValue = this.Root.PakFormat.GetQbItemValue(type, this.Root);
+            _qbItemValue = Root.PakFormat.GetQbItemValue(type, Root);
             _position = 0; //unknown
 
             #region switch
@@ -35,7 +35,7 @@ namespace Nanook.QueenBee.Parser
                     //  ItemId, FileId, Pointer, Reserved
 
                     _itemQbKey = QbKey.Create(0);
-                    _fileId = this.Root.FileId;
+                    _fileId = Root.FileId;
                     _pointer = 0;
                     _reserved = 0;
 
@@ -52,7 +52,7 @@ namespace Nanook.QueenBee.Parser
                     //  ItemId, FileId, Value, Reserved
 
                     _itemQbKey = QbKey.Create(0);
-                    _fileId = this.Root.FileId;
+                    _fileId = Root.FileId;
 
                     _itemCount = 1;
 
@@ -126,7 +126,7 @@ namespace Nanook.QueenBee.Parser
             #endregion
 
             setChildMode();
-            _itemCount = (uint)this.CalcItemCount();
+            _itemCount = (uint)CalcItemCount();
         }
         
         /// <summary>
@@ -141,23 +141,23 @@ namespace Nanook.QueenBee.Parser
                 case QbFormat.SectionValue:
                     //Simple section type:
                     //  ItemId, FileId, Value, Reserved
-                    _reserved = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    _reserved = br.ReadUInt32(Root.PakFormat.EndianType);
                     _length += (1 * 4);
                     break;
 
                 case QbFormat.StructItemPointer:
-                    if (_nextItemPointer != 0 && this.StreamPos(br) != _nextItemPointer) //pointer test
-                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, this.StreamPos(br), _nextItemPointer));
+                    if (_nextItemPointer != 0 && StreamPos(br) != _nextItemPointer) //pointer test
+                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _nextItemPointer));
                     break;
 
                 case QbFormat.StructItemValue:
                     //Simple struct type:
                     //  ItemId, Value (4 byte), NextItemPointer
-                    _nextItemPointer = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    _nextItemPointer = br.ReadUInt32(Root.PakFormat.EndianType);
                     _length += (1 * 4);
 
-                    if (_nextItemPointer != 0 && this.StreamPos(br) != _nextItemPointer) //pointer test
-                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, this.StreamPos(br), _nextItemPointer));
+                    if (_nextItemPointer != 0 && StreamPos(br) != _nextItemPointer) //pointer test
+                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _nextItemPointer));
                     break;
 
                 case QbFormat.ArrayPointer:
@@ -186,8 +186,8 @@ namespace Nanook.QueenBee.Parser
         {
             setQbFormat(type);
             _qbItemType = type;
-            _qbItemValue = this.Root.PakFormat.GetQbItemValue(type, this.Root);
-            _position = this.StreamPos(br) - (1 * 4); //subtract the already read header
+            _qbItemValue = Root.PakFormat.GetQbItemValue(type, Root);
+            _position = StreamPos(br) - (1 * 4); //subtract the already read header
             uint itemQbKeyCrc = 0;
 
             #region switch
@@ -198,10 +198,10 @@ namespace Nanook.QueenBee.Parser
                     //  ItemId, FileId, Pointer, Reserved
                     _hasQbKey = true;
 
-                    itemQbKeyCrc = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _fileId = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _pointer = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _reserved = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    itemQbKeyCrc = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _fileId = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _reserved = br.ReadUInt32(Root.PakFormat.EndianType);
 
                     _length = (5*4);
 
@@ -212,8 +212,8 @@ namespace Nanook.QueenBee.Parser
                     _pointers = new uint[1];
                     _pointers[0] = _pointer;
 
-                    if (this.StreamPos(br) != _pointer) //pointer test
-                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, this.StreamPos(br), _pointer));
+                    if (StreamPos(br) != _pointer) //pointer test
+                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _pointer));
                     break;
 
                 case QbFormat.SectionValue:
@@ -221,8 +221,8 @@ namespace Nanook.QueenBee.Parser
                     //  ItemId, FileId, Value, Reserved
                     _hasQbKey = true;
 
-                    itemQbKeyCrc = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _fileId = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    itemQbKeyCrc = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _fileId = br.ReadUInt32(Root.PakFormat.EndianType);
 
                     _itemCount = 1;
 
@@ -234,12 +234,12 @@ namespace Nanook.QueenBee.Parser
                     //  ItemId, Pointer, NextItemPointer
                     _hasQbKey = true;
 
-                    itemQbKeyCrc = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _pointer = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _nextItemPointer = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    itemQbKeyCrc = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _nextItemPointer = br.ReadUInt32(Root.PakFormat.EndianType);
 
-                    if (this.StreamPos(br) != _pointer) //pointer test
-                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, this.StreamPos(br), _pointer));
+                    if (StreamPos(br) != _pointer) //pointer test
+                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _pointer));
 
                     _itemCount = 1;
                     _pointers = new uint[1];
@@ -253,7 +253,7 @@ namespace Nanook.QueenBee.Parser
                     //  ItemId, Value (4 byte), NextItemPointer
                     _hasQbKey = true;
 
-                    itemQbKeyCrc = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    itemQbKeyCrc = br.ReadUInt32(Root.PakFormat.EndianType);
 
                     //always null?
                     if (_itemQbKey == 0 && _qbItemType == QbItemType.StructItemQbKeyString)
@@ -269,14 +269,14 @@ namespace Nanook.QueenBee.Parser
                     //  ItemCount, Pointer, Pointers -  (if length is 1 then pointer points to first item and Pointers are abscent)
                     _hasQbKey = false;
 
-                    _itemCount = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                    _pointer = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    _itemCount = br.ReadUInt32(Root.PakFormat.EndianType);
+                    _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
                     itemQbKeyCrc = 0;
 
                     _length = (3 * 4);
 
-                    if (_pointer != 0 && this.StreamPos(br) != _pointer) //pointer test
-                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, this.StreamPos(br), _pointer));
+                    if (_pointer != 0 && StreamPos(br) != _pointer) //pointer test
+                        throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _pointer));
 
                     _pointers = new uint[_itemCount];
 
@@ -285,7 +285,7 @@ namespace Nanook.QueenBee.Parser
                     else if (_itemCount > 1)
                     {
                         for (int i = 0; i < _itemCount; i++)
-                            _pointers[i] = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                            _pointers[i] = br.ReadUInt32(Root.PakFormat.EndianType);
 
                         _length += (_itemCount * 4);
                     }
@@ -297,13 +297,13 @@ namespace Nanook.QueenBee.Parser
                     _hasQbKey = false;
 
                     itemQbKeyCrc = 0;
-                    _itemCount = br.ReadUInt32(this.Root.PakFormat.EndianType);
+                    _itemCount = br.ReadUInt32(Root.PakFormat.EndianType);
                     _length = (2*4);
                     if (_itemCount > 1)
                     {
-                        _pointer = br.ReadUInt32(this.Root.PakFormat.EndianType);
-                        if (this.StreamPos(br) != _pointer) //pointer test
-                            throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, this.StreamPos(br), _pointer));
+                        _pointer = br.ReadUInt32(Root.PakFormat.EndianType);
+                        if (StreamPos(br) != _pointer) //pointer test
+                            throw new ApplicationException(QbFile.FormatBadPointerExceptionMessage(this, StreamPos(br), _pointer));
                         _length += (1 * 4);
                     }
                     break;
@@ -361,18 +361,18 @@ namespace Nanook.QueenBee.Parser
         /// <param name="beforeAfter">Insert before=True or after=False</param>
         public void InsertItem(QbItemBase item, QbItemBase sibling, bool beforeAfter)
         {
-            for (int i = 0; i < this.Items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
             {
-                if (this.Items[i] == sibling)
+                if (Items[i] == sibling)
                 {
                     if (beforeAfter)
-                        this.Items.Insert(i, item);
+                        Items.Insert(i, item);
                     else
                     {
-                        if (i + 1 < this.Items.Count)
-                            this.Items.Insert(i + 1, item);
+                        if (i + 1 < Items.Count)
+                            Items.Insert(i + 1, item);
                         else
-                            this.Items.Add(item);
+                            Items.Add(item);
                     }
                     return;
                 }
@@ -445,14 +445,14 @@ namespace Nanook.QueenBee.Parser
                 case QbFormat.StructItemPointer:
                     //Complex struct type:
                     //  ItemId, Pointer, NextItemPointer
-                    _nextItemPointer = pos + this.Length;
+                    _nextItemPointer = pos + Length;
                     _pointer = (pos += (4 * 4));
                     break;
 
                 case QbFormat.StructItemValue:
                     //Simple struct type:
                     //  ItemId, Value (4 byte), NextItemPointer
-                    _nextItemPointer = pos + this.Length;
+                    _nextItemPointer = pos + Length;
                     pos += _length;
                     break;
 
@@ -581,15 +581,15 @@ namespace Nanook.QueenBee.Parser
 
         protected void StartLengthCheck(BinaryEndianWriter bw)
         {
-            _lengthCheckStart = this.StreamPos(bw);
+            _lengthCheckStart = StreamPos(bw);
         }
 
         protected ApplicationException TestLengthCheck(object sender, BinaryEndianWriter bw)
         {
-            uint len = this.Length;
-            if (this.StreamPos(bw) - _lengthCheckStart != len)
+            uint len = Length;
+            if (StreamPos(bw) - _lengthCheckStart != len)
             {
-                return new ApplicationException(QbFile.FormatWriteLengthExceptionMessage(sender, _lengthCheckStart, this.StreamPos(bw), len));
+                return new ApplicationException(QbFile.FormatWriteLengthExceptionMessage(sender, _lengthCheckStart, StreamPos(bw), len));
             }
             else
                 return null;
@@ -603,22 +603,22 @@ namespace Nanook.QueenBee.Parser
 
                 if (_childMode == 0)
                 {
-                    if (this.ItemCount != 0)
+                    if (ItemCount != 0)
                         return IsValidReturnType.ItemMustHave0Items;
                 }
                 else if (_childMode == 1)
                 {
-                    if (this.ItemCount != 1)
+                    if (ItemCount != 1)
                         return IsValidReturnType.ItemMustHave1Item;
                 }
                 else if (_childMode == 2)
                 {
-                    if (this.ItemCount < 0)
+                    if (ItemCount < 0)
                         return IsValidReturnType.ItemMustHave0OrMoreItems;
                 }
                 else if (_childMode == 3)
                 {
-                    if (this.ItemCount < 1)
+                    if (ItemCount < 1)
                         return IsValidReturnType.ItemMustHave1OrMoreItems;
                 }
 
@@ -714,14 +714,14 @@ namespace Nanook.QueenBee.Parser
                 case QbFormat.SectionValue:
                     //Simple section type:
                     //  ItemId, FileId, Value, Reserved
-                    bw.Write(_reserved, this.Root.PakFormat.EndianType);
+                    bw.Write(_reserved, Root.PakFormat.EndianType);
                     break;
 
                 case QbFormat.StructItemValue:
                     //case QbItemType.StructItemQbKeyString:
                     //Simple struct type:
                     //  ItemId, Value (4 byte), NextItemPointer
-                        bw.Write(_nextItemPointer, this.Root.PakFormat.EndianType);
+                        bw.Write(_nextItemPointer, Root.PakFormat.EndianType);
                     break;
 
                 default:
@@ -737,7 +737,7 @@ namespace Nanook.QueenBee.Parser
         /// <param name="bw"></param>
         internal virtual void Write(BinaryEndianWriter bw)
         {
-            bw.Write(_qbItemValue, this.Root.PakFormat.EndianType);
+            bw.Write(_qbItemValue, Root.PakFormat.EndianType);
 
             #region switch
 
@@ -748,51 +748,51 @@ namespace Nanook.QueenBee.Parser
                 case QbFormat.SectionPointer:
                     //Complex section type:
                     //  ItemId, FileId, Pointer, Reserved
-                    bw.Write(qbKeyCrc, this.Root.PakFormat.EndianType);
-                    bw.Write(_fileId, this.Root.PakFormat.EndianType);
-                    bw.Write(_pointer, this.Root.PakFormat.EndianType);
-                    bw.Write(_reserved, this.Root.PakFormat.EndianType);
+                    bw.Write(qbKeyCrc, Root.PakFormat.EndianType);
+                    bw.Write(_fileId, Root.PakFormat.EndianType);
+                    bw.Write(_pointer, Root.PakFormat.EndianType);
+                    bw.Write(_reserved, Root.PakFormat.EndianType);
                     break;
 
                 case QbFormat.SectionValue:
                     //Simple section type:
                     //  ItemId, FileId
-                    bw.Write(qbKeyCrc, this.Root.PakFormat.EndianType);
-                    bw.Write(_fileId, this.Root.PakFormat.EndianType);
+                    bw.Write(qbKeyCrc, Root.PakFormat.EndianType);
+                    bw.Write(_fileId, Root.PakFormat.EndianType);
                     break;
 
                 case QbFormat.StructItemPointer:
                     //Complex struct type:
                     //  ItemId, Pointer, NextItemPointer
-                    bw.Write(qbKeyCrc, this.Root.PakFormat.EndianType);
-                    bw.Write(_pointer, this.Root.PakFormat.EndianType);
-                    bw.Write(_nextItemPointer, this.Root.PakFormat.EndianType);
+                    bw.Write(qbKeyCrc, Root.PakFormat.EndianType);
+                    bw.Write(_pointer, Root.PakFormat.EndianType);
+                    bw.Write(_nextItemPointer, Root.PakFormat.EndianType);
                     break;
 
                 case QbFormat.StructItemValue:
                     //Simple struct type:
                     //  ItemId, Value (4 byte), NextItemPointer
-                    bw.Write(qbKeyCrc, this.Root.PakFormat.EndianType);
+                    bw.Write(qbKeyCrc, Root.PakFormat.EndianType);
                     break;
 
                 case QbFormat.ArrayPointer:
                     //Complex array type:
                     //  ItemCount, Pointer, Pointers -  (if length is 1 then pointer points to first item and Pointers are abscent)
-                    bw.Write(_itemCount, this.Root.PakFormat.EndianType);
+                    bw.Write(_itemCount, Root.PakFormat.EndianType);
                     if (_itemCount == 0)
-                        bw.Write(0, this.Root.PakFormat.EndianType);
+                        bw.Write(0, Root.PakFormat.EndianType);
                     else if (_itemCount > 1)
-                        bw.Write(_pointer, this.Root.PakFormat.EndianType);
+                        bw.Write(_pointer, Root.PakFormat.EndianType);
                     for (int i = 0; i < _itemCount; i++)
-                        bw.Write(_pointers[i], this.Root.PakFormat.EndianType);
+                        bw.Write(_pointers[i], Root.PakFormat.EndianType);
                     break;
 
                 case QbFormat.ArrayValue:
                     //Simple array type:
                     //  ItemCount, Pointer, Pointers -  (if length is 1 then pointer points to first item and Pointers are abscent)
-                    bw.Write(_itemCount, this.Root.PakFormat.EndianType);
+                    bw.Write(_itemCount, Root.PakFormat.EndianType);
                     if (_itemCount > 1)
-                        bw.Write(_pointer, this.Root.PakFormat.EndianType);
+                        bw.Write(_pointer, Root.PakFormat.EndianType);
                     break;
 
 
@@ -963,7 +963,7 @@ namespace Nanook.QueenBee.Parser
 
         public QbItemBase FindItem(QbKey key, bool recursive)
         {
-            return this.Root.SearchItems(this.Root, _items, recursive, delegate(QbItemBase item)
+            return Root.SearchItems(Root, _items, recursive, delegate(QbItemBase item)
             {
                 return (item.ItemQbKey != 0 && item.ItemQbKey.Crc == key.Crc);
             });
@@ -971,7 +971,7 @@ namespace Nanook.QueenBee.Parser
 
         public QbItemBase FindItem(QbItemType type, bool recursive)
         {
-            return this.Root.SearchItems(this.Root, _items, recursive, delegate(QbItemBase item)
+            return Root.SearchItems(Root, _items, recursive, delegate(QbItemBase item)
             {
                 return (item.QbItemType == type);
             });
@@ -979,7 +979,7 @@ namespace Nanook.QueenBee.Parser
 
         public QbItemBase FindItem(bool recursive, Predicate<QbItemBase> match)
         {
-            return this.Root.SearchItems(this.Root, _items, recursive, match);
+            return Root.SearchItems(Root, _items, recursive, match);
         }
 
 

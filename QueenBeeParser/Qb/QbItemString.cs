@@ -23,7 +23,7 @@ namespace Nanook.QueenBee.Parser
 
             _charWidth = !_isUnicode ? 1 : 2;
 
-            this.Strings = new string[1]; //sets item count
+            Strings = new string[1]; //sets item count
             _strings[0] = "";
         }
 
@@ -33,18 +33,18 @@ namespace Nanook.QueenBee.Parser
         /// <returns></returns>
         public override QbItemBase Clone()
         {
-            QbItemString s = new QbItemString(this.Root);
-            s.Create(this.QbItemType);
+            QbItemString s = new QbItemString(Root);
+            s.Create(QbItemType);
 
-            if (this.ItemQbKey != null)
-                s.ItemQbKey = this.ItemQbKey.Clone();
+            if (ItemQbKey != null)
+                s.ItemQbKey = ItemQbKey.Clone();
 
-            string[] si = new string[this.Strings.Length];
+            string[] si = new string[Strings.Length];
             for (int i = 0; i < si.Length; i++)
-                si[i] = this.Strings[i];
+                si[i] = Strings[i];
 
             s.Strings = si;
-            s.ItemCount = this.ItemCount;
+            s.ItemCount = ItemCount;
 
             return s;
         }
@@ -60,7 +60,7 @@ namespace Nanook.QueenBee.Parser
 
             base.Construct(br, type);
 
-            this.Strings = new string[base.ItemCount];
+            Strings = new string[base.ItemCount];
 
             _charWidth = !_isUnicode ? 1 : 2;
 
@@ -147,7 +147,7 @@ namespace Nanook.QueenBee.Parser
             base.Pointers = new uint[_strings.Length];
 
             uint pos2 = base.AlignPointers(pos);
-            uint next = pos + this.Length;
+            uint next = pos + Length;
 
             pos = pos2;
 
