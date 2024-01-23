@@ -16,7 +16,7 @@ namespace Nanook.QueenBee.Parser
         {
         }
 
-        public UInt32 ReadUInt32(EndianType endianType)
+        public uint ReadUInt32(EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -28,7 +28,7 @@ namespace Nanook.QueenBee.Parser
                 return base.ReadUInt32();
         }
 
-        public Int32 ReadInt32(EndianType endianType)
+        public int ReadInt32(EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -40,7 +40,7 @@ namespace Nanook.QueenBee.Parser
                 return base.ReadInt32();
         }
 
-        public UInt16 ReadUInt16(EndianType endianType)
+        public ushort ReadUInt16(EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -52,7 +52,7 @@ namespace Nanook.QueenBee.Parser
                 return base.ReadUInt16();
         }
 
-        public Int16 ReadInt16(EndianType endianType)
+        public short ReadInt16(EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -64,7 +64,7 @@ namespace Nanook.QueenBee.Parser
                 return base.ReadInt16();
         }
 
-        public Single ReadSingle(EndianType endianType)
+        public float ReadSingle(EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {

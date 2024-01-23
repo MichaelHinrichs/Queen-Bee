@@ -309,7 +309,7 @@ namespace Nanook.QueenBee.Parser
             get { return fileExists(FullCompressedDebugFilename); }
         }
 
-        private Boolean fileExists(string filename)
+        private bool fileExists(string filename)
         {
             try
             {

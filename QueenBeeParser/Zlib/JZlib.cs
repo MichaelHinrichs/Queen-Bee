@@ -40,8 +40,8 @@ namespace Rebex.IO.Compression
 
     internal sealed class JZlib
 	{
-		private const System.String version_Renamed_Field = "1.0.2";
-		public static System.String version()
+		private const string version_Renamed_Field = "1.0.2";
+		public static string version()
 		{
 			return version_Renamed_Field;
 		}

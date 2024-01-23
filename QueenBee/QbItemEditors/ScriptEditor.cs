@@ -145,7 +145,7 @@ namespace Nanook.QueenBee
         {
             char c = (char)b;
             //if (b != 0x09 && (Char.IsSymbol(c) || Char.IsLetterOrDigit(c) || Char.IsWhiteSpace(c) || Char.IsPunctuation(c)))
-            if (b != 0x09 && !Char.IsControl(c))
+            if (b != 0x09 && !char.IsControl(c))
                 return c;
             else
                 return '.';

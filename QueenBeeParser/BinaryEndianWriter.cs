@@ -11,7 +11,7 @@ namespace Nanook.QueenBee.Parser
         {
         }
         
-        public void Write(UInt32 value, EndianType endianType)
+        public void Write(uint value, EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -23,7 +23,7 @@ namespace Nanook.QueenBee.Parser
                 base.Write(value);
         }
 
-        public void Write(Int32 value, EndianType endianType)
+        public void Write(int value, EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -35,7 +35,7 @@ namespace Nanook.QueenBee.Parser
                 base.Write(value);
         }
 
-        public void Write(UInt16 value, EndianType endianType)
+        public void Write(ushort value, EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -47,7 +47,7 @@ namespace Nanook.QueenBee.Parser
                 base.Write(value);
         }
 
-        public void Write(Int16 value, EndianType endianType)
+        public void Write(short value, EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
@@ -59,7 +59,7 @@ namespace Nanook.QueenBee.Parser
                 base.Write(value);
         }
 
-        public void Write(Single value, EndianType endianType)
+        public void Write(float value, EndianType endianType)
         {
             if ((BitConverter.IsLittleEndian && endianType != EndianType.Little) || (!BitConverter.IsLittleEndian && endianType != EndianType.Big))
             {
