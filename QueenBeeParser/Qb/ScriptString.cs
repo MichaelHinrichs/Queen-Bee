@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nanook.QueenBee.Parser
+﻿namespace Nanook.QueenBee.Parser
 {
     /// <summary>
     /// A simple class to store strings found within scripts

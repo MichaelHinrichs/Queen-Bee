@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nanook.QueenBee.Parser
+﻿namespace Nanook.QueenBee.Parser
 {
     //if changed then change the MASSIVE array in PakFormat 
     public enum PakFormatType

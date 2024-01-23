@@ -1,4 +1,3 @@
-
 //
 // This file is part of Rebex ZlibStream for .NET and is based 
 // on JCraft's JZlib Java library.
@@ -36,12 +35,11 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
 * and contributors of zlib.
 */
-using System;
 
 namespace Rebex.IO.Compression
 {
-	
-	internal sealed class Tree
+
+    internal sealed class Tree
 	{
 		private const int MAX_BITS = 15;
 		private const int BL_CODES = 19;

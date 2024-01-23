@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nanook.QueenBee.Parser
+﻿namespace Nanook.QueenBee.Parser
 {
     /// <summary>
     /// Added to cater for GH having the same QbItemTypes under different headers (arrays directly under structs for example)

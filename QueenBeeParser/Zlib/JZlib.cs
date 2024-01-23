@@ -1,4 +1,3 @@
-
 //
 // This file is part of Rebex ZlibStream for .NET and is based 
 // on JCraft's JZlib Java library.
@@ -36,11 +35,10 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 * Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
 * and contributors of zlib.
 */
-using System;
 namespace Rebex.IO.Compression
 {
-	
-	internal sealed class JZlib
+
+    internal sealed class JZlib
 	{
 		private const System.String version_Renamed_Field = "1.0.2";
 		public static System.String version()

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nanook.QueenBee.Parser
+﻿namespace Nanook.QueenBee.Parser
 {
     internal class PakDbgQbKey
     {

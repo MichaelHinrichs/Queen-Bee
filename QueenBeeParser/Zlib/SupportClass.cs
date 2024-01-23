@@ -1,4 +1,3 @@
-
 //
 //  Copyright (c) 2009, Rebex CR s.r.o. www.rebex.net, 
 //  All rights reserved.
@@ -15,14 +14,13 @@
 //  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
-using System;
 
 namespace Rebex.IO.Compression
 {
-	/// <summary>
-	/// Contains conversion support elements such as classes, interfaces and static methods.
-	/// </summary>
-	internal class SupportClass
+    /// <summary>
+    /// Contains conversion support elements such as classes, interfaces and static methods.
+    /// </summary>
+    internal class SupportClass
 	{
 
 		/*******************************/

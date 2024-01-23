@@ -16,15 +16,14 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Text;
 using System.IO;
 
 namespace Rebex.IO.Compression
 {
-	/// <summary>
-	/// Specifies whether to perform compression or decompression.
-	/// </summary>
-	public enum CompressionMode
+    /// <summary>
+    /// Specifies whether to perform compression or decompression.
+    /// </summary>
+    public enum CompressionMode
 	{
 		/// <summary>
 		/// Decompression.
