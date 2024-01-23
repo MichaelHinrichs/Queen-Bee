@@ -2383,7 +2383,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 QbFile.AllowedScriptStringChars = loadSetting(c, "AllowedScriptStringChars", @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890\/?!""£$%^&*()-+{}[]'#@~?><,. =®©_");
 
                 if (!QbFile.AllowedScriptStringChars.Contains("="))
-                    QbFile.AllowedScriptStringChars = QbFile.AllowedScriptStringChars + "="; //added v1.1
+                    QbFile.AllowedScriptStringChars += "="; //added v1.1
 
                 cboFormatType.Text = AppState.InputFormat;
                 txtPakFile.Text = AppState.PakFilename;
