@@ -25,14 +25,12 @@ namespace Nanook.QueenBee
 
         protected virtual void OnUpdated(EventArgs e)
         {
-            if (Updated != null)
-                Updated(this, e);
+            Updated?.Invoke(this, e);
         }
 
         protected virtual void OnError(ErrorEventArgs e)
         {
-            if (Error != null)
-                Error(this, e);
+            Error?.Invoke(this, e);
         }
 
         protected void ShowError(string title, string message)
